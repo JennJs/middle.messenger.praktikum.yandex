@@ -1,25 +1,24 @@
 .button_primary {
-	background-color:#3369F3;
-	width: 280px;
-	height: 30px;
-	color: white;
-	border-radius: 8px;
-	padding: 5px;
-	box-sizing: border-box;
-	border: none;
-	margin: 0 auto;
-	position: relative;
-	display:block;
-	margin-top: 15px;
+  background-color: #3369F3;
+  width: 280px;
+  height: 30px;
+  color: white;
+  border-radius: 8px;
+  padding: 5px;
+  box-sizing: border-box;
+  border: none;
+  margin: 0 auto;
+  position: relative;
+  display: block;
+  margin-top: 15px;
 }
-
 .button_secondary {
-	background: none;
-    border: none;
-    margin: 5px auto;
-    padding: 0;
-    cursor: pointer;
-	color: #3369F3;
-	position: relative;
-	display:block;
+  background: none;
+  border: none;
+  margin: 5px auto;
+  padding: 0;
+  cursor: pointer;
+  color: #3369F3;
+  position: relative;
+  display: block;
 }
