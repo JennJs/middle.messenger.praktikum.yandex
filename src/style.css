@@ -1,11 +1,13 @@
-.row
-{
-	display:flex;
-	justify-content: flex-start;
-	align-content: flex-start;
+* {
+  box-sizing: border-box;
 }
-
-.col
-{
-	flex-basis: 50%;
+body {
+  margin: 0 !important;
+}
+.settings {
+  display: flex;
+  height: 100vh;
+}
+#root {
+  height: 100vh;
 }

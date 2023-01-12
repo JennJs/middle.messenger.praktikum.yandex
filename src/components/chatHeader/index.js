@@ -2,8 +2,6 @@ import Handlebars from 'handlebars';
 import tpl from 'bundle-text:./tpl.hbs';
 import './style.css';
 
-
-
-export default (props = {}) => {
-	return Handlebars.compile(tpl)(props);
+export default (name) => {
+	return Handlebars.compile(tpl)( name );
 }
