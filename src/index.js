@@ -21,15 +21,12 @@ import search from "../static/search.png";
 import chats from '../src/pages/chats';
 import message_window from '../src/pages/message_window';
 import avatar_img from '../static/avatar.png'
-window.onload = function() {
-	console.log(document.getElementById('content'));
-	
- };
+
 
 const comp = Handlebars.compile(tpl);
-console.log(comp);
+
 const pageSignIn = comp({
-	page_signin: signin_form({
+	page: signin_form({
 		button: button( 'submit','button_signin', 'Зарегистрироваться', 'button_primary'), 
 		link: link( '#','Войти', 'position_centr'),
 	    input1: input('Почта', 'email', 'email', 'email', 'Введите ваш email'),
@@ -37,19 +34,21 @@ const pageSignIn = comp({
 	    input3: input('Имя', 'text', 'first_name', 'first_name', 'Введите ваше имя'),
 	    input4: input('Фамилия', 'text', 'second_name', 'second_name', 'Введите вашу фамилию'),
 	    input5: input('Телефон', 'tel', 'phone', 'phone', 'Введите ваш номер'),
-		input6: input('Пароль', 'password', '', 'password', 'Введите ваш пароль')}),
+		input6: input('Пароль', 'password', '', 'password', 'Введите ваш пароль')
+	})
 });
 
 const pageLogin = comp({
-	page_login: signin_form({
+	page: signin_form({
 		button: button( 'submit','button_login', 'Войти', 'button_primary'), 
 		link: link( '#','Нет аккаунта?', 'position_centr'),
 	    input1: input('Логин', 'text', 'login', 'login', 'Введите ваш логин'),
-		input2: input('Пароль', 'password', '', 'password', 'Введите ваш пароль')}),
+		input2: input('Пароль', 'password', '', 'password', 'Введите ваш пароль')
+	})
 });
 
 const pageUserSettings = comp({
-	page_user_settings: user_settings({ 
+	page: user_settings({ 
 		comeback_nav: comeback(left_arrow),
 		first_name: 'Jenn',
 		avatar: avatar(avatar_img),
@@ -59,15 +58,14 @@ const pageUserSettings = comp({
 		user_setting_component_surname: setting_component('Фамилия', 'text', 'second_name', 'user_second_name', 'Migda', 'disabled'),
 		user_setting_component_name_inchat: setting_component('Имя в чате', 'text', 'display_name', 'user_display_name', 'Jenn', 'disabled'),
 		user_setting_component_phone: setting_component('Телефон', 'tel', 'phone', 'user_phone', '89110000000', 'disabled'),
-        link_change_data: link( '#','Изменить данные', 'position_left'),
-        link: link( '#','Изменить данные', 'position_left'),
-		link_change_pass: link( '#','Изменить пароль', 'position_left'),
-		link_logout: link( '#','Выйти', 'position_left', 'color:red')
+        link_change_data: link( '/userSettings/change-data','Изменить данные', 'position_left'),
+		link_change_pass: link( '/userSettings/change-password','Изменить пароль', 'position_left'),
+		link_logout: link( '/login','Выйти', 'position_left', 'color:red')
 	})	
 });
 
 const pageUserChangeData = comp({
-	page_user_change_data: change_data({ 
+	page: change_data({ 
 		comeback_nav: comeback(left_arrow),
 		avatar: avatar(),
 		user_setting_component_email: setting_component('Почта', 'email', 'email', 'user_email', 'jenn-m@yandex.ru'),
@@ -81,7 +79,7 @@ const pageUserChangeData = comp({
 });
 
 const pageUserChangePassword = comp({
-	page_user_change_password: change_password({ 
+	page: change_password({ 
 		comeback_nav: comeback(left_arrow),
 		avatar: avatar(),
 		user_setting_component_old_pass: setting_component('Старый пароль', 'password', 'oldPassword', 'user_password', '123'),
@@ -92,13 +90,13 @@ const pageUserChangePassword = comp({
 });
 
 const page500 = comp({
-	page_500: page_500({ 
+	page: page_500({ 
 		link: link('#', 'Назад к чатам')
 	})	
 });
 
 const page404 = comp({
-	page_404: page_404({ 
+	page: page_404({ 
 		link: link('#', 'Назад к чатам')
 	})	
 });
@@ -108,36 +106,32 @@ const chatsHeader = comp({
 });
 
 const pageChats = comp({
-	page_chats: chats({
+	page: chats({
 		header_chats: chat_header('Jenn', search),	
 		message_window: message_window() 
 	}),	
 });
-if (window.location.pathname == '/404') {
-	console.log(page404)
-	document.getElementById('root').innerHTML = page404;
-}else {
-	document.getElementById('root').innerHTML = pageUserSettings;
+
+const router = () => {
+	if (window.location.pathname === '/404') {
+		return page404;
+	} else if (window.location.pathname === '/userSettings') {
+		return pageUserSettings;
+	} else if (window.location.pathname === '/login') {
+		return pageLogin;
+	} else if (window.location.pathname === '/registration') {
+		return pageSignIn;
+	} else if (window.location.pathname === '/500') {
+		return page500;
+	} else if (window.location.pathname === '/userSettings/change-data') {
+		return pageUserChangeData;
+	} else if (window.location.pathname === '/userSettings/change-password') {
+		return pageUserChangePassword;
+	}
+	return pageChats;
 }
 
-// document.getElementById('root').innerHTML = pageUserSettings;
-const hbs = document.getElementById('content');
-
-// console.log(hbs);
-console.log(window.location.pathname);
-console.log(pageUserSettings);
-// function route (path, template) {
-//     if (typeof template === 'function') {
-//         return routes[path] = template;
-//     }
-//     else if (typeof template === 'string') {
-//         return routes[path] = templates[template];
-//     } else {
-//         return;
-//     };
-// };
-// route('/', 'home');
-// route('/about', 'about')
+document.getElementById('root').innerHTML = router();
 
 // document.getElementById('root').querySelector('a').addEventListener('click', (e) => {
 
