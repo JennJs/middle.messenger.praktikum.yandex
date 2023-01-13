@@ -1,11 +1,15 @@
 const express = require('express');
-const exphbs = require('express-handlebars'); 
+const path = require('path');
 
 const app = express();
-
-app.use(express.static(__dirname + '/dist'));
-
 const PORT = 3000;
+
+app.use(express.static(path.join(__dirname, '/dist')));
+
+app.use('/*', ( _, res) => {
+  console.log(res);
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 app.listen(PORT, function () {
   console.log(`Example app listening on port ${PORT}!`);
