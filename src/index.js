@@ -1,16 +1,15 @@
-import Handlebars from "handlebars";
+import Handlebars from 'handlebars';
 import tpl from 'bundle-text:./index.hbs';
 import './style.css';
 import button from './components/button';
 import avatar from './components/avatar';
 import signin_form from "./pages/signin_form";
-import input from "./components/input";
-import link from "./components/link";
-import login_form from "./pages/login_form";
-import comeback from "./components/comeBack";
-import left_arrow from "../static/left-arrow.png";
-import user_settings from "../src/pages/user_settings";
-import setting_component from "../src/components/user_setting";
+import input from './components/input';
+import link from './components/link';
+import comeback from './components/comeBack';
+import left_arrow from '../static/left-arrow.png';
+import user_settings from '../src/pages/user_settings';
+import setting_component from '../src/components/user_setting';
 import '../src/components/link/style.css';
 import change_data from '../src/pages/user_change_data';
 import change_password from '../src/pages/user_change_password';
@@ -18,11 +17,17 @@ import page_500 from '../src/pages/500';
 import page_404 from '../src/pages/404';
 import '../src/pages/500/style.css';
 import chat_header from '../src/components/chatHeader';
-
-
+import search from "../static/search.png";
+import chats from '../src/pages/chats';
+import message_window from '../src/pages/message_window';
+import avatar_img from '../static/avatar.png'
+window.onload = function() {
+	console.log(document.getElementById('content'));
+	
+ };
 
 const comp = Handlebars.compile(tpl);
-
+console.log(comp);
 const pageSignIn = comp({
 	page_signin: signin_form({
 		button: button( 'submit','button_signin', 'Зарегистрироваться', 'button_primary'), 
@@ -34,6 +39,7 @@ const pageSignIn = comp({
 	    input5: input('Телефон', 'tel', 'phone', 'phone', 'Введите ваш номер'),
 		input6: input('Пароль', 'password', '', 'password', 'Введите ваш пароль')}),
 });
+
 const pageLogin = comp({
 	page_login: signin_form({
 		button: button( 'submit','button_login', 'Войти', 'button_primary'), 
@@ -41,11 +47,12 @@ const pageLogin = comp({
 	    input1: input('Логин', 'text', 'login', 'login', 'Введите ваш логин'),
 		input2: input('Пароль', 'password', '', 'password', 'Введите ваш пароль')}),
 });
+
 const pageUserSettings = comp({
 	page_user_settings: user_settings({ 
 		comeback_nav: comeback(left_arrow),
 		first_name: 'Jenn',
-		avatar: avatar(),
+		avatar: avatar(avatar_img),
 		user_setting_component_email: setting_component('Почта', 'email', 'email', 'user_email', 'jenn-m@yandex.ru', 'disabled'),
 		user_setting_component_login: setting_component('Логин', 'text', 'login', 'user_login','jenn', 'disabled'),
 		user_setting_component_name: setting_component('Имя', 'text', 'first_name', 'user_first_name', 'Evgeniia', 'disabled'),
@@ -58,6 +65,7 @@ const pageUserSettings = comp({
 		link_logout: link( '#','Выйти', 'position_left', 'color:red')
 	})	
 });
+
 const pageUserChangeData = comp({
 	page_user_change_data: change_data({ 
 		comeback_nav: comeback(left_arrow),
@@ -71,6 +79,7 @@ const pageUserChangeData = comp({
 		button: button('submit', 'change_user_data', 'Сохранить', 'button_primary')
 	})	
 });
+
 const pageUserChangePassword = comp({
 	page_user_change_password: change_password({ 
 		comeback_nav: comeback(left_arrow),
@@ -81,24 +90,54 @@ const pageUserChangePassword = comp({
 		button: button('submit', 'change_user_pass', 'Сохранить', 'button_primary')
 	})	
 });
+
 const page500 = comp({
 	page_500: page_500({ 
 		link: link('#', 'Назад к чатам')
 	})	
 });
+
 const page404 = comp({
 	page_404: page_404({ 
 		link: link('#', 'Назад к чатам')
 	})	
 });
+
 const chatsHeader = comp({
-	chats_header: chat_header({ 
-		name: 'Jenn',
-		link: link('#', 'Назад к чатам'),
-		left_arrow: comeback(left_arrow)
-	})	
+	chats_header: chat_header('Jenn', search)	
 });
-document.getElementById('root').innerHTML = chatsHeader;
+
+const pageChats = comp({
+	page_chats: chats({
+		header_chats: chat_header('Jenn', search),	
+		message_window: message_window() 
+	}),	
+});
+if (window.location.pathname == '/404') {
+	console.log(page404)
+	document.getElementById('root').innerHTML = page404;
+}else {
+	document.getElementById('root').innerHTML = pageUserSettings;
+}
+
+// document.getElementById('root').innerHTML = pageUserSettings;
+const hbs = document.getElementById('content');
+
+// console.log(hbs);
+console.log(window.location.pathname);
+console.log(pageUserSettings);
+// function route (path, template) {
+//     if (typeof template === 'function') {
+//         return routes[path] = template;
+//     }
+//     else if (typeof template === 'string') {
+//         return routes[path] = templates[template];
+//     } else {
+//         return;
+//     };
+// };
+// route('/', 'home');
+// route('/about', 'about')
 
 // document.getElementById('root').querySelector('a').addEventListener('click', (e) => {
 
