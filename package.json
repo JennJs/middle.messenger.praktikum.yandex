@@ -6,7 +6,6 @@
   "scripts": {
     "dev": " parcel src/index.html",
     "build": "parcel build src/index.html"
-    
   },
   "keywords": [],
   "author": "",
@@ -21,7 +20,7 @@
     "parcel-transformer-hbs": "^1.0.4"
   },
   "engines": {
-    "node": ">= 12.0"
+    "node": ">= 12.0.0"
   },
   "dependencies": {
     "express": "^4.18.2",
