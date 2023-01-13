@@ -3,32 +3,33 @@ import tpl from 'bundle-text:./index.hbs';
 import './style.css';
 import button from './components/button';
 import avatar from './components/avatar';
-import signin_form from "./pages/signin_form";
+import signin_form from "./pages/signInForm";
 import input from './components/input';
 import link from './components/link';
 import comeback from './components/comeBack';
 import left_arrow from '../static/left-arrow.png';
-import user_settings from '../src/pages/user_settings';
-import setting_component from '../src/components/user_setting';
+import user_settings from '../src/pages/userSettings';
+import setting_component from './components/userSetting';
 import '../src/components/link/style.css';
-import change_data from '../src/pages/user_change_data';
-import change_password from '../src/pages/user_change_password';
+import change_data from './pages/userChangeData';
+import change_password from './pages/userChangePassword';
 import page_500 from '../src/pages/500';
 import page_404 from '../src/pages/404';
 import '../src/pages/500/style.css';
 import chat_header from '../src/components/chatHeader';
 import search from "../static/search.png";
 import chats from '../src/pages/chats';
-import message_window from '../src/pages/message_window';
-import avatar_img from '../static/avatar.png'
-
+import message_window from './pages/messageWindow';
+import login_form from './pages/loginForm';
+import avatar_img from '../static/avatar.png';
+import {router} from '../src/utils/router.js';
 
 const comp = Handlebars.compile(tpl);
 
 const pageSignIn = comp({
 	page: signin_form({
 		button: button( 'submit','button_signin', 'Зарегистрироваться', 'button_primary'), 
-		link: link( '#','Войти', 'position_centr'),
+		link: link( '/login','Войти', 'position_centr'),
 	    input1: input('Почта', 'email', 'email', 'email', 'Введите ваш email'),
 	    input2: input('Логин', 'text', 'login', 'login', 'Введите ваш логин'),
 	    input3: input('Имя', 'text', 'first_name', 'first_name', 'Введите ваше имя'),
@@ -39,9 +40,9 @@ const pageSignIn = comp({
 });
 
 const pageLogin = comp({
-	page: signin_form({
+	page: login_form({
 		button: button( 'submit','button_login', 'Войти', 'button_primary'), 
-		link: link( '#','Нет аккаунта?', 'position_centr'),
+		link: link( '/registration','Нет аккаунта?', 'position_centr'),
 	    input1: input('Логин', 'text', 'login', 'login', 'Введите ваш логин'),
 		input2: input('Пароль', 'password', '', 'password', 'Введите ваш пароль')
 	})
@@ -91,13 +92,13 @@ const pageUserChangePassword = comp({
 
 const page500 = comp({
 	page: page_500({ 
-		link: link('#', 'Назад к чатам')
+		link: link('/', 'Назад к чатам')
 	})	
 });
 
 const page404 = comp({
 	page: page_404({ 
-		link: link('#', 'Назад к чатам')
+		link: link('/', 'Назад к чатам')
 	})	
 });
 
@@ -109,39 +110,19 @@ const pageChats = comp({
 	page: chats({
 		header_chats: chat_header('Jenn', search),	
 		message_window: message_window() 
-	}),	
+	})
 });
-
-const router = () => {
-	if (window.location.pathname === '/404') {
-		return page404;
-	} else if (window.location.pathname === '/userSettings') {
-		return pageUserSettings;
-	} else if (window.location.pathname === '/login') {
-		return pageLogin;
-	} else if (window.location.pathname === '/registration') {
-		return pageSignIn;
-	} else if (window.location.pathname === '/500') {
-		return page500;
-	} else if (window.location.pathname === '/userSettings/change-data') {
-		return pageUserChangeData;
-	} else if (window.location.pathname === '/userSettings/change-password') {
-		return pageUserChangePassword;
-	}
-	return pageChats;
-}
 
 document.getElementById('root').innerHTML = router();
 
-// document.getElementById('root').querySelector('a').addEventListener('click', (e) => {
-
-// })
-
-// window.createButton = (id, value) => {
-
-// 	const htmlTpl = document.createElement('template');
-// 	console.log(htmlTpl);
-// 	htmlTpl.innerHTML = button(id,value);
-
-// 	document.getElementById('root').appendChild(htmlTpl.content);
-// }
+ export  {
+	pageChats,
+	chatsHeader,
+	page404,
+	page500,
+	pageUserChangePassword,
+	pageUserChangeData,
+	pageUserSettings,
+	pageLogin,
+	pageSignIn
+};

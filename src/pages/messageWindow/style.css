@@ -1,0 +1,10 @@
+.message_window {
+  width: 58vw;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.message_window p {
+  font-size: 17px;
+  color: grey;
+}
