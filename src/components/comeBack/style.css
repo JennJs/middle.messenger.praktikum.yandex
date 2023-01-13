@@ -1,0 +1,23 @@
+.comeback_icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.comeback_page:hover {
+  background: #fbfbfb;
+}
+.comeback_page {
+  display: flex;
+  height: 100vh;
+  width: 90px;
+  background: #FBFBFB;
+  border-right: 2px solid #cfc5c5;
+  margin: 0;
+  padding-right: 25px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.comeback_page p {
+  margin: 0;
+  width: 30px;
+}

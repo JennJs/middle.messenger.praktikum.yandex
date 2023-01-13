@@ -10,15 +10,6 @@
   margin: 0 auto;
   position: relative;
   display: block;
-  margin-top: 15px;
-}
-.button_secondary {
-  background: none;
-  border: none;
-  margin: 5px auto;
-  padding: 0;
-  cursor: pointer;
-  color: #3369F3;
-  position: relative;
-  display: block;
+  margin-top: 35px;
+  margin-bottom: 10px;
 }

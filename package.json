@@ -4,7 +4,7 @@
   "description": "messenger",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel src/index.html",
+    "dev": " parcel src/index.html",
     "build": "parcel src/build index.html"
   },
   "keywords": [],
@@ -15,6 +15,8 @@
     "@parcel/transformer-inline-string": "^2.8.2",
     "express-handlebars": "^6.0.6",
     "parcel": "^2.8.2",
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "parcel-reporter-static-files-copy": "^1.5.0",
     "parcel-transformer-hbs": "^1.0.4"
   },
   "dependencies": {
