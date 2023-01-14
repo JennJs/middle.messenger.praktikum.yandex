@@ -2,5 +2,5 @@
 ссылка Netlify: https://relaxed-banoffee-47e18c.netlify.app/
 
 команды для запуска:
-npm run dev   
+npm run dev  
 npm run start
