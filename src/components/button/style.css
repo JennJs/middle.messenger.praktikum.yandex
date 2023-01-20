@@ -1,0 +1,15 @@
+.button_primary {
+  background-color: #3369F3;
+  width: 280px;
+  height: 30px;
+  color: white;
+  border-radius: 8px;
+  padding: 5px;
+  box-sizing: border-box;
+  border: none;
+  margin: 0 auto;
+  position: relative;
+  display: block;
+  margin-top: 35px;
+  margin-bottom: 10px;
+}

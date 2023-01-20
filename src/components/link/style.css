@@ -1,0 +1,18 @@
+a {
+  display: block;
+  width: fit-content;
+  color: #3369F3;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 15px 0;
+}
+.position_centr {
+  position: relative;
+  left: 140px;
+}
+.position_left {
+  position: relative;
+  left: 0px;
+}

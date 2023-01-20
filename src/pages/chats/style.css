@@ -1,0 +1,10 @@
+.chats {
+  padding: 0 7px;
+  width: 370px;
+  height: 100vh;
+  border-right: 1px solid #EAEAEA;
+  box-shadow: 0 0 2px #c1b9b9;
+}
+.messenger {
+  display: flex;
+}
