@@ -1,7 +1,12 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./tpl.hbs';
+import Block from '../../modules/block/Block';
+import template from './tpl.hbs';
 import './style.css';
 
-export default ( url ) => {
-	return Handlebars.compile(tpl)({ url });
+export class ComeBack extends Block {
+  constructor(props) {
+    super( 'nav', props );
+  }
+  render() {
+    return this.compile(template, this.props);
+  }
 }

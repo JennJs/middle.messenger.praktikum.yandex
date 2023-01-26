@@ -7,10 +7,8 @@ export default class EventBus {
         if (!this.listeners[event]) {
             this.listeners[event] = [];
         }
-
         this.listeners[event].push(callback);
     // console.log(this.listeners);
-
     }
 
     off(event, callback) {
@@ -33,9 +31,3 @@ export default class EventBus {
         });
     }
 }
-
-// const eventBus = new EventBus();
-
-// const callback = (...args) => {
-//     console.log('Event emitted', args);
-// }

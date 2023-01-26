@@ -1,7 +1,12 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./tpl.hbs';
+import Block from '../../modules/block/Block';
+import template from './tpl.hbs';
 import './style.css';
 
-export default (src_img) => {
-	return Handlebars.compile(tpl)(src_img);
+export class Avatar extends Block {
+  constructor(props) {
+    super( 'div', props );
+  }
+  render() {
+    return this.compile(template, this.props);
+  }
 }

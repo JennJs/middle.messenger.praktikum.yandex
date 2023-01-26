@@ -1,7 +1,12 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./tpl.hbs';
+import Block from '../../modules/block/Block';
+import template from './tpl.hbs';
 import './style.css';
 
-export default (lable, input_type, input_name, input_id, input_value, state) => {
-	return Handlebars.compile(tpl)({ lable, input_type, input_name, input_id, input_value, state });
+export class UserSettings extends Block {
+  constructor(props) {
+    super( 'div', props );
+  }
+  render() {
+    return this.compile(template, this.props);
+  }
 }

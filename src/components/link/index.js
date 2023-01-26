@@ -1,7 +1,12 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./tpl.hbs';
+import Block from '../../modules/block/Block';
+import template from './tpl.hbs';
 import './style.css';
 
-export default (href, link_title, clas, style) => {
-	return Handlebars.compile(tpl)({ href, link_title, clas, style });
+export class Link extends Block {
+  constructor(props) {
+    super( 'a', props );
+  }
+  render() {
+    return this.compile(template, this.props);
+  }
 }

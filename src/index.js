@@ -1,29 +1,3 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./index.hbs';
-import './style.css';
-// import Button from './components/button';
-import avatar from './components/avatar';
-import signin_form from "./pages/signInForm";
-import input from './components/input';
-import link from './components/link';
-import comeback from './components/comeBack';
-import left_arrow from '../static/left-arrow.png';
-import user_settings from '../src/pages/userSettings';
-import setting_component from './components/userSetting';
-import '../src/components/link/style.css';
-import change_data from './pages/userChangeData';
-import change_password from './pages/userChangePassword';
-import page_500 from '../src/pages/500';
-import page_404 from '../src/pages/404';
-import '../src/pages/500/style.css';
-import chat_header from '../src/components/chatHeader';
-import search from "../static/search.png";
-import chats from '../src/pages/chats';
-import message_window from './pages/messageWindow';
-import login_form from './pages/loginForm';
-import avatar_img from '../static/avatar.png';
-import {router} from '../src/utils/router.js';
-import {Block} from '../src/modules/block/Block';
 
 // const comp = Handlebars.compile(tpl);
 // console.log(Button);
@@ -136,17 +110,84 @@ import {Block} from '../src/modules/block/Block';
 // document.getElementById('root').innerHTML = router();
 
 import { Button }  from './components/button';
+import { Avatar }  from './components/avatar';
+import { ChatHeader }  from './components/chatHeader';
+import search from "../static/search.png";
+import { ComeBack }  from './components/comeBack';
+import left_arrow from '../static/left-arrow.png';
+import './style.css';
+import { Input }  from './components/input';
+import { Link }  from './components/link';
+import { UserSettings }  from './components/userSetting';
+
 
 window.addEventListener('DOMContentLoaded', () => {
   const root = document.querySelector('#root');
 
-  const button = new Button({ label: 'click', events: {
-	click: () => console.log('clicked'),
-  }, });
+  const button = new Button({ 
+    label: 'click', 
+    events: {
+      click: () => console.log('clicked'),
+    }, 
+  });
 
-  root.append(button.getContent());
-
+  const contButton = button.getContent();
+  contButton.classList.add('button_primary');
+  contButton.setAttribute('id', 'button_submit');
   button.dispatchComponentDidMount();
+
+
+  const avatar = new Avatar({});
+  const contAvatar = avatar.getContent();
+  contAvatar.classList.add('avatar_conteiner');
+  avatar.dispatchComponentDidMount();
+
+  const chatHeader = new ChatHeader({ 
+    name: 'Jenn', 
+    url: search, 
+  });
+  const contChatHeader = chatHeader.getContent();
+  contChatHeader.classList.add('chats_header_conteiner');
+  chatHeader.dispatchComponentDidMount();
+
+  const comeBack = new ComeBack({ 
+    url: left_arrow, 
+  });
+  const contComeBack = comeBack.getContent();
+  contComeBack.classList.add('comeback');
+  comeBack.dispatchComponentDidMount();
+
+  const input = new Input({ 
+    lable: 'Логин',
+    input_name: 'login',
+    input_type: 'text',
+    input_id: 'login_signIn',
+    input_placeholder: 'Логин'
+  });
+  const contInput = input.getContent();
+  input.dispatchComponentDidMount();
+
+  const link = new Link({});
+  const contLink = link.getContent();
+  link.setAttributes(contLink, {"href": "/login", 'class': "position_centr"});
+  contLink.textContent="Войти"
+  link.dispatchComponentDidMount();
+
+  const userSettings = new UserSettings({
+    lable: 'Имя',
+    input_name: 'first_name',
+    input_type: 'text',
+    input_id: 'user_first_name',
+    input_value: 'Evgeniia',
+    state: 'disabled'
+  });
+  const contUserSettings = userSettings.getContent();
+  contUserSettings.classList.add('user_settings_conteiner');
+  userSettings.dispatchComponentDidMount();
+
+  root.append(contUserSettings);
+
+
 });
 
 // import { HomePage } from './pages/home/index';

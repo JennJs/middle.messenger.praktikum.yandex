@@ -1,7 +1,6 @@
 import  EventBus  from "../../utils/eventBus";
 import { nanoid } from 'nanoid';
 
-// Нельзя создавать экземпляр данного класса
 class Block {
   static EVENTS = {
     INIT: "init",
@@ -11,10 +10,7 @@ class Block {
   };
 
   id = nanoid(6);
-  // children = [];
-  // props;
   _element = null;
-  // _meta = {tagName, props };
   _meta ;
 
   /** JSDoc
@@ -24,7 +20,6 @@ class Block {
    * @returns {void}
    */
   constructor(tagName = "div", propsWithChildren ={}) {
-
     const eventBus = new EventBus();
 
     const {props, children} = this._getChildrenAndProps(propsWithChildren);
@@ -36,6 +31,7 @@ class Block {
     this.children = children;
     this.props = this._makePropsProxy(props);
 
+
     this.eventBus = () => eventBus;
 
     this._registerEvents(eventBus);
@@ -46,30 +42,21 @@ class Block {
     const props = {};
     const children = {};
 
-    // Object.entries(childrenAndProps).forEach(([key, value]) => {
-    //   if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
-    //     children[key] = value;
-    //   } else if (value instanceof Block) {
-    //     children[key] = value;
-    //   } else {
-    //     props[key] = value;
-    //   }
-    // });
     Object.entries(childrenAndProps).forEach(([key, value]) => {
+    // console.log(key, value);
+
       if (value instanceof Block) {
         children[key] = value;
       } else {
         props[key] = value;
       }
     });
-    // console.log(props, children);
     return {props, children};
   }
 
   _addEvents() {
     const {events = {}} = this.props;
-    // console.log(this._element);
-
+    
     Object.keys(events).forEach(eventName => {
       this._element.addEventListener(eventName, events[eventName]);
     });
@@ -84,7 +71,7 @@ class Block {
 
   _createResources() {
     const { tagName } = this._meta;
-    console.log(tagName);
+    // console.log(tagName);
     this._element = this._createDocumentElement(tagName);
   }
 
@@ -95,10 +82,6 @@ class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
   init() {}
-  // init() {
-  //   this._createResources();
-  //   this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-  // }
 
   _componentDidMount() {
     this.componentDidMount();
@@ -131,29 +114,11 @@ class Block {
   };
 
   get element() {
-    console.log(this._element);
-
+    // console.log(this._element);
     return this._element;
   }
   
   _render() {
-    // const block = this.render();
-    // Это небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно компилировать не в строку (или делать это правильно),
-    // либо сразу превращать в DOM-элементы и возвращать из compile DOM-ноду
-    // this._element.innerHTML = block;
-
-    // const newElement = block.firstElementChild;
-
-    // if (this._element && newElement) {
-    //   this._element.replaceWith(newElement);
-    // }
-
-    // this._element = newElement;
-
-    // this._addEvents();
-
     const fragment = this.render();
 
     this._element.innerHTML = '';
@@ -167,64 +132,6 @@ class Block {
   render() {
     return new DocumentFragment();
   }
-
-  // compile(template, context) {
-  //   console.log(template);
-
-  //   const contextAndStubs = {...context};
-
-  //   Object.entries(this.children).forEach(([name, component]) => {
-  //     // if (Array.isArray(component)) {
-  //     //   contextAndStubs[name] = component.map(child => `<div data-id="${child.id}"></div>`)
-  //     // } else {
-  //       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
-  //     // console.log(contextAndStubs[name]);
-
-  //     // }
-  //   });
-
-  //   const html = template(contextAndStubs);
-  //   console.log(html);
-
-  //   const temp = document.createElement('template');
-    
-
-  //   temp.innerHTML = html;
-  //   // console.log(temp.content);
-  //   // const replaceStub = component => {
-  //   //   const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
-  //   //   if (!stub) {
-  //   //     return;
-  //   //   }
-
-  //   //   component.getContent()?.append(...Array.from(stub.childNodes));
-
-  //   //   stub.replaceWith(component.getContent());
-  //   // }
-
-  //   // Object.entries(this.children).forEach(([_, component]) => {
-  //   //   if (Array.isArray(component)) {
-  //   //     component.forEach(replaceStub);
-  //   //   } else {
-  //   //     replaceStub(component);
-  //   //   }
-  //   // });
-
-  //   Object.entries(this.children).forEach(([_, component]) => {
-  //     const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
-  //     if (!stub) {
-  //       return;
-  //     }
-
-  //     component.getContent().append(...Array.from(stub.childNodes));
-
-  //     stub.replaceWith(component.getContent());
-
-  //   });
-  //   return temp.content;
-  // }
 
   compile(template, context) {
     // console.log(template);
@@ -240,7 +147,7 @@ class Block {
     });
 
     const html = template(contextAndStubs);
-    console.log(html);
+    // console.log(html);
 
 
     const temp = document.createElement('template');
@@ -265,8 +172,6 @@ class Block {
 
 
   getContent() {
-    console.log(this.element);
-
     return this.element;
   }
 
@@ -306,6 +211,8 @@ class Block {
   // hide() {
   //   this.getContent().style.display = "none";
   // }
+  setAttributes(el, attrs) {   
+     Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value)); }
 }
 
 export default Block;

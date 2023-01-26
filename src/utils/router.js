@@ -1,4 +1,4 @@
-import { Button} from '../components/button/index'
+// import { pageButton} from '../index'
 
 // export const router = () => {
 // 	if (window.location.pathname === '/404') {
@@ -16,10 +16,7 @@ import { Button} from '../components/button/index'
 // 	} else if (window.location.pathname === '/userSettings/change-password') {
 // 		return pageUserChangePassword;
 // 	} else if (window.location.pathname === '/button') {
-// 		return buttonTest;
+// 		return pageButton;
 // 	}
-// 	return pageChats;
-// }
-// export const router = () => {
-// 	return Button;
+// 	// return pageChats;
 // }
