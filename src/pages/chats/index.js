@@ -1,7 +1,25 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./tpl.hbs';
+import Block from '../../modules/block/Block'
+import template from './tpl.hbs';
+import { ChatHeader } from '../../components/chatHeader';
 import './style.css';
+import search from '../../../static/search.png';
+import { MessageWindow } from '../../pages/messageWindow';
 
-export default ( ...props ) => {
-	return Handlebars.compile(tpl)(...props );
+
+export class Chats extends Block {
+  constructor(props) {
+    super('div', props);
+  }
+ 
+  init() {
+    this.children.header_chats = new ChatHeader({ 
+		name: 'Jenn', 
+      url: search, 
+    });
+    this.children.message_window = new MessageWindow({});
+  }
+ 
+  render() {
+    return this.compile(template, this.props);
+  }
 }

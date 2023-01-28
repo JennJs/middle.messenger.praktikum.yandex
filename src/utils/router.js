@@ -1,22 +1,22 @@
-// import { pageButton} from '../index'
 
-// export const router = () => {
-// 	if (window.location.pathname === '/404') {
-// 		return page404;
-// 	} else if (window.location.pathname === '/userSettings') {
-// 		return pageUserSettings;
-// 	} else if (window.location.pathname === '/login') {
-// 		return pageLogin;
-// 	} else if (window.location.pathname === '/registration') {
-// 		return pageSignIn;
-// 	} else if (window.location.pathname === '/500') {
-// 		return page500;
-// 	} else if (window.location.pathname === '/userSettings/change-data') {
-// 		return pageUserChangeData;
-// 	} else if (window.location.pathname === '/userSettings/change-password') {
-// 		return pageUserChangePassword;
-// 	} else if (window.location.pathname === '/button') {
-// 		return pageButton;
-// 	}
-// 	// return pageChats;
-// }
+import {contPage404, contPage500, contChats, contSignInForm, contUserChangeData, contUserChangePassword, contUserSettingsPage, contloginForm }  from '../index'
+
+// console.log( _404Page);
+export const router = () => {
+	if (window.location.pathname === '/404') {
+		return  contPage404;  
+	} else if (window.location.pathname === '/userSettings') {
+		return contUserSettingsPage;
+	} else if (window.location.pathname === '/login') {
+		return contloginForm;
+	} else if (window.location.pathname === '/registration') {
+		return contSignInForm;
+	} else if (window.location.pathname === '/500') {
+		return contPage500;
+	} else if (window.location.pathname === '/userSettings/change-data') {
+		return contUserChangeData;
+	} else if (window.location.pathname === '/userSettings/change-password') {
+		return contUserChangePassword;
+	} 
+	return contChats;
+}

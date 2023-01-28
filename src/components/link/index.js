@@ -4,7 +4,7 @@ import './style.css';
 
 export class Link extends Block {
   constructor(props) {
-    super( 'a', props );
+    super( 'div', props );
   }
   render() {
     return this.compile(template, this.props);

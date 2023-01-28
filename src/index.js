@@ -1,6 +1,7 @@
 
 // const comp = Handlebars.compile(tpl);
-// console.log(Button);
+
+
 // const pageSignIn = comp({
 // 	page: signin_form({
 // 		button: button( 'submit','button_signin', 'Зарегистрироваться', 'button_primary'), 
@@ -109,103 +110,67 @@
 
 // document.getElementById('root').innerHTML = router();
 
-import { Button }  from './components/button';
-import { Avatar }  from './components/avatar';
-import { ChatHeader }  from './components/chatHeader';
-import search from "../static/search.png";
-import { ComeBack }  from './components/comeBack';
-import left_arrow from '../static/left-arrow.png';
-import './style.css';
-import { Input }  from './components/input';
-import { Link }  from './components/link';
-import { UserSettings }  from './components/userSetting';
 
+import './style.css';
+import { Page404 }  from './pages/404';
+import style from './pages/500/style.css'
+import { Page500 }  from './pages/500';
+import { Chats }  from './pages/chats';
+import { LoginForm }  from './pages/loginForm';
+import styles from './pages/signInForm/style.css'
+import { SignInForm }  from './pages/signInForm';
+import { UserChangeData } from './pages/userChangeData';
+import { UserChangePassword } from './pages/userChangePassword';
+import { UserSettingsPage } from './pages/userSettings';
+import { router } from './utils/router';
+
+
+  const page404 = new Page404({});
+  export const contPage404 = page404.getContent();
+  contPage404.classList.add('conteiner_500')
+  page404.dispatchComponentDidMount();
+// console.log( contPage404);
+
+  const page500 = new Page500({});
+  export const contPage500 = page500.getContent();
+  contPage500.classList.add('conteiner_500');
+  page500.dispatchComponentDidMount();
+
+  const chats= new Chats({});
+  export const contChats = chats.getContent();
+  contChats.classList.add('messenger')
+  chats.dispatchComponentDidMount();
+
+  const loginForm= new LoginForm({});
+  export const contloginForm = loginForm.getContent();
+  contloginForm.classList.add('login_form_conteiner')
+  loginForm.dispatchComponentDidMount();
+
+  const signInForm= new SignInForm({});
+  export const contSignInForm = signInForm.getContent();
+  contSignInForm.classList.add('login_form_conteiner')
+  signInForm.dispatchComponentDidMount();
+
+  const userChangeData= new UserChangeData({});
+  export const contUserChangeData = userChangeData.getContent();
+  contUserChangeData.classList.add('settings')
+  userChangeData.dispatchComponentDidMount();
+
+  const userChangePassword = new UserChangePassword({});
+  export const contUserChangePassword = userChangePassword.getContent();
+  userChangePassword.dispatchComponentDidMount();
+
+  const userSettingsPage = new UserSettingsPage({
+    first_name: 'Jenn'
+  });
+  export const contUserSettingsPage = userSettingsPage.getContent();
+  userSettingsPage.dispatchComponentDidMount();
 
 window.addEventListener('DOMContentLoaded', () => {
   const root = document.querySelector('#root');
+  
 
-  const button = new Button({ 
-    label: 'click', 
-    events: {
-      click: () => console.log('clicked'),
-    }, 
-  });
-
-  const contButton = button.getContent();
-  contButton.classList.add('button_primary');
-  contButton.setAttribute('id', 'button_submit');
-  button.dispatchComponentDidMount();
-
-
-  const avatar = new Avatar({});
-  const contAvatar = avatar.getContent();
-  contAvatar.classList.add('avatar_conteiner');
-  avatar.dispatchComponentDidMount();
-
-  const chatHeader = new ChatHeader({ 
-    name: 'Jenn', 
-    url: search, 
-  });
-  const contChatHeader = chatHeader.getContent();
-  contChatHeader.classList.add('chats_header_conteiner');
-  chatHeader.dispatchComponentDidMount();
-
-  const comeBack = new ComeBack({ 
-    url: left_arrow, 
-  });
-  const contComeBack = comeBack.getContent();
-  contComeBack.classList.add('comeback');
-  comeBack.dispatchComponentDidMount();
-
-  const input = new Input({ 
-    lable: 'Логин',
-    input_name: 'login',
-    input_type: 'text',
-    input_id: 'login_signIn',
-    input_placeholder: 'Логин'
-  });
-  const contInput = input.getContent();
-  input.dispatchComponentDidMount();
-
-  const link = new Link({});
-  const contLink = link.getContent();
-  link.setAttributes(contLink, {"href": "/login", 'class': "position_centr"});
-  contLink.textContent="Войти"
-  link.dispatchComponentDidMount();
-
-  const userSettings = new UserSettings({
-    lable: 'Имя',
-    input_name: 'first_name',
-    input_type: 'text',
-    input_id: 'user_first_name',
-    input_value: 'Evgeniia',
-    state: 'disabled'
-  });
-  const contUserSettings = userSettings.getContent();
-  contUserSettings.classList.add('user_settings_conteiner');
-  userSettings.dispatchComponentDidMount();
-
-  root.append(contUserSettings);
-
+  root.append(router());
 
 });
-
-// import { HomePage } from './pages/home/index';
-// import { Button } from './components/button/index';
-
-// window.addEventListener('DOMContentLoaded', () => {
-//   const root = document.querySelector('#root');
-//   console.log(root);
-
-//   const homePage = new HomePage({ title: 'Home page' });
-
-//   console.log(HomePage);
-//   const content = homePage.getContent();
-//   console.log(content);
-
-
-//   root.append(homePage.getContent());
-
-//   homePage.dispatchComponentDidMount();
-// });
 

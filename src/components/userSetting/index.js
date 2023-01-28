@@ -7,6 +7,7 @@ export class UserSettings extends Block {
     super( 'div', props );
   }
   render() {
+    this.getContent().classList.add('user_settings_conteiner');
     return this.compile(template, this.props);
   }
 }

@@ -31,7 +31,6 @@ class Block {
     this.children = children;
     this.props = this._makePropsProxy(props);
 
-
     this.eventBus = () => eventBus;
 
     this._registerEvents(eventBus);
@@ -43,8 +42,6 @@ class Block {
     const children = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
-    // console.log(key, value);
-
       if (value instanceof Block) {
         children[key] = value;
       } else {
@@ -114,44 +111,32 @@ class Block {
   };
 
   get element() {
-    // console.log(this._element);
     return this._element;
   }
   
   _render() {
     const fragment = this.render();
-
     this._element.innerHTML = '';
-
     this._element.append(fragment);
-
     this._addEvents();
   }
 
-    // Переопределяется пользователем. Необходимо вернуть разметку
   render() {
     return new DocumentFragment();
   }
 
   compile(template, context) {
-    // console.log(template);
 
     const contextAndStubs = { ...context };
-    // console.log(contextAndStubs);
-
 
     Object.entries(this.children).forEach(([name, component]) => {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
-      // console.log(contextAndStubs[name]);
 
     });
 
     const html = template(contextAndStubs);
-    // console.log(html);
-
 
     const temp = document.createElement('template');
-
     temp.innerHTML = html;
 
     Object.entries(this.children).forEach(([_, component]) => {
@@ -161,8 +146,7 @@ class Block {
         return;
       }
 
-      component.getContent()?.append(...Array.from(stub.childNodes));
-
+      component.getContent().append(...Array.from(stub.childNodes));
       stub.replaceWith(component.getContent());
 
     });
@@ -170,13 +154,11 @@ class Block {
     return temp.content;
   }
 
-
   getContent() {
     return this.element;
   }
 
   _makePropsProxy(props) {
-    // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this;
     return new Proxy(props, {
       get(target, prop) {
@@ -185,11 +167,7 @@ class Block {
       },
       set(target, prop, value) {
         const oldTarget = {...target}
-
         target[prop] = value;
-
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
@@ -200,19 +178,21 @@ class Block {
   }
 
   _createDocumentElement(tagName) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }
 
-  // show() {
-  //   this.getContent().style.display = "block";
-  // }
+  show() {
+    this.getContent().style.display = "block";
+  }
 
-  // hide() {
-  //   this.getContent().style.display = "none";
-  // }
+  hide() {
+    this.getContent().style.display = "none";
+  }
+
   setAttributes(el, attrs) {   
-     Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value)); }
+     Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value)); 
+  }
+
 }
 
 export default Block;

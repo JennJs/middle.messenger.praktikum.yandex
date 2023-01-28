@@ -1,7 +1,19 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./tpl.hbs';
-import './style.css';
+import Block from '../../modules/block/Block'
+import template from './tpl.hbs';
+import { Link } from '../../components/link';
 
-export default ( ...props ) => {
-	return Handlebars.compile(tpl)(...props );
+export class Page500 extends Block {
+  constructor(props) {
+    super('div', props);
+  }
+  init() {
+    this.children.link = new Link({ 
+		href: '/chats',
+		clas: 'position_centr',
+		link_title: 'Назад к чатам'
+	});
+  }
+  render() {
+    return this.compile(template, this.props);
+  }
 }

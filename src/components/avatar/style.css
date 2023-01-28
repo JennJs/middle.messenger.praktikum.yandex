@@ -4,6 +4,8 @@
   cursor: pointer;
   background-color: #d5cdcd;
   border-radius: 80px;
+  margin: 0 auto;
+  margin-bottom: 40px;
 }
 .avatar_conteiner {
   display: flex;
