@@ -193,6 +193,15 @@ class Block {
      Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value)); 
   }
 
+  getFormValue(e) {
+    e.preventDefault();
+    const form = document.querySelector('form');
+    const dataForm = Object.fromEntries(new FormData(form).entries());
+    console.log(dataForm);
+    form.reset();
+    return false;
+  }
+
 }
 
 export default Block;

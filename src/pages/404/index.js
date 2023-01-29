@@ -5,7 +5,6 @@ import { Link } from '../../components/link';
 export class Page404 extends Block {
   constructor(props) {
     super('div', props);
-	console.log(this.children.link);
   }
   init() {
     this.children.link = new Link({ 
@@ -15,7 +14,6 @@ export class Page404 extends Block {
 	});
   }
   render() {
-    console.log(this.element)
     return this.compile(template, this.props);
   }
 }

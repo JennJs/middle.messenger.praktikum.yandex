@@ -5,7 +5,6 @@ import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 
 
-
 export class LoginForm extends Block {
   constructor(props) {
     super('div', props);
@@ -29,8 +28,8 @@ export class LoginForm extends Block {
 	this.children.button_log_in  = new Button({
 		label: 'Войти', 
 		events: {
-			click: () => console.log('clicked'),
-		  }, 
+			click: (e) => this.getFormValue(e),
+		}, 
 	});
 	this.children.link_sign_in  = new Link({
 		href: '/registration',

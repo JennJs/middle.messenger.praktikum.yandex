@@ -1,7 +1,6 @@
 
 // const comp = Handlebars.compile(tpl);
 
-
 // const pageSignIn = comp({
 // 	page: signin_form({
 // 		button: button( 'submit','button_signin', 'Зарегистрироваться', 'button_primary'), 
@@ -129,7 +128,6 @@ import { router } from './utils/router';
   export const contPage404 = page404.getContent();
   contPage404.classList.add('conteiner_500')
   page404.dispatchComponentDidMount();
-// console.log( contPage404);
 
   const page500 = new Page500({});
   export const contPage500 = page500.getContent();
@@ -146,7 +144,9 @@ import { router } from './utils/router';
   contloginForm.classList.add('login_form_conteiner')
   loginForm.dispatchComponentDidMount();
 
-  const signInForm= new SignInForm({});
+  const signInForm= new SignInForm({
+    
+  });
   export const contSignInForm = signInForm.getContent();
   contSignInForm.classList.add('login_form_conteiner')
   signInForm.dispatchComponentDidMount();
@@ -168,9 +168,33 @@ import { router } from './utils/router';
 
 window.addEventListener('DOMContentLoaded', () => {
   const root = document.querySelector('#root');
-  
-
   root.append(router());
-
 });
+
+//  const formLogin = document.forms;
+// // console.log(form.getElementById('form_login'));
+// console.log(formLogin);
+// const {form} = document.forms;
+
+// function getFormValue(event) {
+//   event.preventDefault();
+
+//   const data = {};
+
+//   for (let field of form) {
+//     const {name} = field;
+//     console.log(name);
+
+//     if (name) {
+//       const {value} = field;
+//       data[name] =  value;
+//     }
+// }
+
+//     console.log(data);
+// }
+
+  // form.addEventListener('submit', getFormValue);
+// let formDataLogin = new FormData(formLogin);
+// console.log(formDataLogin);
 

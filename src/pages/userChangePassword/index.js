@@ -40,14 +40,12 @@ export class UserChangePassword extends Block {
 	this.children.button_save  = new Button({
 		label: 'Сохранить', 
 		events: {
-			click: () => console.log('clicked'),
+			click: (e) => this.getFormValue(e),
 		  }, 
 	});
   }
-  
  
   render() {
-	// console.log(this.children);
 	this.getContent().classList.add('settings');
 	this.children.comeback_nav.getContent().classList.add('comeback');
 	this.children.button_save.getContent().classList.add('button_primary');

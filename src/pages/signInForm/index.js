@@ -10,7 +10,7 @@ export class SignInForm extends Block {
   constructor(props) {
     super('div', props);
   }
- 
+  
   init() {
 	this.children.input_email = new Input({ 
 		lable: 'Почта',
@@ -55,10 +55,10 @@ export class SignInForm extends Block {
 		input_placeholder: 'Пароль' 
 	});
 	this.children.button_sign_in  = new Button({
-		label: 'Зарегистрироваться', 
+		label: 'Зарегистрироваться',
 		events: {
-			click: () => console.log('clicked'),
-		  }, 
+			click: (e) => this.getFormValue(e),
+		}, 
 	});
 	this.children.link_log_in  = new Link({
 		href: '/login',
@@ -66,7 +66,8 @@ export class SignInForm extends Block {
 		link_title: 'Войти'
 	});
   }
- 
+  
+
   render() {
 	this.children.button_sign_in.getContent().classList.add('button_primary');
     return this.compile(template, this.props);

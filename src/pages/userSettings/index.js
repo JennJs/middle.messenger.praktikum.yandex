@@ -85,7 +85,6 @@ export class UserSettingsPage extends Block {
   }
  
   render() {
-	console.log(this.children);
 	this.getContent().classList.add('settings');
 	this.children.comeback_nav.getContent().classList.add('comeback');
     return this.compile(template, this.props);

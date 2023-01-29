@@ -8,7 +8,6 @@ export default class EventBus {
             this.listeners[event] = [];
         }
         this.listeners[event].push(callback);
-    // console.log(this.listeners);
     }
 
     off(event, callback) {
