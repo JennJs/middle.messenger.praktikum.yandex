@@ -11,18 +11,27 @@ export class MessageFooter extends Block {
   init() {
     this.children.button_send = new Button({
       events:{
-        click: (e) => this.getMessage(e)
+        click: (e) => this.getMessage(e),
       } 
     })
   }
   getMessage(e) {
     e.preventDefault();
+    const reMessage = /^\.+$/;
+    let result = true;
     const data = {};
     const textarea = document.getElementById('message_textarea');
     data[textarea.name] = textarea.value
-    console.log(data);
-    textarea.value = '';
-    return false;
+    console.log(textarea.value);
+
+    if (reMessage.test(!textarea.value)) {
+      data[textarea.name] = textarea.value
+      console.log(data);
+      textarea.value = '';
+    } else {
+      return false;
+    }
+    return result;
   }
   render() {
     this.children.button_send.getContent().classList.add('button_send_arrow');
