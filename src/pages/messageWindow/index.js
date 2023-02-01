@@ -12,10 +12,7 @@ export class MessageWindow extends Block {
   }
   init() {
     this.children.message_footer = new MessageFooter({
-      url_button: right_arrow,
       url_clip: clip,
-      onblur: this.valid,
-      onfocus: this.focus
     })
   }
 

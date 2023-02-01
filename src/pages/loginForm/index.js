@@ -4,6 +4,7 @@ import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { validate } from '../../utils/validation'
+import { Label } from '../../components/label';
 
 
 export class LoginForm extends Block {
@@ -12,28 +13,18 @@ export class LoginForm extends Block {
   }
  
   init() {
+	this.children.input_login_label = new Label({});
     this.children.input_login = new Input({ 
-		lable: 'Логин',
-		input_name: 'login',
-		input_type: 'text',
-		input_id: 'login_log_in',
-		input_placeholder: 'Логин',
 		events: {
-			blur: () => console.log('blur'),
-			focus: () => console.log('focus'),
-			change: (e) => this.valid(e),
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
 		} 
 	});
+	this.children.input_password_label = new Label({});
 	this.children.input_password  = new Input({
-		lable: 'Пароль',
-		input_name: 'password',
-		input_type: 'password',
-		input_id: 'password_log_in',
-		input_placeholder: 'Пароль',
 		events: {
-			blur: () => console.log('blur'),
-			focus: () => console.log('focus'),
-			change: (e) => this.valid(e)
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
 		} 
 	});
 	this.children.button_log_in  = new Button({
@@ -47,11 +38,16 @@ export class LoginForm extends Block {
 		clas: 'position_centr',
 		link_title: 'Нет аккаунта?'
 	});
-  }
- 
-  render() {
-	// console.log(this.children.input_login)
+	this.setLabelsAttributes(this.children.input_login_label, 'Логин', 'login_log_in' );
+	this.setInputsAttributes(this.children.input_login.getContent(),'login_log_in', 'login', 'text', 'Логин');
+	this.setLabelsAttributes(this.children.input_password_label, 'Пароль', 'password_log_in' );
+	this.setInputsAttributes(this.children.input_password.getContent(),'password_log_in', 'password', 'password', 'Пароль' );
+
 	this.children.button_log_in.getContent().classList.add('button_primary');
+  }
+
+
+  render() {
     return this.compile(template, this.props);
   }
 }

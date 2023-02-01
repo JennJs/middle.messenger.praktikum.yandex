@@ -191,8 +191,20 @@ class Block {
     this.getContent().style.display = "none";
   }
 
-  setAttributes(el, attrs) {   
-     Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value)); 
+  setInputsAttributes(el, id, input_name, type, placeholder, value ='' ) {
+    const attrs = {
+      id, 
+      name: input_name ,
+		  type,
+      placeholder,
+      value
+    };
+    Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+  }
+
+  setLabelsAttributes(el, label , id ) {
+    el.getContent().setAttribute('for', id );
+    el.getContent().textContent = label;
   }
 
   getFormValue(e) {
@@ -201,141 +213,103 @@ class Block {
     let form2 = document.forms[0];
 
     const dataForm = Object.fromEntries(new FormData(form).entries());
-    // console.log(dataForm);
-    // // form.reset();
-    // Object.entries(dataForm).forEach((entry) => {
-    //   // const [key, value] = entry;
-    //   // if (key === 'email') {
-        if (validate(dataForm, form2)) {
-          console.log('форма успешно проверена');
-          const values = form2.elements;
-          Object.entries(values).forEach( ([key , value]) => {
-             value.value = '';
-          })
-          
-        };
+   
+    if (validate(dataForm, form2)) {
+      const values = form2.elements;
+
+      Object.entries(values).forEach( ([key , value]) => {
+        if (!value.classList.contains('user_settings')) {
+          value.value = '';
+        } 
+      })
+      console.log(dataForm);
+      e.target.setAttribute('disabled', '')
+    } 
     return false;
   }
 
+  focus(e) {
+    let errorDiv = document.getElementById('error_'+e.target.name);
+    let parent = e.target.parentNode;
+    if(errorDiv) {
+      errorDiv.remove();
+      parent.classList.remove('error_input');
+      e.target.classList.remove('error_input');
+    } 
+  };
+
   valid(e) {
-    // console.log(e, 'valid');
-    // console.log(e.target.name);
-   
+    const error = (e, text) => {
+      let errorDiv = document.getElementById('error_'+e.target.name);
+      let parent = e.target.parentNode;
+        if(!errorDiv) {
+          let errorDiv = document.createElement("div");
+          errorDiv.setAttribute('id', 'error_'+e.target.name);
+          errorDiv.innerHTML=`Поле ${e.target.placeholder} ${text}`;
+          if(e.target.classList.contains('user_settings')) {
+            errorDiv.classList.add('error_settings');
+            parent.classList.add('error_input');
+            parent.after(errorDiv)
+          } else {
+            errorDiv.classList.add('error');
+            e.target.classList.add('error_input');
+            e.target.after(errorDiv);
+          }
+        
+        } 
+    }
+    
     const reEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    const reLogin = /^[\w\-]{3,20}$/;
+    const reLogin = /^[a-zA-ZА-Яа-я0-9\-\_]{2,20}[a-zA-ZА-Яа-я]+$/;
     const reNameAndSurname = /^[A-ZА-Я][A-ZА-Яa-zа-я\-]+$/;
     const rePhone = /^(?:\+|[\+7|8])[\d]{10,15}$/;
     const rePassword = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,40}$/;
 
-        // if(e.target.name === 'email') {
-        //     value.style.border = "";
-        //     if (reEmail.test(value.value )) {
-        //         let errorDiv = document.getElementById('error_'+e.target.name);
-        //         if(errorDiv) {
-        //             errorDiv.innerHTML='';
-        //         }
-        //         value.classList.remove('error_input');
-        //         return true;
-        //     }
-        //     else {
-                
-        //         value.classList.add('error_input');
-        //         let errorDiv = document.createElement("div");
-        //         errorDiv.setAttribute('id', 'error_'+e.target.name);
-        //         errorDiv.classList.add('error');
-        //         errorDiv.innerHTML='email введен неверно';
-        //         value.after(errorDiv);
-        //         return false;
-        //     }
-         if(e.target.name === 'login') {
-            if (reLogin.test(e.target.value )) {
-                let errorDiv = document.getElementById('error_'+e.target.name);
-                if(errorDiv) {
-                    errorDiv.innerHTML='';
-                } 
-                e.target.classList.remove('error_input');
-            }
-            else {
-              let errorDiv = document.getElementById('error_'+e.target.name);
-              if(!errorDiv) {
-                e.target.classList.add('error_input');
-                let errorDiv = document.createElement("div");
-                errorDiv.setAttribute('id', 'error_'+e.target.name);
-                errorDiv.classList.add('error');
-                errorDiv.innerHTML=`логин должен быть от 3 до 20 латинских букв, может содержать цифры, дефис, нижнее подчёркивание, без пробелов`;
-                e.target.after(errorDiv);
-              } 
-            }
-        }
-
-        // } else if(e.target.name === 'first_name' || e.target.name === 'second_name' ) {
-        //     value.style.border = "";
-        //     if (reNameAndSurname.test(value.value )) {
-        //         let errorDiv = document.getElementById('error_'+e.target.name);
-        //         if(errorDiv) {
-        //             errorDiv.innerHTML='';
-        //         } 
-        //         value.classList.remove('error_input');
-        //         return true;
-        //     } else {
-
-        //         value.classList.add('error_input');
-        //         let errorDiv = document.createElement("div");
-        //         errorDiv.setAttribute('id', 'error_'+e.target.name);
-        //         errorDiv.classList.add('error');
-        //         errorDiv.innerHTML=`поле ${value.placeholder} должно содержать латиницу или кириллицу, первая буква должна быть заглавной, без пробелов и без цифр, допустим только дефис`;
-        //         value.after(errorDiv);
-        //         return false;
-        //     }
-        // } else if(e.target.name === 'phone') {
-        //     value.style.border = "";
-        //     if (rePhone.test(value.value )) {
-        //         let errorDiv = document.getElementById('error_'+e.target.name);
-        //         if(errorDiv) {
-        //             errorDiv.innerHTML='';
-        //         }  
-        //         value.classList.remove('error_input');
-        //         return true;
-        //     } else {
-
-        //         value.classList.add('error_input');
-        //         let errorDiv = document.createElement("div");
-        //         errorDiv.setAttribute('id', 'error_'+e.target.name);
-        //         errorDiv.classList.add('error');
-        //         errorDiv.innerHTML=`поле ${value.placeholder} должно содержать от 10 до 15 символов, состоять из цифр, может начинается с плюса`;
-        //         value.after(errorDiv);
-        //         return false;
-        //     }
-        // } else if(e.target.name === 'password') {
-        //     value.style.border = "";
-        //     if (rePassword.test(value.value )) {
-        //         let errorDiv = document.getElementById('error_'+e.target.name);
-        //         if(errorDiv) {
-        //             errorDiv.innerHTML='';
-        //         }
-        //         value.classList.remove('error_input');
-        //         return true;
-        //     } else {
-        //         let errorDiv = document.getElementById('error_'+e.target.name);
-        //         if(!errorDiv) {
-    
-        //             value.classList.add('error_input');
-        //             let errorDiv = document.createElement("div");
-        //             errorDiv.setAttribute('id', 'error_'+e.target.name);
-        //             errorDiv.classList.add('error');
-        //             errorDiv.innerHTML=`поле ${value.placeholder} должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.`;
-        //             value.after(errorDiv);
-        //             return false;
-        //         }     
-        //     }
-
-}
+    if(e.target.name === 'email') {
+      if (reEmail.test(e.target.value)) {
+        this.focus(e);
+      } else {
+        error(e, 'заполненно неверно');
+      }
   
-  focus(e) {
-    console.log('focus');
-    // console.log(this.element.value);
-  };
-
+    } else if(e.target.name === 'login') {
+        if (reLogin.test(e.target.value)) {
+          this.focus(e);
+        } else {
+          error(e, 'должно содержать от 3 до 20 латинских букв, может содержать цифры, дефис, нижнее подчёркивание, без пробелов');
+        }
+    } else if(e.target.name === 'first_name' || e.target.name === 'second_name' ) {
+      if (reNameAndSurname.test(e.target.value)) {
+        this.focus(e);
+      } else {
+        error(e, 'должно содержать латиницу или кириллицу, первая буква должна быть заглавной, без пробелов и без цифр, допустим только дефис');
+      }
+    } else if(e.target.name === 'phone') {
+        if (rePhone.test(e.target.value)) {
+          this.focus(e);
+        } else {
+          error(e, 'должно содержать от 10 до 15 символов, состоять из цифр, может начинается с +');
+        }
+    } else if(e.target.name === 'password') {
+      if (rePassword.test(e.target.value)) {
+        this.focus(e);
+      } else {
+        error(e, 'должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра');
+      }  
+    } else if(e.target.name === 'display_name') {
+      if (!e.target.value.trim().length === 0) {
+        this.focus(e);
+      } else {
+        error(e, ' Имя в чате должно содержать хотя бы один символ');
+      }
+    } else if(e.target.name === 'newPassword' || e.target.name === 'newPasswordRepeat') {
+      if (rePassword.test(e.target.value)) {
+        this.focus(e);
+      } else {
+        error(e, 'Пароль должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра');
+      }
+    }
+  }
 }
 
 export default Block;

@@ -1,0 +1,11 @@
+#message_textarea {
+  width: 100%;
+  background-color: #EFEFEF;
+  border: none;
+  border-radius: 15px;
+  padding: 5px;
+  min-height: 40px;
+}
+#message_textarea :focus {
+  border-color: aliceblue;
+}

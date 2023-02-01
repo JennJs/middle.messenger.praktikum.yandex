@@ -1,4 +1,37 @@
 export function validate(data, form) {
+    let count = 0;
+    let result = false;
+
+    const error = (value, text) => {
+        let parent = value.parentNode;
+        let errorDiv = document.getElementById('error_'+value.name);
+        if(!errorDiv) {
+            let errorDiv = document.createElement("div");
+            errorDiv.setAttribute('id', 'error_'+value.name);
+            errorDiv.innerHTML=`Поле ${value.placeholder} ${text}`;
+
+            if(value.classList.contains('user_settings')) {
+                errorDiv.classList.add('error_settings');
+                parent.classList.add('error_input');
+                parent.after(errorDiv)
+            } else {
+                errorDiv.classList.add('error');
+                value.classList.add('error_input');
+                value.after(errorDiv);
+            }
+        }
+    }
+
+    const success = (value) => {
+        count++;
+        let errorDiv = document.getElementById('error_'+value.name);
+        if(errorDiv) {
+            errorDiv.remove();
+            value.classList.remove('error_input');
+        }
+        value.classList.remove('error_input');
+    }
+
     let el = form.elements;
     let inputs = [];
 
@@ -14,113 +47,79 @@ export function validate(data, form) {
             inputs.push(el[key]);
         }
     })
+   let newPassword = '';
+   let newPasswordRepeat = '';
 
-    let result = true;
-    // console.log(inputs);
     Object.entries(inputs).forEach( ([key , value]) => {
         if(value.name === 'email') {
-            value.style.border = "";
-            if (reEmail.test(value.value )) {
-                let errorDiv = document.getElementById('error_'+value.name);
-                if(errorDiv) {
-                    errorDiv.innerHTML='';
-                }
-                value.classList.remove('error_input');
-                return true;
-            }
-            else {
-                result = false;
-                value.classList.add('error_input');
-                let errorDiv = document.createElement("div");
-                errorDiv.setAttribute('id', 'error_'+value.name);
-                errorDiv.classList.add('error');
-                errorDiv.innerHTML='email введен неверно';
-                value.after(errorDiv);
-                return false;
+            if (!reEmail.test(value.value )) {
+                error(value, 'заполненно неверно');
+            } else {
+                success(value);
             }
         } else if(value.name === 'login') {
-            value.style.border = "";
-            if (reLogin.test(value.value )) {
-                let errorDiv = document.getElementById('error_'+value.name);
-                if(errorDiv) {
-                    errorDiv.innerHTML='';
-                } 
-                value.classList.remove('error_input');
-                return true;
-            }
-            else {
-                result = false;
-                value.classList.add('error_input');
-                let errorDiv = document.createElement("div");
-                errorDiv.setAttribute('id', 'error_'+value.name);
-                errorDiv.classList.add('error');
-                errorDiv.innerHTML=`логин должен быть от 3 до 20 латинских букв, может содержать цифры, дефис, нижнее подчёркивание, без пробелов`;
-                value.after(errorDiv);
-                return false;
+            if (!reLogin.test(value.value )) {
+                error(value, 'должно содержать от 3 до 20 латинских букв, может содержать цифры, дефис, нижнее подчёркивание, без пробелов');
+            } else {
+                success(value);
             }
         } else if(value.name === 'first_name' || value.name === 'second_name' ) {
-            value.style.border = "";
-            if (reNameAndSurname.test(value.value )) {
-                let errorDiv = document.getElementById('error_'+value.name);
-                if(errorDiv) {
-                    errorDiv.innerHTML='';
-                } 
-                value.classList.remove('error_input');
-                return true;
+            if (!reNameAndSurname.test(value.value )) {
+                error(value,'должно содержать латиницу или кириллицу, первая буква должна быть заглавной, без пробелов и без цифр, допустим только дефис');
             } else {
-                result = false;
-                value.classList.add('error_input');
-                let errorDiv = document.createElement("div");
-                errorDiv.setAttribute('id', 'error_'+value.name);
-                errorDiv.classList.add('error');
-                errorDiv.innerHTML=`поле ${value.placeholder} должно содержать латиницу или кириллицу, первая буква должна быть заглавной, без пробелов и без цифр, допустим только дефис`;
-                value.after(errorDiv);
-                return false;
+                success(value);
             }
         } else if(value.name === 'phone') {
-            value.style.border = "";
-            if (rePhone.test(value.value )) {
-                let errorDiv = document.getElementById('error_'+value.name);
-                if(errorDiv) {
-                    errorDiv.innerHTML='';
-                }  
-                value.classList.remove('error_input');
-                return true;
+            if (!rePhone.test(value.value )) {
+                error(value, 'должно содержать от 10 до 15 символов, состоять из цифр, может начинается с +');
             } else {
-                result = false;
-                value.classList.add('error_input');
-                let errorDiv = document.createElement("div");
-                errorDiv.setAttribute('id', 'error_'+value.name);
-                errorDiv.classList.add('error');
-                errorDiv.innerHTML=`поле ${value.placeholder} должно содержать от 10 до 15 символов, состоять из цифр, может начинается с плюса`;
-                value.after(errorDiv);
-                return false;
+                success(value);
             }
-        } else if(value.name === 'password') {
-            value.style.border = "";
-            if (rePassword.test(value.value )) {
-                let errorDiv = document.getElementById('error_'+value.name);
-                if(errorDiv) {
-                    errorDiv.innerHTML='';
-                }
-                value.classList.remove('error_input');
-                return true;
+        } else if(value.name === 'password' || value.name === 'oldPassword' ) {
+            if (!rePassword.test(value.value )) {
+                error(value, 'Пароль должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра');
             } else {
-                let errorDiv = document.getElementById('error_'+value.name);
-                if(!errorDiv) {
-                    result = false;
-                    value.classList.add('error_input');
-                    let errorDiv = document.createElement("div");
-                    errorDiv.setAttribute('id', 'error_'+value.name);
-                    errorDiv.classList.add('error');
-                    errorDiv.innerHTML=`поле ${value.placeholder} должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.`;
-                    value.after(errorDiv);
-                    return false;
+                success(value);
+            }
+        } else if(value.name === 'display_name') {
+            if (value.value.trim().length === 0) {
+                error(value, 'должно содержать хотя бы один символ');
+            } else {
+                success(value);
+            }
+        } else if(value.name === 'newPassword') {
+            if (!rePassword.test(value.value )) {
+                error(value, 'Пароль должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра');
+            } else {
+                newPassword = value.value;
+                success(value);
+            }
+        } else if(value.name === 'newPasswordRepeat') {
+            if (!rePassword.test(value.value )) {
+                error(value, 'Пароль должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра');
+            } else {
+                newPasswordRepeat = value.value;
+                if(newPassword !== newPasswordRepeat) {
+                    error(value, 'Пароли не совпадают');
                 } else {
-                    return result = false;
-                }    
+                    success(value);
+
+                }
             }
         }
     })
+    // if(newPassword !== newPasswordRepeat) {
+    //     console.log('no match');
+    // }
+    if (count === inputs.length) {
+        result = true;
+    }
+    // console.log(inputs.length);
+    // console.log(count);
+    // console.log(inputs);
+    // console.log(result);
+
+
     return result;
+    
 }

@@ -1,7 +1,8 @@
 <form action="#" method="post" >
     <div><img  class="clip" src="{{url_clip}}" alt="send"></button></div>
 	<div class="input_message"> 
-        <textarea id="message_textarea"  name="message"> </textarea>
+        {{!-- {{{ textarea }}} --}}
+        {{{ input_message }}}
     </div>
     <div  class="button_send_message">
 	    {{{button_send}}}

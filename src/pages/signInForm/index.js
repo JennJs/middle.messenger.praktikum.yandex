@@ -3,7 +3,7 @@ import template from './tpl.hbs';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Link } from '../../components/link';
-
+import { Label } from '../../components/label';
 
 
 export class SignInForm extends Block {
@@ -12,47 +12,47 @@ export class SignInForm extends Block {
   }
   
   init() {
-	this.children.input_email = new Input({ 
-		lable: 'Почта',
-		input_name: 'email',
-		input_type: 'email',
-		input_id: 'email_sign_in',
-		input_placeholder: 'Почта' 
+	this.children.input_email_label = new Label();
+	this.children.input_email = new Input({
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		} 
 	});
-    this.children.input_login = new Input({ 
-		lable: 'Логин',
-		input_name: 'login',
-		input_type: 'text',
-		input_id: 'login_sign_in',
-		input_placeholder: 'Логин' 
+	this.children.input_login_label = new Label();
+    this.children.input_login = new Input({
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		} 
 	});
-	this.children.input_name = new Input({ 
-		lable: 'Имя',
-		input_name: 'first_name',
-		input_type: 'text',
-		input_id: 'first_name_sign_in',
-		input_placeholder: 'Имя' 
+	this.children.input_name_label = new Label();
+	this.children.input_name = new Input({
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		} 
 	});
+	this.children.input_surname_label = new Label();
 	this.children.input_surname = new Input({ 
-		lable: 'Фамилия',
-		input_name: 'second_name',
-		input_type: 'text',
-		input_id: 'second_name_sign_in',
-		input_placeholder: 'Фамилия' 
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		}  
 	});
+	this.children.input_tel_label = new Label();
 	this.children.input_tel = new Input({ 
-		lable: 'Телефон',
-		input_name: 'phone',
-		input_type: 'tel',
-		input_id: 'phone_sign_in',
-		input_placeholder: 'Ваш номер телефона' 
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		}   
 	});
+	this.children.input_password_label = new Label();
 	this.children.input_password  = new Input({
-		lable: 'Пароль',
-		input_name: 'password',
-		input_type: 'password',
-		input_id: 'password_sign_in',
-		input_placeholder: 'Пароль' 
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		}    
 	});
 	this.children.button_sign_in  = new Button({
 		label: 'Зарегистрироваться',
@@ -65,11 +65,28 @@ export class SignInForm extends Block {
 		clas: 'position_centr',
 		link_title: 'Войти'
 	});
+	this.setLabelsAttributes(this.children.input_email_label, 'Email', 'email_sign_in' );
+	this.setInputsAttributes(this.children.input_email.getContent(),'email_sign_in', 'email', 'email', 'Email' );
+
+	this.setLabelsAttributes(this.children.input_login_label, 'Логин', 'login_sign_in' );
+	this.setInputsAttributes(this.children.input_login.getContent(),'login_sign_in', 'login', 'text', 'Логин' );
+
+	this.setLabelsAttributes(this.children.input_name_label, 'Имя', 'first_name_sign_in' );
+	this.setInputsAttributes(this.children.input_name.getContent(),'first_name_sign_in', 'first_name', 'text', 'Имя' );
+
+	this.setLabelsAttributes(this.children.input_surname_label, 'Фамилия', 'second_name_sign_in' );
+	this.setInputsAttributes(this.children.input_surname.getContent(),'second_name_sign_in', 'second_name', 'text', 'Фамилия' );
+
+	this.setLabelsAttributes(this.children.input_tel_label, 'Телефон', 'phone_sign_in' );
+	this.setInputsAttributes(this.children.input_tel.getContent(),'phone_sign_in', 'phone', 'tel', 'Телефон' );
+
+	this.setLabelsAttributes(this.children.input_password_label, 'Пароль', 'password_sign_in' );
+	this.setInputsAttributes(this.children.input_password.getContent(),'password_sign_in', 'password', 'password', 'Пароль' );
+
+	this.children.button_sign_in.getContent().classList.add('button_primary');
   }
-  
 
   render() {
-	this.children.button_sign_in.getContent().classList.add('button_primary');
     return this.compile(template, this.props);
   }
 }

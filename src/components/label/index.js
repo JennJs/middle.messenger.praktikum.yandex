@@ -2,12 +2,11 @@ import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 
-export class Input extends Block {
+export class Label extends Block {
   
   constructor(props) {
-    super( 'input', props );
+    super( 'label', props );
   }
-
   render() {
     return this.compile(template, this.props);
   }

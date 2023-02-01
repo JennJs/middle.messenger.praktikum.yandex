@@ -5,7 +5,8 @@ import { ComeBack } from '../../components/comeBack';
 import left_arrow  from '../../../static/left-arrow.png';
 import { Avatar } from '../../components/avatar';
 import './style.css';
-import { UserSettings } from '../../components/userSetting';
+import { Label } from '../../components/label';
+import { Input } from '../../components/input';
 
 
 export class UserChangePassword extends Block {
@@ -18,24 +19,26 @@ export class UserChangePassword extends Block {
 		url: left_arrow
 	});
     this.children.avatar = new Avatar({});
-	this.children.change_pass_component_old_pass = new UserSettings({ 
-		lable: 'Старый пароль',
-		input_name: 'oldPassword',
-		input_type: 'password',
-		input_id: 'change_pass_old_pass',
-		input_value: '123'
+	this.children.change_pass_old_pass_label = new Label();
+	this.children.change_pass_old_pass_input = new Input({
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		} 
 	});
-	this.children.change_pass_component_new_pass = new UserSettings({ 
-		lable: 'Новый пароль',
-		input_name: 'newPassword',
-		input_type: 'password',
-		input_id: 'change_pass_new_pass',
+	this.children.change_pass_new_pass_label = new Label();
+	this.children.change_pass_new_pass_input = new Input({
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		} 
 	});
-	this.children.change_pass_component_new_pass_repeat = new UserSettings({ 
-		lable: 'Повторите новый пароль',
-		input_name: 'newPasswordRepeat',
-		input_type: 'password',
-		input_id: 'change_pass_new_pass_repeat',
+	this.children.change_pass_new_pass_repeat_label = new Label();
+	this.children.change_pass_new_pass_repeat_input = new Input({
+		events: {
+			blur: (e) => this.valid(e),
+			focus: (e) => this.focus(e),
+		} 
 	});
 	this.children.button_save  = new Button({
 		label: 'Сохранить', 
@@ -43,6 +46,18 @@ export class UserChangePassword extends Block {
 			click: (e) => this.getFormValue(e),
 		  }, 
 	});
+
+   this.setInputsAttributes(this.children.change_pass_old_pass_input.getContent(), 'change_pass_old_pass', 'oldPassword', 'password', '', '123Jfhfrr5');
+   this.children.change_pass_old_pass_input.getContent().classList.add('user_settings');
+   this.setLabelsAttributes(this.children.change_pass_old_pass_label, 'Старый пароль',  'change_pass_old_pass' );
+
+   this.setInputsAttributes(this.children.change_pass_new_pass_input.getContent(), 'change_pass_new_pass', 'newPassword', 'password', '', '');
+   this.children.change_pass_new_pass_input.getContent().classList.add('user_settings');
+   this.setLabelsAttributes(this.children.change_pass_new_pass_label, 'Новый пароль',  'change_pass_new_pass' );
+
+   this.setInputsAttributes(this.children.change_pass_new_pass_repeat_input.getContent(), 'change_pass_new_pass_repeat', 'newPasswordRepeat', 'password', '', '');
+   this.children.change_pass_new_pass_repeat_input.getContent().classList.add('user_settings');
+   this.setLabelsAttributes(this.children.change_pass_new_pass_repeat_label, 'Повторите новый пароль',  'change_pass_new_pass_repeat' );
   }
  
   render() {
