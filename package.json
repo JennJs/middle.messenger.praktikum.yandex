@@ -6,20 +6,25 @@
   "scripts": {
     "dev": " parcel src/index.html",
     "build": "parcel build src/index.html",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
+    "style": "stylelint \"**/*.css\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
     "@parcel/transformer-inline-string": "^2.8.2",
+    "eslint": "^8.33.0",
     "express-handlebars": "^6.0.6",
     "parcel": "^2.8.2",
     "parcel-plugin-static-files-copy": "^2.6.0",
     "parcel-reporter-static-files-copy": "^1.5.0",
-    "parcel-transformer-hbs": "^1.0.4"
+    "parcel-transformer-hbs": "^1.0.4",
+    "stylelint": "^14.16.1"
   },
   "engines": {
     "node": ">= 12.0.0"

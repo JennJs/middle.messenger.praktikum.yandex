@@ -6,18 +6,18 @@ import { Input } from '../input';
 
 export class ChatHeader extends Block {
   constructor(props) {
-    super( 'div', props );
+    super('div', props);
   }
 
   init() {
     this.children.button_search = new Button({
       events: {
-        click: (e) => this.getSearchMessage(e)
-      }
+        click: (e) => this.getSearchMessage(e),
+      },
     });
-    this.children.input_search = new Input({})
+    this.children.input_search = new Input({});
 
-    this.setInputsAttributes(this.children.input_search.getContent(), 'search_input', 'search', 'text', 'Поиск' );
+    this.setInputsAttributes(this.children.input_search.getContent(), 'search_input', 'search', 'text', 'Поиск');
   }
 
   getSearchMessage(e) {
@@ -25,11 +25,11 @@ export class ChatHeader extends Block {
     let result = true;
     const data = {};
     const search = document.getElementById('search_input');
-   
-    if(search.value.trim().length === 0) {
+
+    if (search.value.trim().length === 0) {
       result = false;
-    }else {
-      data[search.name] = search.value
+    } else {
+      data[search.name] = search.value;
       console.log(data);
       search.value = '';
     }
@@ -42,4 +42,3 @@ export class ChatHeader extends Block {
     return this.compile(template, this.props);
   }
 }
-

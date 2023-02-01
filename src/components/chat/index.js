@@ -4,12 +4,11 @@ import './style.css';
 
 export class Chat extends Block {
   constructor(props) {
-    super( 'div', props );
-    
+    super('div', props);
   }
+
   render() {
-    this.getContent().classList.add('chat')
+    this.getContent().classList.add('chat');
     return this.compile(template, this.props);
   }
 }
-

@@ -3,9 +3,8 @@ import template from './tpl.hbs';
 import './style.css';
 
 export class Input extends Block {
-  
   constructor(props) {
-    super( 'input', props );
+    super('input', props);
   }
 
   render() {

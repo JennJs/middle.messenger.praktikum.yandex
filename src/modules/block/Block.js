@@ -70,7 +70,6 @@ class Block {
 
   _createResources() {
     const { tagName } = this._meta;
-    // console.log(tagName);
     this._element = this._createDocumentElement(tagName);
   }
 
@@ -100,7 +99,7 @@ class Block {
     }
   }
 
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate( ) {
     return true;
   }
 
@@ -141,7 +140,7 @@ class Block {
     const temp = document.createElement('template');
     temp.innerHTML = html;
 
-    Object.entries(this.children).forEach(([_, component]) => {
+    Object.entries(this.children).forEach(([, component]) => {
       const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
 
       if (!stub) {
@@ -191,11 +190,11 @@ class Block {
     this.getContent().style.display = "none";
   }
 
-  setInputsAttributes(el, id, input_name, type, placeholder, value ='' ) {
+  setInputsAttributes(el, id, name, type, placeholder, value ='' ) {
     const attrs = {
       id, 
-      name: input_name ,
-		  type,
+      name,
+		type,
       placeholder,
       value
     };
@@ -217,7 +216,7 @@ class Block {
     if (validate(dataForm, form2)) {
       const values = form2.elements;
 
-      Object.entries(values).forEach( ([key , value]) => {
+      Object.entries(values).forEach( ([ , value]) => {
         if (!value.classList.contains('user_settings')) {
           value.value = '';
         } 
@@ -236,7 +235,7 @@ class Block {
       parent.classList.remove('error_input');
       e.target.classList.remove('error_input');
     } 
-  };
+  }
 
   valid(e) {
     const error = (e, text) => {
@@ -260,9 +259,9 @@ class Block {
     }
     
     const reEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    const reLogin = /^[a-zA-ZА-Яа-я0-9\-\_]{2,20}[a-zA-ZА-Яа-я]+$/;
-    const reNameAndSurname = /^[A-ZА-Я][A-ZА-Яa-zа-я\-]+$/;
-    const rePhone = /^(?:\+|[\+7|8])[\d]{10,15}$/;
+    const reLogin = /^[a-zA-ZА-Яа-я0-9\-_]{2,20}[a-zA-ZА-Яа-я]+$/;
+    const reNameAndSurname = /^[A-ZА-Я][A-ZА-Яa-zа-я-]+$/;
+    const rePhone = /^(?:\+|[+7|8])[\d]{10,15}$/;
     const rePassword = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,40}$/;
 
     if(e.target.name === 'email') {

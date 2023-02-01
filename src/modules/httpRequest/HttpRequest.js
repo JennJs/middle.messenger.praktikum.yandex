@@ -17,19 +17,19 @@ export class HTTPTRequest {
     }
 
     get = (url, options = {}) => {
-      return this.request(url, {...options, method: METHODS.GET}, options.timeout);
+      return this.request(url, {...options, method: this.METHODS.GET}, options.timeout);
     };
   
     post = (url, options = {}) => {
-        return this.request(url, {...options, method: METHODS.POST}, options.timeout);
+        return this.request(url, {...options, method: this.METHODS.POST}, options.timeout);
     };
     
     put = (url, options = {}) => {
-        return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
+        return this.request(url, {...options, method: this.METHODS.PUT}, options.timeout);
     };
     
     delete = (url, options = {}) => { 
-        return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
+        return this.request(url, {...options, method: this.METHODS.DELETE}, options.timeout);
     };
     
     request = (url, options = {}, timeout = 5000) => {
@@ -42,12 +42,12 @@ export class HTTPTRequest {
         }
     
         const xhr = new XMLHttpRequest();
-        const isGet = method === METHODS.GET;
+        const isGet = method === this.METHODS.GET;
     
         xhr.open(
             method, 
             isGet && !!data
-            ? `${url}${queryStringify(data)}`
+            ? `${url}${this.queryStringify(data)}`
             : url,
         );
     

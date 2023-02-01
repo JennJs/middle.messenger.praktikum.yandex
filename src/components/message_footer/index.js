@@ -2,35 +2,33 @@ import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 import { Button } from '../button';
-import { Textarea } from '../textarea';
 import { Input } from '../input';
 
 export class MessageFooter extends Block {
   constructor(props) {
-    super( 'div', props );
+    super('div', props);
   }
-  
+
   init() {
-    this.children.input_message = new Input()
+    this.children.input_message = new Input();
     this.children.button_send = new Button({
-      events:{
+      events: {
         click: (e) => this.getMessage(e),
-      } 
-    })
-    this.setInputsAttributes(this.children.input_message.getContent(), 'message_textarea', 'message', 'text', '' );
-    // this.children.input_message.getContent().setAttribute('id', 'message_textarea');
-    // this.children.input_message.getContent().setAttribute('name', 'message');
+      },
+    });
+    this.setInputsAttributes(this.children.input_message.getContent(), 'message_textarea', 'message', 'text', '');
   }
+
   getMessage(e) {
     e.preventDefault();
     let result = true;
     const data = {};
     const textarea = document.getElementById('message_textarea');
-   
-    if(textarea.value.trim().length === 0) {
+
+    if (textarea.value.trim().length === 0) {
       result = false;
-    }else {
-      data[textarea.name] = textarea.value
+    } else {
+      data[textarea.name] = textarea.value;
       console.log(data);
       textarea.value = '';
     }

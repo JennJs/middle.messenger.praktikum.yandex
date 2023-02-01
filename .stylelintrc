@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "color-hex-case": "upper",
+    "rule-empty-line-before": "never",
+    "block-no-empty": true
+  },
+  "ignoreFiles": [
+    "dist/*"
+  ]
+  } 
