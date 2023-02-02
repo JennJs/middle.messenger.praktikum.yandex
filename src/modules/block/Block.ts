@@ -2,7 +2,11 @@ import  EventBus  from "../../utils/eventBus";
 import { nanoid } from 'nanoid';
 import { validate } from "../../utils/validation";
 
-class Block {
+export type T = Record<string, any>;
+type Children = Record<string, Block<T>>;
+
+class Block <Props extends Record<string, any>>  {
+  
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -10,21 +14,22 @@ class Block {
     FLOW_RENDER: "flow:render"
   };
 
-  id = nanoid(6);
-  _element = null;
-  _meta ;
+  public id: string = nanoid(6);
+  private _element: HTMLElement;
+  protected children: Children = {};
+  protected props: Props;
+  protected tagName: string;
+  protected eventBus: () => EventBus;
+  private _meta: { 
+    tagName: string; 
+    props: Props; 
+  };
 
-  /** JSDoc
-   * @param {string} tagName
-   * @param {Object} props
-   *
-   * @returns {void}
-   */
-  constructor(tagName = "div", propsWithChildren ={}) {
+  constructor(tagName = "div", propsWithChildren: Props ) {
     const eventBus = new EventBus();
    
     const {props, children} = this._getChildrenAndProps(propsWithChildren);
-
+    
     this._meta = {
       tagName,
       props
@@ -32,28 +37,28 @@ class Block {
     
     this.children = children;
     this.props = this._makePropsProxy(props);
-   
     this.eventBus = () => eventBus;
-
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildrenAndProps(childrenAndProps) {
-    const props = {};
-    const children = {};
-
-    Object.entries(childrenAndProps).forEach(([key, value]) => {
-      if (value instanceof Block) {
-        children[key] = value;
-      } else {
-        props[key] = value;
-      }
-    });
-    return {props, children};
+  private _getChildrenAndProps(childrenAndProps: Props): {props: Props, children: Children} {
+    const props = {}  as T;
+    const children: Children = {};
+    if (childrenAndProps) {
+        Object.entries(childrenAndProps).forEach(([key, value]) => {
+            if (value instanceof Block) {
+              children[key] = value;
+            } else {
+              props[key] = value;
+            }
+        });
+    }
+    
+    return {props: (props as Props), children};
   }
 
-  _addEvents() {
+  private _addEvents():void {
     const {events = {}} = this.props;
    
     Object.keys(events).forEach(eventName => {
@@ -61,49 +66,48 @@ class Block {
     });
   }
 
-  _registerEvents(eventBus) {
+  private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
+  private _createResources(): void {
     const { tagName } = this._meta;
     this._element = this._createDocumentElement(tagName);
   }
 
-  _init() {
+  private _init(): void {
     this.init();
     this._createResources();
-   
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
-  init() {}
+  protected init(): void {}
 
-  _componentDidMount() {
+  private _componentDidMount(): void {
     this.componentDidMount();
   }
 
-  componentDidMount() {}
+  protected componentDidMount(): void {}
 
-  dispatchComponentDidMount() {
+  protected dispatchComponentDidMount(): void {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
    
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  _componentDidUpdate(oldProps, newProps) {
+  private _componentDidUpdate(oldProps: Props, newProps: Props): void {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  componentDidUpdate( ) {
+  protected componentDidUpdate(oldProps: Props, newProps: Props): boolean {
     return true;
   }
 
-  setProps = nextProps => {
+  protected setProps = (nextProps: Props): void => {
     if (!nextProps) {
       return;
     }
@@ -111,24 +115,24 @@ class Block {
     Object.assign(this.props, nextProps);
   };
 
-  get element() {
+  public get element(): HTMLElement {
     return this._element;
   }
   
-  _render() {
+  private _render(): void {
     const fragment = this.render();
     this._element.innerHTML = '';
     this._element.append(fragment);
     this._addEvents();
   }
 
-  render() {
+  protected render(): DocumentFragment {
     return new DocumentFragment();
   }
 
-  compile(template, context) {
+  protected compile(template: (context: any) => string, context: Props): DocumentFragment {
 
-    const contextAndStubs = { ...context };
+    const contextAndStubs: T = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
@@ -136,7 +140,6 @@ class Block {
     });
 
     const html = template(contextAndStubs);
-
     const temp = document.createElement('template');
     temp.innerHTML = html;
 
@@ -155,14 +158,14 @@ class Block {
     return temp.content;
   }
 
-  getContent() {
+  public getContent(): HTMLElement {
     return this.element;
   }
 
-  _makePropsProxy(props) {
+  private _makePropsProxy(props: Props): Props {
     const self = this;
     return new Proxy(props, {
-      get(target, prop) {
+      get(target: any, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
@@ -172,25 +175,25 @@ class Block {
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
-      deleteProperty() {
+      deleteProperty(): never {
         throw new Error('Нет доступа');
       }
     });
   }
 
-  _createDocumentElement(tagName) {
+  private _createDocumentElement(tagName: string): HTMLElement {
     return document.createElement(tagName);
   }
 
-  show() {
+  public show(): void {
     this.getContent().style.display = "block";
   }
 
-  hide() {
+  public hide(): void {
     this.getContent().style.display = "none";
   }
 
-  setInputsAttributes(el, id, name, type, placeholder, value ='' ) {
+  public setInputsAttributes(el: HTMLElement, id: string, name: string, type: string, placeholder: string, value: string ='' ) {
     const attrs = {
       id, 
       name,
@@ -201,35 +204,35 @@ class Block {
     Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
   }
 
-  setLabelsAttributes(el, label , id ) {
+  protected setLabelsAttributes(el: Block<T>, label: string , id: string ) {
     el.getContent().setAttribute('for', id );
     el.getContent().textContent = label;
   }
 
-  getFormValue(e) {
+  protected getFormValue(e: Event & { target: HTMLInputElement} ): boolean {
     e.preventDefault();
-    const form = document.querySelector('form');
-    let form2 = document.forms[0];
-
+    const form = document.querySelector('form') as HTMLFormElement;
+    let form2  = document.forms[0];
     const dataForm = Object.fromEntries(new FormData(form).entries());
    
     if (validate(dataForm, form2)) {
       const values = form2.elements;
+      
 
-      Object.entries(values).forEach( ([ , value]) => {
+      Object.entries(values).forEach( ([ , value ]) => {
         if (!value.classList.contains('user_settings')) {
-          value.value = '';
+         (value as HTMLInputElement).value = '' ;
         } 
       })
       console.log(dataForm);
-      e.target.setAttribute('disabled', '')
+      e.target.setAttribute('disabled', '');
     } 
     return false;
   }
 
-  focus(e) {
-    let errorDiv = document.getElementById('error_'+e.target.name);
-    let parent = e.target.parentNode;
+  focus(e: Event & { target: HTMLInputElement}) {
+    let errorDiv = document.getElementById('error_'+e.target.name) ;
+    let parent = e.target.parentNode as HTMLElement;
     if(errorDiv) {
       errorDiv.remove();
       parent.classList.remove('error_input');
@@ -237,10 +240,10 @@ class Block {
     } 
   }
 
-  valid(e) {
-    const error = (e, text) => {
-      let errorDiv = document.getElementById('error_'+e.target.name);
-      let parent = e.target.parentNode;
+  valid(e: Event & { target: HTMLInputElement}) {
+    const error = (e:Event & { target: HTMLInputElement }, text: string) => {
+      let errorDiv = document.getElementById('error_'+e.target .name);
+      let parent = e.target.parentNode as HTMLElement;
         if(!errorDiv) {
           let errorDiv = document.createElement("div");
           errorDiv.setAttribute('id', 'error_'+e.target.name);
@@ -264,8 +267,8 @@ class Block {
     const rePhone = /^(?:\+|[+7|8])[\d]{10,15}$/;
     const rePassword = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,40}$/;
 
-    if(e.target.name === 'email') {
-      if (reEmail.test(e.target.value)) {
+    if((e.target as HTMLInputElement).name === 'email') {
+      if (reEmail.test((e.target as HTMLInputElement).value)) {
         this.focus(e);
       } else {
         error(e, 'заполненно неверно');
@@ -296,10 +299,10 @@ class Block {
         error(e, 'должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра');
       }  
     } else if(e.target.name === 'display_name') {
-      if (!e.target.value.trim().length === 0) {
-        this.focus(e);
-      } else {
+      if ((e.target.value as string).trim().length  === 0) {
         error(e, ' Имя в чате должно содержать хотя бы один символ');
+      } else {
+        this.focus(e);
       }
     } else if(e.target.name === 'newPassword' || e.target.name === 'newPasswordRepeat') {
       if (rePassword.test(e.target.value)) {

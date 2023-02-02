@@ -1,4 +1,5 @@
 export function validate(data, form) {
+
   let count = 0;
   let result = false;
 

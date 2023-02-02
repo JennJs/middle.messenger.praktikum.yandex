@@ -1,9 +1,9 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 
-export class Chat extends Block {
-  constructor(props) {
+export class Chat extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 

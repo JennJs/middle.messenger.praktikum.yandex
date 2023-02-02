@@ -1,18 +1,18 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 import { Button } from '../button';
 import { Input } from '../input';
 
-export class ChatHeader extends Block {
-  constructor(props) {
+export class ChatHeader extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 
-  init() {
+  init(): void {
     this.children.button_search = new Button({
       events: {
-        click: (e) => this.getSearchMessage(e),
+        click: (e: Event) => this.getSearchMessage(e),
       },
     });
     this.children.input_search = new Input({});
@@ -20,11 +20,11 @@ export class ChatHeader extends Block {
     this.setInputsAttributes(this.children.input_search.getContent(), 'search_input', 'search', 'text', 'Поиск');
   }
 
-  getSearchMessage(e) {
+  getSearchMessage(e: Event): boolean {
     e.preventDefault();
     let result = true;
     const data = {};
-    const search = document.getElementById('search_input');
+    const search = document.getElementById('search_input') as HTMLInputElement;
 
     if (search.value.trim().length === 0) {
       result = false;
