@@ -1,4 +1,4 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { Button } from '../../components/button';
 import { ComeBack } from '../../components/comeBack';
@@ -8,8 +8,8 @@ import './style.css';
 import { Label } from '../../components/label';
 import { Input } from '../../components/input';
 
-export class UserChangePassword extends Block {
-  constructor(props) {
+export class UserChangePassword extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 
@@ -18,21 +18,21 @@ export class UserChangePassword extends Block {
       url: left_arrow,
     });
     this.children.avatar = new Avatar({});
-    this.children.change_pass_old_pass_label = new Label();
+    this.children.change_pass_old_pass_label = new Label({});
     this.children.change_pass_old_pass_input = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.change_pass_new_pass_label = new Label();
+    this.children.change_pass_new_pass_label = new Label({});
     this.children.change_pass_new_pass_input = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.change_pass_new_pass_repeat_label = new Label();
+    this.children.change_pass_new_pass_repeat_label = new Label({});
     this.children.change_pass_new_pass_repeat_input = new Input({
       events: {
         blur: (e) => this.valid(e),

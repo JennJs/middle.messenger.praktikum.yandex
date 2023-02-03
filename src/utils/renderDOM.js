@@ -1,6 +1,6 @@
 // utils/renderDOM.js
 
-export function render(query, block) {
+export function renderDOM(query, block) {
   const root = document.querySelector(query);
 
   // Можно завязаться на реализации вашего класса Block

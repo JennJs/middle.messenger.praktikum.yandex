@@ -1,9 +1,16 @@
-import Block, {T} from '../../modules/block/Block';
+import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 
-export class Link extends Block<T> {
-  constructor(props: T) {
+type LinkProps = {
+  href: string,
+  link_title: string,
+  clas: string,
+  style?: string
+}
+
+export class Link extends Block<LinkProps> {
+  constructor(props: LinkProps) {
     super('div', props);
   }
 

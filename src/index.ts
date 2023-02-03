@@ -1,10 +1,10 @@
 import './style.css';
 import { Page404 } from './pages/404';
-// import style from './pages/500/style.css';
+import  './pages/500/style.css';
 import { Page500 } from './pages/500';
 import { Chats } from './pages/chats';
 import { LoginForm } from './pages/loginForm';
-// import styles from './pages/signInForm/style.css';
+import './pages/signInForm/style.css';
 import { SignInForm } from './pages/signInForm';
 import { UserChangeData } from './pages/userChangeData';
 import { UserChangePassword } from './pages/userChangePassword';
@@ -54,33 +54,7 @@ export const contUserSettingsPage = userSettingsPage.getContent();
 userSettingsPage.dispatchComponentDidMount();
 
 window.addEventListener('DOMContentLoaded', () => {
-  const root = document.querySelector('#root');
+  const root = document.querySelector('#root') as  Element;
   root.append(router());
 });
 
-//  const formLogin = document.forms;
-// // console.log(form.getElementById('form_login'));
-// console.log(formLogin);
-// const {form} = document.forms;
-
-// function getFormValue(event) {
-//   event.preventDefault();
-
-//   const data = {};
-
-//   for (let field of form) {
-//     const {name} = field;
-//     console.log(name);
-
-//     if (name) {
-//       const {value} = field;
-//       data[name] =  value;
-//     }
-// }
-
-//     console.log(data);
-// }
-
-// form.addEventListener('submit', getFormValue);
-// let formDataLogin = new FormData(formLogin);
-// console.log(formDataLogin);

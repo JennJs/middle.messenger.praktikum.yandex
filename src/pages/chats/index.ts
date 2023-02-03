@@ -1,4 +1,4 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { ChatHeader } from '../../components/chatHeader';
 import './style.css';
@@ -7,8 +7,8 @@ import { MessageWindow } from '../messageWindow';
 import { Chat } from '../../components/chat';
 import avatar from '../../../static/avatar.png';
 
-export class Chats extends Block {
-  constructor(props) {
+export class Chats extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 

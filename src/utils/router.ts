@@ -2,8 +2,7 @@ import {
   contPage404, contPage500, contChats, contSignInForm, contUserChangeData, contUserChangePassword, contUserSettingsPage, contloginForm,
 } from '../index';
 
-// console.log( _404Page);
-export const router = () => {
+export const router = (): HTMLElement => {
   if (window.location.pathname === '/404') {
     return contPage404;
   } if (window.location.pathname === '/userSettings') {

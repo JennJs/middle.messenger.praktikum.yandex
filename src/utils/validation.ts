@@ -1,11 +1,11 @@
-export function validate(data, form) {
+export function validate(data: Record<string, any>, form: HTMLFormElement): boolean {
 
-  let count = 0;
-  let result = false;
+  let count: number = 0;
+  let result: boolean = false;
 
-  const error = (value, text) => {
-    const parent = value.parentNode;
-    const errorDiv = document.getElementById(`error_${value.name}`);
+  const error = (value: HTMLInputElement, text: string): void => {
+    const parent = value.parentNode as HTMLElement;
+    const errorDiv  = document.getElementById(`error_${value.name}`) as HTMLElement;
     if (!errorDiv) {
       const errorDiv = document.createElement('div');
       errorDiv.setAttribute('id', `error_${value.name}`);
@@ -23,7 +23,7 @@ export function validate(data, form) {
     }
   };
 
-  const success = (value) => {
+  const success = (value: HTMLInputElement): void => {
     count++;
     const errorDiv = document.getElementById(`error_${value.name}`);
     if (errorDiv) {
@@ -33,8 +33,8 @@ export function validate(data, form) {
     value.classList.remove('error_input');
   };
 
-  const el = form.elements;
-  const inputs = [];
+  const el  = form.elements;
+  const inputs: Array<HTMLInputElement> = [];
 
   const reEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   const reLogin = /^[\w-]{3,20}$/;
@@ -48,8 +48,8 @@ export function validate(data, form) {
       inputs.push(el[key]);
     }
   });
-  let newPassword = '';
-  let newPasswordRepeat = '';
+  let newPassword: string = '';
+  let newPasswordRepeat: string = '';
 
   Object.entries(inputs).forEach(([, value]) => {
     if (value.name === 'email') {

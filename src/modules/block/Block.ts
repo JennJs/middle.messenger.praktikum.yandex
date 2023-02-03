@@ -91,7 +91,7 @@ class Block <Props extends Record<string, any>>  {
 
   protected componentDidMount(): void {}
 
-  protected dispatchComponentDidMount(): void {
+  public dispatchComponentDidMount(): void {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
    
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
@@ -213,7 +213,7 @@ class Block <Props extends Record<string, any>>  {
     e.preventDefault();
     const form = document.querySelector('form') as HTMLFormElement;
     let form2  = document.forms[0];
-    const dataForm = Object.fromEntries(new FormData(form).entries());
+    const dataForm: Record<string, any> = Object.fromEntries(new FormData(form).entries());
    
     if (validate(dataForm, form2)) {
       const values = form2.elements;
@@ -230,7 +230,7 @@ class Block <Props extends Record<string, any>>  {
     return false;
   }
 
-  focus(e: Event & { target: HTMLInputElement}) {
+  focus(e: Event & { target: HTMLInputElement}): void {
     let errorDiv = document.getElementById('error_'+e.target.name) ;
     let parent = e.target.parentNode as HTMLElement;
     if(errorDiv) {
@@ -240,7 +240,7 @@ class Block <Props extends Record<string, any>>  {
     } 
   }
 
-  valid(e: Event & { target: HTMLInputElement}) {
+  valid(e: Event & { target: HTMLInputElement}): void {
     const error = (e:Event & { target: HTMLInputElement }, text: string) => {
       let errorDiv = document.getElementById('error_'+e.target .name);
       let parent = e.target.parentNode as HTMLElement;

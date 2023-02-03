@@ -1,4 +1,4 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { Link } from '../../components/link';
 import { ComeBack } from '../../components/comeBack';
@@ -8,8 +8,8 @@ import './style.css';
 import { Label } from '../../components/label';
 import { Input } from '../../components/input';
 
-export class UserSettingsPage extends Block {
-  constructor(props) {
+export class UserSettingsPage extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 
@@ -18,18 +18,18 @@ export class UserSettingsPage extends Block {
       url: left_arrow,
     });
     this.children.avatar = new Avatar({});
-    this.children.user_setting_email_label = new Label();
-    this.children.user_setting_email_input = new Input();
-    this.children.user_setting_login_label = new Label();
-    this.children.user_setting_login_input = new Input();
-    this.children.user_setting_name_label = new Label();
-    this.children.user_setting_name_input = new Input();
-    this.children.user_setting_surname_label = new Label();
-    this.children.user_setting_surname_input = new Input();
-    this.children.user_setting_name_inchat_label = new Label();
-    this.children.user_setting_name_inchat_input = new Input();
-    this.children.user_setting_phone_label = new Label();
-    this.children.user_setting_phone_input = new Input();
+    this.children.user_setting_email_label = new Label({});
+    this.children.user_setting_email_input = new Input({});
+    this.children.user_setting_login_label = new Label({});
+    this.children.user_setting_login_input = new Input({});
+    this.children.user_setting_name_label = new Label({});
+    this.children.user_setting_name_input = new Input({});
+    this.children.user_setting_surname_label = new Label({});
+    this.children.user_setting_surname_input = new Input({});
+    this.children.user_setting_name_inchat_label = new Label({});
+    this.children.user_setting_name_inchat_input = new Input({});
+    this.children.user_setting_phone_label = new Label({});
+    this.children.user_setting_phone_input = new Input({});
     this.children.link_change_data = new Link({
       href: '/userSettings/change-data',
       link_title: 'Изменить данные',

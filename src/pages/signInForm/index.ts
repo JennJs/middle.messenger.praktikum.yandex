@@ -1,52 +1,53 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { Label } from '../../components/label';
 
-export class SignInForm extends Block {
-  constructor(props) {
+
+export class SignInForm extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 
   init() {
-    this.children.input_email_label = new Label();
+    this.children.input_email_label = new Label({});
     this.children.input_email = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.input_login_label = new Label();
+    this.children.input_login_label = new Label({});
     this.children.input_login = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.input_name_label = new Label();
+    this.children.input_name_label = new Label({});
     this.children.input_name = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.input_surname_label = new Label();
+    this.children.input_surname_label = new Label({});
     this.children.input_surname = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.input_tel_label = new Label();
+    this.children.input_tel_label = new Label({});
     this.children.input_tel = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.input_password_label = new Label();
+    this.children.input_password_label = new Label({});
     this.children.input_password = new Input({
       events: {
         blur: (e) => this.valid(e),

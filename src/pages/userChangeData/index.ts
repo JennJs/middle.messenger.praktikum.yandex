@@ -1,4 +1,4 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { Button } from '../../components/button';
 import { ComeBack } from '../../components/comeBack';
@@ -8,8 +8,8 @@ import './style.css';
 import { Label } from '../../components/label';
 import { Input } from '../../components/input';
 
-export class UserChangeData extends Block {
-  constructor(props) {
+export class UserChangeData extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 
@@ -20,42 +20,42 @@ export class UserChangeData extends Block {
     this.children.avatar = new Avatar({});
     this.children.avatar = new Avatar({});
     this.children.avatar = new Avatar({});
-    this.children.user_setting_email_change_label = new Label();
+    this.children.user_setting_email_change_label = new Label({});
     this.children.user_setting_email_change_input = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.user_setting_login_change_label = new Label();
+    this.children.user_setting_login_change_label = new Label({});
     this.children.user_setting_login_change_input = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.user_setting_name_change_label = new Label();
+    this.children.user_setting_name_change_label = new Label({});
     this.children.user_setting_name_change_input = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.user_setting_surname_change_label = new Label();
+    this.children.user_setting_surname_change_label = new Label({});
     this.children.user_setting_surname_change_input = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.user_setting_name_inchat_change_label = new Label();
+    this.children.user_setting_name_inchat_change_label = new Label({});
     this.children.user_setting_name_inchat_change_input = new Input({
       events: {
         blur: (e) => this.valid(e),
         focus: (e) => this.focus(e),
       },
     });
-    this.children.user_setting_phone_change_label = new Label();
+    this.children.user_setting_phone_change_label = new Label({});
     this.children.user_setting_phone_change_input = new Input({
       events: {
         blur: (e) => this.valid(e),

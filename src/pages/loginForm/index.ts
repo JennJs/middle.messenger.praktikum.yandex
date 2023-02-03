@@ -1,34 +1,34 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { Label } from '../../components/label';
 
-export class LoginForm extends Block {
-  constructor(props) {
+export class LoginForm extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 
-  init() {
+  init(): void {
     this.children.input_login_label = new Label({});
     this.children.input_login = new Input({
       events: {
-        blur: (e) => this.valid(e),
-        focus: (e) => this.focus(e),
+        blur: (e: Event & { target: HTMLInputElement}) => this.valid(e),
+        focus: (e: Event & { target: HTMLInputElement}) => this.focus(e),
       },
     });
     this.children.input_password_label = new Label({});
     this.children.input_password = new Input({
       events: {
-        blur: (e) => this.valid(e),
-        focus: (e) => this.focus(e),
+        blur: (e: Event & { target: HTMLInputElement}) => this.valid(e),
+        focus: (e: Event & { target: HTMLInputElement}) => this.focus(e),
       },
     });
     this.children.button_log_in = new Button({
       label: 'Войти',
       events: {
-        click: (e) => this.getFormValue(e),
+        click: (e: Event & { target: HTMLInputElement}) => this.getFormValue(e),
       },
     });
     this.children.link_sign_in = new Link({

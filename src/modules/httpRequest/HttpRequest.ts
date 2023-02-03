@@ -22,27 +22,25 @@ function queryStringify(data: Record<string, any>): string {
     }, '?');
 }
 
-type RequestMethods = (url: string, options?: Options) => Promise<XMLHttpRequest>
-
 export class HTTPTRequest {
 
-    get: RequestMethods = (url , options = {}) => {
-      return this.request(url, + queryStringify(options.data), {...options, method: METHODS.GET}, options.timeout);
+    get = (url: string , options: Options = {}): Promise<XMLHttpRequest> => {
+      return this.request(url + queryStringify((options.data as  Record<string, any>)), {...options, method: METHODS.GET}, options.timeout);
     };
   
-    post = (url, options = {}) => {
+    post = (url: string, options: Options = {}): Promise<XMLHttpRequest> => {
         return this.request(url, {...options, method: METHODS.POST}, options.timeout);
     };
     
-    put = (url, options = {}) => {
+    put = (url: string, options: Options = {}): Promise<XMLHttpRequest> => {
         return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
     };
     
-    delete = (url, options = {}) => { 
+    delete = (url: string, options: Options = {}): Promise<XMLHttpRequest> => { 
         return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
     };
     
-    request = (url, options = {}, timeout = 5000) => {
+    request = (url: string, options: Options = {}, timeout = 5000): Promise<XMLHttpRequest> => {
         const {headers = {}, method, data} = options;
     
         return new Promise(function(resolve, reject) {
@@ -78,7 +76,7 @@ export class HTTPTRequest {
         if (isGet || !data) {
             xhr.send();
         } else {
-            xhr.send(data);
+            xhr.send((data as  XMLHttpRequestBodyInit));
         }
         });
     };

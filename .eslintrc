@@ -7,8 +7,11 @@
       // "extends": ["eslint:recommended"],
       "env": {
           "browser": true,
-          "es2021": true
+          "es2021": true,
+          "jest": true,
+        //   "commonjs": true
       },
+      "eslint-disable": "no-undef",
       "extends": "eslint:recommended",
       "parserOptions": {
           "ecmaVersion": "latest",

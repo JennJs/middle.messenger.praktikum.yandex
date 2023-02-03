@@ -1,9 +1,9 @@
-import Block from '../../modules/block/Block';
+import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { Link } from '../../components/link';
 
-export class Page500 extends Block {
-  constructor(props) {
+export class Page404 extends Block<T> {
+  constructor(props: T) {
     super('div', props);
   }
 
