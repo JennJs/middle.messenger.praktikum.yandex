@@ -1,10 +1,27 @@
 .message_window  {
-    width: 58vw;
-    align-items: center;
+    width: 75%;
+    min-width: 846px;
+    height: 100hv;
+}
+#incoming_message  {
+   padding: 10px  0px 5px 125px;
+}
+#outgoing_message  {
     display: flex;
-    justify-content: center;
+    padding: 10px 125px 0px 10px;
+    justify-content: flex-end;
+    
 }
-.message_window p {
-    font-size: 17px;
-    color: grey;
-}
+#incoming_message p {
+    border-radius: 20px;
+    width: fit-content;
+    padding: 20px;
+    background-color: #F8F8F8;
+ }
+ #outgoing_message p {
+    width: fit-content;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #E4EDFD;
+    text-align: end;
+ }

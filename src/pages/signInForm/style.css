@@ -1,13 +1,12 @@
 #form_signin,
 #form_login {
   width: 340px;
-  border: 1px solid #ede8e8;
+  border: 1px solid #EDE8E8;
   border-radius: 12px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   padding: 20px 0;
-  box-shadow: 0px 1px 7px #eaeaea;
+  box-shadow: 0px 1px 7px #EAEAEA;
+  height: fit-content;
 }
 h1 {
   font-size: 20px;
@@ -17,5 +16,7 @@ h1 {
 .login_form_conteiner {
   display: flex;
   width: 95vw;
-  height: fit-content;
+  height: inherit;
+  align-items: center;
+  justify-content: center;
 }

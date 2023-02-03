@@ -1,13 +1,14 @@
 .chats_header {
-	display: flex;
-	width: 350px;
+	width: 100%;
 	justify-content: space-between;
     align-items: center;
-	background-color: #FBFBFB;
 	padding: 0 15px;
+	border-bottom: 1px solid #EAEAEA;
 }
-.chats_header_conteiner {
-	width: 350px;
+.profile_conteiner {
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
 }
 .profile {
 	color: #999999;
@@ -28,14 +29,16 @@
 	border-radius: 5px;
 	text-align: center;
 }
-.search_button, .search_button img {
+.search_button {
 	width: 30px;
 	height: 30px;
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
-	margin-top: 2px;
-	margin-right: 10px;
+	margin-top: 6px;
+	margin-left: 10px;
+	background-image: url('../../../static/search.png');
+	background-size: contain;
 }
 hr {
 	height: 1px;

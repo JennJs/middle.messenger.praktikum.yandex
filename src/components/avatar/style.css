@@ -2,8 +2,10 @@
   height: 100px;
   width: 100px;
   cursor: pointer;
-  background-color: #d5cdcd;
+  background-color: #D5CDCD;
   border-radius: 80px;
+  margin: 0 auto;
+  margin-bottom: 40px;
 }
 .avatar_conteiner {
   display: flex;

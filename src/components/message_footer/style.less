@@ -1,0 +1,56 @@
+.message_window_footer form {
+ display: flex;
+ align-items: center;
+ align-content: center;
+ justify-content: space-around;
+}
+.message_window_footer {
+    position: fixed;
+    bottom:0;
+    width: 75%;
+    background-color: #fafbfb;
+    min-height: 50px;
+    padding: 10px 0;
+    border-top: 2px solid #EAEAEA;
+}
+.input_message {
+    flex-grow: 2;
+    min-height: 40px;
+}
+
+#message_textarea {
+    width: 100%;
+    background-color: #EFEFEF;
+    border: none; 
+    border-radius: 15px;
+    padding: 5px;
+    padding: 20px 10px;
+    line-height: 28px;
+}
+#message_textarea :focus {
+    border-color: aliceblue;
+}
+.button_send_message {
+    width: 40px ;
+    height: 40px;
+    border-radius: 50%;
+    padding-right: 10px;
+    text-align: start;
+    border: none;
+    background-image: url('../../../static/right-arrow.png');
+    background-size: 40px;
+    }
+.button_send_arrow {
+    width: 40px ;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color:transparent;
+    cursor: pointer;
+    padding-bottom: 10px;
+}
+.clip {
+    padding: 0 5px;
+    height: 35px;
+    cursor: pointer;
+}

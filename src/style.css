@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Inter';
 }
 body {
   margin: 0 !important;
@@ -31,4 +32,16 @@ body {
 nav h3 {
   text-align: start;
   margin: 0;
+}
+.error {
+  color: red;
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+.error_settings {
+  color: red;
+  margin-bottom: 20px;
+}
+.error_input {
+  border: 3px solid red;
 }
