@@ -19,8 +19,8 @@ body {
 .nav {
   width: 200px;
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: 100px;
+  right: -50px;
 }
 .nav_list {
   list-style-type: none;

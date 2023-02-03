@@ -66,6 +66,17 @@ class Block <Props extends Record<string, any>>  {
     });
   }
 
+  private _removeEvents(): void {
+    const events: { [event: string]: () => void } = (this.props).events;
+    if (!events || !this._element) {
+        return;
+    }
+
+    Object.entries(events).forEach(([event, listener]) => {
+        this._element.removeEventListener(event, listener);
+    });
+}
+
   private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -120,9 +131,14 @@ class Block <Props extends Record<string, any>>  {
   }
   
   private _render(): void {
-    const fragment = this.render();
-    this._element.innerHTML = '';
-    this._element.append(fragment);
+    const fragment = this.render(); 
+    if(fragment) {
+        this._removeEvents();
+        this._element.innerHTML = '';
+        this._element.append(fragment);
+    }
+    // this._element.innerHTML = '';
+    // this._element.append(fragment);
     this._addEvents();
   }
 

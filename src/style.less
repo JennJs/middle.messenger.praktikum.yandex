@@ -1,3 +1,4 @@
+@color-red: red;
 * {
     box-sizing: border-box;
     font-family: 'Inter';
@@ -19,8 +20,8 @@ body {
 .nav {
     width: 200px;
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    bottom: 100px;
+    right: -50px;
 }
 .nav_list {
     list-style-type: none;
@@ -32,15 +33,15 @@ nav h3 {
     margin: 0;
 }
 .error {
-    color: red;
+    color: @color-red;
     margin-left: 30px;
     margin-bottom: 20px;  
 }
 .error_settings {
-    color: red;
+    color: @color-red;
     margin-bottom: 20px;  
 }
 .error_input {
-    border: 3px solid red;
+    border: 3px solid @color-red;
 }
 

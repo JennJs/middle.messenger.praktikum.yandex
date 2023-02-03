@@ -2,6 +2,7 @@
   width: 75%;
   min-width: 846px;
   height: 100hv;
+  padding-right: 10px;
 }
 #incoming_message {
   padding: 10px  0px 5px 125px;

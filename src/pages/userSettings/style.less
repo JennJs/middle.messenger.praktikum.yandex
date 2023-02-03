@@ -1,3 +1,5 @@
+@settings-color: #EAEAEA;
+@label-color: #000000;
 .userSettings_container {
     height: 85vh;
     width: 400px;
@@ -15,7 +17,7 @@ h3 {
     font-size: 13px;
 }
 .user_settings_conteiner {
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: 1px solid @settings-color;
     padding-bottom: 5px;
 	display: inline-flex;	
 	align-items: flex-end;
@@ -25,7 +27,7 @@ h3 {
 	justify-content: space-between;
 }
 .user_settings_conteiner label {
-	color: #000000;
+	color: @label-color;
 	font-size: 15px;
 	margin: 0;
 	display: inline-flex;

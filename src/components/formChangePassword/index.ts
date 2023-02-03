@@ -1,6 +1,5 @@
 import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
-import './style.css';
 import { Avatar } from '../avatar';
 import { Label } from '../label';
 import { Input } from '../input';

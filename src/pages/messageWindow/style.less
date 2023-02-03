@@ -1,7 +1,10 @@
+@incoming-message-color: #F8F8F8;
+@outgoing-message-color: #E4EDFD;
 .message_window  {
     width: 75%;
     min-width: 846px;
     height: 100hv;
+    padding-right: 10px;
 }
 #incoming_message  {
    padding: 10px  0px 5px 125px;
@@ -16,12 +19,12 @@
     border-radius: 20px;
     width: fit-content;
     padding: 20px;
-    background-color: #F8F8F8;
+    background-color: @incoming-message-color;
  }
  #outgoing_message p {
     width: fit-content;
     padding: 20px;
     border-radius: 20px;
-    background-color: #E4EDFD;
+    background-color: @outgoing-message-color;
     text-align: end;
  }

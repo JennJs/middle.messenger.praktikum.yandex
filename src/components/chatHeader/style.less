@@ -1,9 +1,12 @@
+@chat-header-color:#EAEAEA;
+@input-color: #EFEFEF;
+@profile-color: #999999;
 .chats_header {
 	width: 100%;
 	justify-content: space-between;
     align-items: center;
 	padding: 0 15px;
-	border-bottom: 1px solid #EAEAEA;
+	border-bottom: 1px solid @chat-header-color;
 }
 .profile_conteiner {
 	display: flex;
@@ -11,7 +14,7 @@
     align-items: center;
 }
 .profile {
-	color: #999999;
+	color: @profile-color;
 }
 #search {
 	display: flex;
@@ -24,7 +27,7 @@
 	width: 100%;
     border: none;
 	width: 260px;
-	background-color:#EFEFEF;
+	background-color: @input-color;
 	height: 35px;
 	border-radius: 5px;
 	text-align: center;
@@ -43,7 +46,7 @@
 hr {
 	height: 1px;
 	border: 0;
-	background-color:#EAEAEA;
+	background-color: @chat-header-color;
 }
 .form_search {
 	display: flex;

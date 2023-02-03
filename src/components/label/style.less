@@ -1,12 +1,13 @@
+@label-color: #999999;
 label {
 	display: block;
-	color: #999999;
+	color: @label-color;
 	font-size: 9px;
 	margin-left: 31px;
 	font-size: 13px;
 	text-align: start;
 }
-::-webkit-input-placeholder {color:#999999; font-size: 9px}
-::-moz-placeholder          {color:#999999; font-size: 9px}
-:-moz-placeholder           {color:#999999; font-size: 9px}
-:-ms-input-placeholder      {color:#999999; font-size: 9px}
+::-webkit-input-placeholder {color: @label-color; font-size: 9px}
+::-moz-placeholder          {color: @label-color; font-size: 9px}
+:-moz-placeholder           {color: @label-color; font-size: 9px}
+:-ms-input-placeholder      {color: @label-color; font-size: 9px}

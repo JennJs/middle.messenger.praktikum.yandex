@@ -1,8 +1,11 @@
+@profile-color: #999999;
+@new-messages-color: #3369F3;
+@chat-color: #EAEAEA;
 .chat {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: 1px solid @chat-color;
     padding: 10px;
     margin-bottom: 10px;
 }
@@ -23,10 +26,10 @@
 }
 .last_message {
     font-size: 12px;
-    color: #999999;
+    color: @profile-color;
 }
 .time {
-    color: #999999;
+    color: @profile-color;
     font-size: 9px;
 }
 .sum_new_messages {
@@ -34,7 +37,7 @@
     height: 20px;
     color: white;
     border-radius: 50%;
-    background-color: #3369F3;
+    background-color: @new-messages-color;
     margin-top: 10px;
     font-size: 12px;
     padding-top: 3px;
