@@ -1,13 +1,18 @@
-import Block, {T} from '../../modules/block/Block';
+import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { Label } from '../../components/label';
+import { getFormValue } from '../../utils/getFormValue';
 
-export class LoginForm extends Block<T> {
-  constructor(props: T) {
-    super('div', props);
+type LoginFormProps = { 
+  events: {submit: (e: Event & { target: HTMLInputElement}) => void},
+};
+
+export class LoginForm extends Block<LoginFormProps> {
+  constructor(props: LoginFormProps) {
+    super('form', props);
   }
 
   init(): void {
@@ -28,7 +33,7 @@ export class LoginForm extends Block<T> {
     this.children.button_log_in = new Button({
       label: 'Войти',
       events: {
-        click: (e: Event & { target: HTMLInputElement}) => this.getFormValue(e),
+        click: (e: Event & { target: HTMLInputElement}) => getFormValue(e),
       },
     });
     this.children.link_sign_in = new Link({
@@ -42,6 +47,7 @@ export class LoginForm extends Block<T> {
     this.setInputsAttributes(this.children.input_password.getContent(), 'password_log_in', 'password', 'password', 'Пароль');
 
     this.children.button_log_in.getContent().classList.add('button_primary');
+    this.children.button_log_in.getContent().setAttribute('type', 'submit');
   }
 
   render() {

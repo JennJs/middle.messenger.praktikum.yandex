@@ -9,7 +9,7 @@ export class ChatHeader extends Block<T> {
     super('div', props);
   }
 
-  init(): void {
+  init() {
     this.children.button_search = new Button({
       events: {
         click: (e: Event) => this.getSearchMessage(e),
@@ -23,7 +23,7 @@ export class ChatHeader extends Block<T> {
   getSearchMessage(e: Event): boolean {
     e.preventDefault();
     let result = true;
-    const data = {};
+    const data: Record<string, any> = {};
     const search = document.getElementById('search_input') as HTMLInputElement;
 
     if (search.value.trim().length === 0) {

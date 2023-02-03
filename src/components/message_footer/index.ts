@@ -22,7 +22,7 @@ export class MessageFooter extends Block<T> {
   getMessage(e: Event) {
     e.preventDefault();
     let result = true;
-    const data = {};
+    const data: Record<string, any> = {};
     const inputMessage = document.getElementById('message_textarea') as HTMLInputElement;
 
     if (inputMessage.value.trim().length === 0) {

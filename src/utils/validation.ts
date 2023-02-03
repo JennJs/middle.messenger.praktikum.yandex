@@ -1,5 +1,4 @@
-export function validate(data: Record<string, any>, form: HTMLFormElement): boolean {
-
+export function validate( form: HTMLFormElement): boolean {
   let count: number = 0;
   let result: boolean = false;
 
@@ -33,7 +32,6 @@ export function validate(data: Record<string, any>, form: HTMLFormElement): bool
     value.classList.remove('error_input');
   };
 
-  const el  = form.elements;
   const inputs: Array<HTMLInputElement> = [];
 
   const reEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
@@ -42,12 +40,12 @@ export function validate(data: Record<string, any>, form: HTMLFormElement): bool
   const rePhone = /^(?:\+|[+7|8])[\d]{10,15}$/;
   const rePassword = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,40}$/;
 
-  Object.entries(data).forEach((element) => {
-    const [key, ] = element;
-    if (key === el[key].name) {
-      inputs.push(el[key]);
-    }
-  });
+  const allInputs = form.querySelectorAll('input');
+  
+  Array.from(allInputs).forEach((input: HTMLInputElement) => {
+    inputs.push(input);
+  })
+
   let newPassword: string = '';
   let newPasswordRepeat: string = '';
 

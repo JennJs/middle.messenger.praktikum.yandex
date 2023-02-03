@@ -5,7 +5,7 @@ import { MessageFooter } from '../../components/message_footer';
 import clip from '../../../static/clip.png';
 
 export class MessageWindow extends Block<T> {
-  constructor(props) {
+  constructor(props: T) {
     super('div', props);
   }
 

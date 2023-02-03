@@ -1,6 +1,6 @@
 import  EventBus  from "../../utils/eventBus";
 import { nanoid } from 'nanoid';
-import { validate } from "../../utils/validation";
+
 
 export type T = Record<string, any>;
 type Children = Record<string, Block<T>>;
@@ -207,27 +207,6 @@ class Block <Props extends Record<string, any>>  {
   protected setLabelsAttributes(el: Block<T>, label: string , id: string ) {
     el.getContent().setAttribute('for', id );
     el.getContent().textContent = label;
-  }
-
-  protected getFormValue(e: Event & { target: HTMLInputElement} ): boolean {
-    e.preventDefault();
-    const form = document.querySelector('form') as HTMLFormElement;
-    let form2  = document.forms[0];
-    const dataForm: Record<string, any> = Object.fromEntries(new FormData(form).entries());
-   
-    if (validate(dataForm, form2)) {
-      const values = form2.elements;
-      
-
-      Object.entries(values).forEach( ([ , value ]) => {
-        if (!value.classList.contains('user_settings')) {
-         (value as HTMLInputElement).value = '' ;
-        } 
-      })
-      console.log(dataForm);
-      e.target.setAttribute('disabled', '');
-    } 
-    return false;
   }
 
   focus(e: Event & { target: HTMLInputElement}): void {

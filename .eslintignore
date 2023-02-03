@@ -1,3 +1,5 @@
-/dist
-/node_modules 
-/.parcel-cache
+**/*.min.js
+.parcel-cache
+dist
+node_modules
+coverage

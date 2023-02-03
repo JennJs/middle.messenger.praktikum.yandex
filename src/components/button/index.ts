@@ -1,4 +1,4 @@
-import Block, {T} from '../../modules/block/Block';
+import Block  from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 
