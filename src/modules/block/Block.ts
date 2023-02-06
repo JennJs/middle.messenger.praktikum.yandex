@@ -58,6 +58,14 @@ class Block <Props extends Record<string, any>>  {
     return {props: (props as Props), children};
   }
 
+  private _registerEvents(eventBus: EventBus): void {
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+  }
+
+
   private _addEvents():void {
     const {events = {}} = this.props;
    
@@ -76,13 +84,6 @@ class Block <Props extends Record<string, any>>  {
         this._element.removeEventListener(event, listener);
     });
 }
-
-  private _registerEvents(eventBus: EventBus): void {
-    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-  }
 
   private _createResources(): void {
     const { tagName } = this._meta;

@@ -1,5 +1,4 @@
-@incoming-message-color: #F8F8F8;
-@outgoing-message-color: #E4EDFD;
+@import '../../colors.less';
 .message_window  {
     width: 75%;
     min-width: 846px;
@@ -12,19 +11,18 @@
 #outgoing_message  {
     display: flex;
     padding: 10px 125px 0px 10px;
-    justify-content: flex-end;
-    
+    justify-content: flex-end;   
 }
 #incoming_message p {
     border-radius: 20px;
     width: fit-content;
     padding: 20px;
     background-color: @incoming-message-color;
- }
- #outgoing_message p {
+}
+#outgoing_message p {
     width: fit-content;
     padding: 20px;
     border-radius: 20px;
     background-color: @outgoing-message-color;
     text-align: end;
- }
+}

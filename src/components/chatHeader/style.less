@@ -1,12 +1,10 @@
-@chat-header-color:#EAEAEA;
-@input-color: #EFEFEF;
-@profile-color: #999999;
+@import '../../colors.less';
 .chats_header {
 	width: 100%;
 	justify-content: space-between;
     align-items: center;
 	padding: 0 15px;
-	border-bottom: 1px solid @chat-header-color;
+	border-bottom: 1px solid @shadow-color;
 }
 .profile_conteiner {
 	display: flex;
@@ -46,7 +44,7 @@
 hr {
 	height: 1px;
 	border: 0;
-	background-color: @chat-header-color;
+	background-color: @shadow-color;
 }
 .form_search {
 	display: flex;
