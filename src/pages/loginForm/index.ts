@@ -5,9 +5,13 @@ import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { Label } from '../../components/label';
 import { getFormValue } from '../../utils/getFormValue';
+import route from '../../utils/navigation';
 
 type LoginFormProps = { 
-  events: {submit: (e: Event & { target: HTMLInputElement}) => void},
+  events: {
+    submit: (e: Event & { target: HTMLInputElement}) => void,
+    click: (e: Event ) => void
+  },
 };
 
 export class LoginForm extends Block<LoginFormProps> {
@@ -40,6 +44,9 @@ export class LoginForm extends Block<LoginFormProps> {
       href: '/registration',
       clas: 'position_centr',
       link_title: 'Нет аккаунта?',
+      events: {
+        click : (e: Event) => route(e)
+      }
     });
     this.setLabelsAttributes(this.children.input_login_label, 'Логин', 'login_log_in');
     this.setInputsAttributes(this.children.input_login.getContent(), 'login_log_in', 'login', 'text', 'Логин');

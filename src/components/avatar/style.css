@@ -1,11 +1,15 @@
 .avatar {
   height: 100px;
   width: 100px;
+  background-color: #d5cdcd;
+  border-radius: 50%;
+}
+.avatar input {
+  height: 100px;
+  width: 100px;
   cursor: pointer;
-  background-color: #D5CDCD;
-  border-radius: 80px;
-  margin: 0 auto;
-  margin-bottom: 40px;
+  opacity: 0;
+  border-radius: 50%;
 }
 .avatar_conteiner {
   display: flex;

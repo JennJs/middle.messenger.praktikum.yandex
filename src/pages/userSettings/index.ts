@@ -7,6 +7,7 @@ import { Avatar } from '../../components/avatar';
 import './style.css';
 import { Label } from '../../components/label';
 import { Input } from '../../components/input';
+import route from '../../utils/navigation';
 
 export class UserSettingsPage extends Block<T> {
   constructor(props: T) {
@@ -34,17 +35,26 @@ export class UserSettingsPage extends Block<T> {
       href: '/userSettings/change-data',
       link_title: 'Изменить данные',
       clas: 'position_left',
+      events: {
+        click : (e: Event) => route(e)
+      }
     });
     this.children.link_change_pass = new Link({
       href: '/userSettings/change-password',
       link_title: 'Изменить пароль',
       clas: 'position_left',
+      events: {
+        click : (e: Event) => route(e)
+      }
     });
     this.children.link_logout = new Link({
       href: '/login',
       link_title: 'Выйти',
       clas: 'position_left',
       style: 'color:red',
+      events: {
+        click : (e: Event) => route(e)
+      }
     });
 
     this.setInputsAttributes(this.children.user_setting_email_input.getContent(), 'email_user_settings', 'email', 'email', '', 'jenn-m@yandex.ru');

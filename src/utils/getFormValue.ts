@@ -7,15 +7,15 @@ export function getFormValue(e: Event & { target: HTMLInputElement} ): boolean {
    
     if (validate(form)) {
       const values = form.elements;
-
+  
       Object.entries(values).forEach( ([ , value ]) => {
         if (!value.classList.contains('user_settings')) {
          (value as HTMLInputElement).value = '' ;
         } 
       })
       console.log(dataForm);
-      e.target.setAttribute('disabled', '');
-     return false;
+      // e.target.setAttribute('disabled', '');
+    //  return false;
 
     } 
     return false;

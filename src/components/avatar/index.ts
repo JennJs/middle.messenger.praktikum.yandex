@@ -8,6 +8,7 @@ export class Avatar extends Block<T> {
   }
 
   render() {
+    this.getContent().classList.add('avatar_conteiner');
     return this.compile(template, this.props);
   }
 }

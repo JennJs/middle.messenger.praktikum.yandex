@@ -13,7 +13,7 @@ export class UserChangeData extends Block<T> {
 
   init() {
     this.children.comeback_nav = new ComeBack({
-      url: left_arrow,
+      // url: left_arrow,
     });
     this.children.form_change_data = new FormChangeData({
       events: {

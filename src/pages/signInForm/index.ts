@@ -5,9 +5,12 @@ import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { Label } from '../../components/label';
 import { getFormValue } from '../../utils/getFormValue';
+import route from '../../utils/navigation';
 
 type SigninFormProps = { 
-  events: {submit: (e: Event & { target: HTMLInputElement}) => void},
+  events: {
+    submit: (e: Event & { target: HTMLInputElement}) => void,
+  },
 };
 
 export class SignInForm extends Block<SigninFormProps> {
@@ -68,6 +71,9 @@ export class SignInForm extends Block<SigninFormProps> {
       href: '/login',
       clas: 'position_centr',
       link_title: 'Войти',
+      events: {
+        click : (e: Event) => route(e)
+      }
     });
     this.setLabelsAttributes(this.children.input_email_label, 'Email', 'email_sign_in');
     this.setInputsAttributes(this.children.input_email.getContent(), 'email_sign_in', 'email', 'email', 'Email');

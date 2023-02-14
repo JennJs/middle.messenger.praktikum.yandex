@@ -1,5 +1,6 @@
 import  EventBus  from "../../utils/eventBus";
 import { nanoid } from 'nanoid';
+import Router from "../router/Router";
 
 
 export type T = Record<string, any>;
@@ -203,7 +204,7 @@ class Block <Props extends Record<string, any>>  {
   }
 
   public show(): void {
-    this.getContent().style.display = "block";
+    this.getContent().style.display = "flex";
   }
 
   public hide(): void {
@@ -308,6 +309,7 @@ class Block <Props extends Record<string, any>>  {
       }
     }
   }
+
 }
 
 export default Block;
