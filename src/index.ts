@@ -13,6 +13,7 @@ import { UserSettingsPage } from './pages/userSettings';
 import { getFormValue } from './utils/getFormValue';
 import Router from './modules/router/Router';
 import route from './utils/navigation';
+import store from './utils/Store'
 
 const page404 = new Page404({
   events: {
@@ -59,7 +60,6 @@ const signInForm = new SignInForm({
 });
 export const contSignInForm: HTMLElement = signInForm.getContent();
 contSignInForm.setAttribute('id', 'signin_form');
-contSignInForm.setAttribute('action', '#');
 contSignInForm.setAttribute('method', 'post');
 // signInForm.dispatchComponentDidMount();
 
@@ -119,4 +119,10 @@ router
 	.start();
 
 // });
+
+// store.getState()
+// store.set('test', {name: 'test', surname: 'test'})
+// console.log(localStorage);
+// console.log('store',store);
+
 

@@ -41,12 +41,12 @@ export default class Route  {
       // this._pathname = pathname;
       this.render();
     }
-    console.log('navigate')
+    // console.log('navigate')
 
   }
   leave() {
     if (this._block) {
-      console.log('leave')
+      // console.log('leave')
 
       // this._block.hide();
       this._block.getContent().remove()

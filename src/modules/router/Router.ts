@@ -35,7 +35,7 @@ export default class Router {
     start() {
       // Реагируем на изменения в адресной строке и вызываем перерисовку
       window.onpopstate = event => {
-        console.log(event.currentTarget.location.pathname);
+        // console.log(event.currentTarget.location.pathname);
         this._onRoute(event.currentTarget.location.pathname);
       };
   
@@ -46,8 +46,8 @@ export default class Router {
       // console.log('history:', this.history);
 
       const route = this.getRoute(pathname);
-      console.log('_currentRoute1 from Router', this._currentRoute)
-      console.log('route from Router:', route);
+      // console.log('_currentRoute1 from Router', this._currentRoute)
+      // console.log('route from Router:', route);
 
       if (!route) {
         return;
@@ -63,6 +63,7 @@ export default class Router {
   
     go(pathname: string) {
       this.history.pushState({}, "", pathname);
+      // console.log(this.history);
       this._onRoute(pathname);
     }
   

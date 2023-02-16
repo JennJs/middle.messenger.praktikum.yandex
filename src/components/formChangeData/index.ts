@@ -92,7 +92,7 @@ export class FormChangeData extends Block<FormProps> {
   }
  
   render() {
-    this.element.setAttribute('id', 'change_pass_form');
+    this.element.setAttribute('id', 'change_data_form');
     this.element.setAttribute('action', '#');
     this.element.setAttribute('method', 'post');
     return this.compile(template, this.props);

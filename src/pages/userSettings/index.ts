@@ -8,11 +8,26 @@ import './style.css';
 import { Label } from '../../components/label';
 import { Input } from '../../components/input';
 import route from '../../utils/navigation';
+import AuthController from '../../controllers/AuthController';
+import UserController from '../../controllers/UsersController';
+
+import store, { StoreEvents } from "../../utils/Store";
 
 export class UserSettingsPage extends Block<T> {
   constructor(props: T) {
     super('div', props);
+
+   AuthController.fetchUser();
+
+    // подписываемся на событие
+     store.on(StoreEvents.Updated, () => {
+   // вызываем обновление компонента, передав данные из хранилища
+      this.setProps(store.getState());
+      });
+    // console.log('store',store)
+
   }
+
 
   init() {
     this.children.comeback_nav = new ComeBack({
@@ -53,36 +68,40 @@ export class UserSettingsPage extends Block<T> {
       clas: 'position_left',
       style: 'color:red',
       events: {
-        click : (e: Event) => route(e)
+        // click : (e: Event) => route(e),
+        click : (e: Event) => { 
+          AuthController.logout();
+          route(e)
+        }
       }
     });
 
-    this.setInputsAttributes(this.children.user_setting_email_input.getContent(), 'email_user_settings', 'email', 'email', '', 'jenn-m@yandex.ru');
+    this.setInputsAttributes(this.children.user_setting_email_input.getContent(), 'email_user_settings', 'email', 'email', '',  '');
     this.children.user_setting_email_input.getContent().setAttribute('disabled', '');
     this.children.user_setting_email_input.getContent().classList.add('user_settings');
     this.setLabelsAttributes(this.children.user_setting_email_label, 'Почта', 'email_user_settings');
 
-    this.setInputsAttributes(this.children.user_setting_login_input.getContent(), 'login_user_settings', 'login', 'text', '', 'jenn-m');
+    this.setInputsAttributes(this.children.user_setting_login_input.getContent(), 'login_user_settings', 'login', 'text', '', );
     this.children.user_setting_login_input.getContent().setAttribute('disabled', '');
     this.children.user_setting_login_input.getContent().classList.add('user_settings');
     this.setLabelsAttributes(this.children.user_setting_login_label, 'Логин', 'login_user_settings');
 
-    this.setInputsAttributes(this.children.user_setting_name_input.getContent(), 'name_user_settings', 'first_name', 'text', '', 'Jenn');
+    this.setInputsAttributes(this.children.user_setting_name_input.getContent(), 'name_user_settings', 'first_name', 'text', '', );
     this.children.user_setting_name_input.getContent().setAttribute('disabled', '');
     this.children.user_setting_name_input.getContent().classList.add('user_settings');
     this.setLabelsAttributes(this.children.user_setting_name_label, 'Имя', 'name_user_settings');
 
-    this.setInputsAttributes(this.children.user_setting_surname_input.getContent(), 'surname_user_settings', 'second_name', 'text', '', 'Migda');
+    this.setInputsAttributes(this.children.user_setting_surname_input.getContent(), 'surname_user_settings', 'second_name', 'text', '', );
     this.children.user_setting_surname_input.getContent().setAttribute('disabled', '');
     this.children.user_setting_surname_input.getContent().classList.add('user_settings');
     this.setLabelsAttributes(this.children.user_setting_surname_label, 'Фамилия', 'surname_user_settings');
 
-    this.setInputsAttributes(this.children.user_setting_name_inchat_input.getContent(), 'display_name_user_settings', 'display_name', 'text', '', 'Jenn');
+    this.setInputsAttributes(this.children.user_setting_name_inchat_input.getContent(), 'display_name_user_settings', 'display_name', 'text', '', );
     this.children.user_setting_name_inchat_input.getContent().setAttribute('disabled', '');
     this.children.user_setting_name_inchat_input.getContent().classList.add('user_settings');
     this.setLabelsAttributes(this.children.user_setting_name_inchat_label, 'Имя в чате', 'display_name_user_settings');
 
-    this.setInputsAttributes(this.children.user_setting_phone_input.getContent(), 'phone_user_settings', 'phone', 'tel', '', '+79110000000');
+    this.setInputsAttributes(this.children.user_setting_phone_input.getContent(), 'phone_user_settings', 'phone', 'tel', '', );
     this.children.user_setting_phone_input.getContent().setAttribute('disabled', '');
     this.children.user_setting_phone_input.getContent().classList.add('user_settings');
     this.setLabelsAttributes(this.children.user_setting_phone_label, 'Телефон', 'phone_user_settings');
