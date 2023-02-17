@@ -1,51 +1,46 @@
 import  BaseAPI  from './Base-api';
 
+export interface ChangePassword {
+  oldPassword: string;
+  newPassword: string;
+}
 
-export interface SigninData {
-    login: string;
-    password: string;
-  }
-  
-  export interface SignupData {
-    first_name: string;
-    second_name: string;
-    login: string;
-    email: string;
-    password: string;
-    phone: string;
-  }
-  
-  export interface User {
-    id: number;
-    first_name: string;
-    second_name: string;
-    login: string;
-    email: string;
-    password: string;
-    phone: string;
-    avatar: string;
-  }
-  
+export interface UpdateUserData {
+  first_name: "string",
+  second_name: "string",
+  display_name: "string",
+  login: "string",
+  email: "string",
+  phone: "string"
+}
+
   export class UsersAPI extends BaseAPI {
     constructor() {
       super('/user');
     }
   
-    signin(data: SigninData) {
-      return this.http.post('/signin', data);
+    updateUser(data: UpdateUserData) {
+      return this.http.put('/profile', data);
     }
   
   
-    signup(data: SignupData) {
-      return this.http.post('/signup', data);
+    getUser(id: number) {
+      return this.http.get(`/${id}`);
     }
-  
-    read(): Promise<User> {
-      return this.http.get('/user');
+
+    changePassword(data: ChangePassword) {
+      return this.http.put('/password', data);
+    }
+    
+    changeAvatar (data: FormData) {
+      return this.http.put('/profile/avatar', data)
+    }
+
+    read(id: number) {
+      return this.http.get(`/${id}`);
     }
   
     create = undefined;
-    update = undefined;
     delete = undefined;
   }
   

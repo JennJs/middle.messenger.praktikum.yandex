@@ -14,6 +14,7 @@ import { getFormValue } from './utils/getFormValue';
 import Router from './modules/router/Router';
 import route from './utils/navigation';
 import store from './utils/Store'
+import UsersController from './controllers/UsersController';
 
 const page404 = new Page404({
   events: {
@@ -95,17 +96,6 @@ export const contUserSettingsPage: HTMLElement = userSettingsPage.getContent();
   // root.append(router()); 
 
 const router = new Router('#root');
-// console.log('router from index:', router);
-// router
-//   .use('/', chats) 
-// 	.use('/login', contloginForm)
-//   .use('/registration', contSignInForm) 
-// 	.use('/userSettings', contUserSettingsPage)
-//   .use('/userSettings/change-data', contUserChangeData) 
-// 	.use('/userSettings/change-password', contUserChangePassword)
-//   .use('/500', contPage500) 
-// 	.use('/404', contPage404)
-// 	.start();
 
 router
   .use('/', chats) 
@@ -123,6 +113,15 @@ router
 // store.getState()
 // store.set('test', {name: 'test', surname: 'test'})
 // console.log(localStorage);
-// console.log('store',store);
+// function showFile(input) {
 
+//   let file = input.files[0];
+
+//   alert(`File name: ${file.name}`); // например, my.png
+//   alert(`Last modified: ${file.lastModified}`); // например, 1552830408824
+// }
+
+
+// UsersController.getUserById(333200);
+// document.getElementsByClassName('avatar')[0].style.backgroundImage=`url(${store._state.user.avatar})`;
 

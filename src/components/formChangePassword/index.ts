@@ -15,7 +15,7 @@ export class FormChangePassword extends Block<FormProps> {
     super('form', props);
   }
   init () {
-    this.children.avatar = new Avatar({});
+    // this.children.avatar = new Avatar({});
     this.children.change_pass_old_pass_label = new Label({});
     this.children.change_pass_old_pass_input = new Input({
       events: {

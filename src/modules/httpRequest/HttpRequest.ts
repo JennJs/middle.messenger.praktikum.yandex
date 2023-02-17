@@ -153,20 +153,47 @@ export enum Method {
     }
   
     private request<Response>(url: string, options: Options = {method: Method.Get}): Promise<Response> {
-      const {method, data} = options;
+      // let {method, data} = options;
+
+      //работает все кроме formData
+      let {
+        headers = { 'Content-Type': 'application/json' },
+        method,
+        data,
+      } = options
+  
   
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open(method, url);
         
+       //работает все кроме formData
+        if (!(data instanceof FormData)) {
+          Object.keys(headers).forEach((key) => {
+            xhr.setRequestHeader(key, headers[key])
+          })
+        }
+
+        // else {
+        //   headers = {}
+        // }
+        // if (!(data instanceof FormData)) {
+        //   xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+        // }
+        // else {
+        //     headers = {}
+        // }
+        
+        // xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+        // xhr.setRequestHeader('accept', 'application/json')
+        // xhr.setRequestHeader('','');
+        // xhr.setRequestHeader('Content-Type', 'application/json');
+        
         xhr.withCredentials = true;
-        // xhr.onload = () => resolve(xhr);
+     
         xhr.onreadystatechange = (e) => {
-  
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status < 400) {
-              console.log('xhr.status: ',xhr.status)
-              console.log('xhr.response: ',xhr.response)
               resolve(xhr.response);
             } else {
               console.log('xhr.status: ', xhr.status)
@@ -174,18 +201,15 @@ export enum Method {
             }
           }
         };
-  
+
         xhr.onabort = () => reject({reason: 'abort'});
         xhr.onerror = () => reject({reason: 'network error'});
         xhr.ontimeout = () => reject({reason: 'timeout'});
-  
-        xhr.setRequestHeader('Content-Type', 'application/json');
-  
-        // xhr.withCredentials = true;
-        // xhr.responseType = 'json';
-  
+    
         if (method === Method.Get || !data) {
           xhr.send();
+        } else if (data instanceof FormData) {
+          xhr.send(data)
         } else {
           xhr.send(JSON.stringify(data));
         }

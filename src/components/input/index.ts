@@ -4,8 +4,9 @@ import './style.css';
 
 type I = {
   events?:{
-    focus: (e: Event & { target: HTMLInputElement})=> void,
-    blur: (e: Event & { target: HTMLInputElement})=> void
+    focus?: (e: Event & { target: HTMLInputElement})=> void,
+    blur?: (e: Event & { target: HTMLInputElement})=> void,
+    change?: (e: Event & { target: HTMLInputElement})=> void
  } 
 }
 
