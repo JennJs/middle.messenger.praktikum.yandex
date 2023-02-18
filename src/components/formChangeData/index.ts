@@ -6,6 +6,8 @@ import { Input } from '../input';
 import { Button } from '../button';
 import { getFormValue } from '../../utils/getFormValue';
 import store, { StoreEvents } from "../../utils/Store";
+import { Link } from '../link';
+import route from '../../utils/navigation';
 
 
 type FormProps = {
@@ -66,6 +68,14 @@ export class FormChangeData extends Block<FormProps> {
         click: (e) => getFormValue(e),
 		},
     });
+    this.children.link_back = new Link({
+      href: '/userSettings',
+      link_title: 'В профиль',
+      clas: 'position_centr',
+      events: {
+        click : (e: Event) => route(e)
+      }
+    })
 
     this.setInputsAttributes(this.children.user_setting_email_change_input.getContent(), 'email_user_settings_change', 'email', 'email', '',  store._state.user ? store._state.user.email : '' );
     this.children.user_setting_email_change_input.getContent().classList.add('user_settings');

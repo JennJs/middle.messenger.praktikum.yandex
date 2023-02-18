@@ -44,7 +44,7 @@ export class FormChangePassword extends Block<FormProps> {
 		},
     });
 
-    this.setInputsAttributes(this.children.change_pass_old_pass_input.getContent(), 'change_pass_old_pass', 'oldPassword', 'password', '', '123Jfhfrr5');
+    this.setInputsAttributes(this.children.change_pass_old_pass_input.getContent(), 'change_pass_old_pass', 'oldPassword', 'password', '', '');
     this.children.change_pass_old_pass_input.getContent().classList.add('user_settings');
     this.setLabelsAttributes(this.children.change_pass_old_pass_label, 'Старый пароль', 'change_pass_old_pass');
 

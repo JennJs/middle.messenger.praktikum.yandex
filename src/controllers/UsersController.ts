@@ -1,6 +1,5 @@
 import API, { AuthAPI, SigninData, SignupData, ChangePassword } from '../modules/API/users-api';
 import store from '../utils/Store';
-import Router from '../modules/router/Router';
 // import MessagesController from './MessagesController';
 
 
@@ -52,17 +51,32 @@ export class UsersController {
   }
   async changeAvatar (data: FormData ) {
     try {
-      // console.log(data);
       const response =  await this.api.changeAvatar(data);
+      console.log('response:', response);
+
       const newUserData = JSON.parse(response);
       store.set('user', newUserData);
-      // console.log(store._state.user.avatar)
       store._state.user.avatar = `https://ya-praktikum.tech/api/v2/resources${newUserData.avatar}`;
       document.getElementsByClassName('avatar')[0].style.backgroundImage=`url(${store._state.user.avatar})`;
-
       console.log( store._state.user);
     } catch (e: any) {
-      console.error('changeAvatar:', e);
+      console.error('changeAvatar error:', e);
+    }
+  }
+
+  async searchUserByLogin(login: string) {
+    try {
+      console.log(login);
+      const response =  await this.api.searchUser(login);
+      console.log(login);
+
+      const user = JSON.parse(response);
+      // console.log(user[0].login);
+
+      store.set('search', user);
+      // console.log(user);
+    } catch (e: any) {
+      console.error('searchUserByLogin:', e);
     }
   }
 } 

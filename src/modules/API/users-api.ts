@@ -36,8 +36,11 @@ export interface UpdateUserData {
       return this.http.put('/profile/avatar', data)
     }
 
-    read(id: number) {
-      return this.http.get(`/${id}`);
+    // read(id: number) {
+    //   return this.http.get(`/${id}`);
+    // }
+    searchUser(login: string) {
+      return this.http.post('/search', { login: login })
     }
   
     create = undefined;

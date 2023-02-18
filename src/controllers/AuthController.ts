@@ -52,6 +52,8 @@ export class AuthController {
     try {
       await this.api.logout();
       store.set('user', {});
+      // store.removeState('user');
+
       (new Router()).go('/login');
       console.log('user logout')
     } catch (e: any) {

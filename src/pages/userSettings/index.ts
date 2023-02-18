@@ -18,14 +18,10 @@ export class UserSettingsPage extends Block<T> {
   constructor(props: T) {
     super('div', props);
 
-    // подписываемся на событие
      store.on(StoreEvents.Updated, () => {
-   // вызываем обновление компонента, передав данные из хранилища
       this.setProps(store.getState());
       });
     console.log('store',store)
-    // console.log(store._state.user.email)
-
   }
 
 
@@ -80,8 +76,6 @@ export class UserSettingsPage extends Block<T> {
       }
     });
     console.log('store',store)
-
-    
 
     this.setInputsAttributes(this.children.user_setting_email_input.getContent(), 'email_user_settings', 'email', 'email', '',  store._state.user ? store._state.user.email : '' );
     this.children.user_setting_email_input.getContent().setAttribute('disabled', '');

@@ -166,7 +166,7 @@ export enum Method {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open(method, url);
-        
+
        //работает все кроме formData
         if (!(data instanceof FormData)) {
           Object.keys(headers).forEach((key) => {
@@ -174,16 +174,6 @@ export enum Method {
           })
         }
 
-        // else {
-        //   headers = {}
-        // }
-        // if (!(data instanceof FormData)) {
-        //   xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-        // }
-        // else {
-        //     headers = {}
-        // }
-        
         // xhr.setRequestHeader('Content-Type', 'multipart/form-data');
         // xhr.setRequestHeader('accept', 'application/json')
         // xhr.setRequestHeader('','');
@@ -192,11 +182,12 @@ export enum Method {
         xhr.withCredentials = true;
      
         xhr.onreadystatechange = (e) => {
+          // console.log('xhr.status:', xhr.status);
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status < 400) {
+            if (xhr.status >= 200 && xhr.status < 300) {
               resolve(xhr.response);
             } else {
-              console.log('xhr.status: ', xhr.status)
+              // console.log('xhr.status: ', xhr.status)
               reject(xhr.response);
             }
           }

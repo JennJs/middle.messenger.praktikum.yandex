@@ -48,3 +48,7 @@ hr {
 .form_search {
   display: flex;
 }
+.add_delete {
+  display: flex;
+  justify-content: space-evenly;
+}

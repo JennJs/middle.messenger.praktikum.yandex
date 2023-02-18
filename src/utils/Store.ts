@@ -29,7 +29,7 @@ export enum StoreEvents {
 	static _instance: Store;
 	static STORE_NAME = 'myAppStore';
 
-	_state = { };
+	_state: Record<string, any> = {};
 
 	constructor() {
 		
@@ -45,7 +45,7 @@ export enum StoreEvents {
 		Store._instance = this;
 
 		this.on(
-			Store.EVENT_UPDATE, 
+			StoreEvents.Updated, 
 			() => { localStorage.setItem(Store.STORE_NAME, JSON.stringify(this._state)); }
 		);
 	}
@@ -54,14 +54,17 @@ export enum StoreEvents {
 		return this._state;
 	}
 
-	removeState() {
-		this._state = {};
-		this.emit(Store.EVENT_UPDATE);
+	removeState(id: string) {
+		this._state[id] = {};
+		// this.emit(Store.EVENT_UPDATE);
+		this.emit(StoreEvents.Updated);
+
 	}
 
 	set(id: string, value) {
 		this._state[id] = value;
-		this.emit(Store.EVENT_UPDATE);
+		// this.emit(Store.EVENT_UPDATE);
+		this.emit(StoreEvents.Updated);
 		return this;
 	}
 }

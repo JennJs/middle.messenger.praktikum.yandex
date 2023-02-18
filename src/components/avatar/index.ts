@@ -25,7 +25,6 @@ export class Avatar extends Block<T> {
   }
 
   render() {
-    console.log(this.props)
     this.getContent().classList.add('avatar_conteiner');
     return this.compile(template, this.props);
   }

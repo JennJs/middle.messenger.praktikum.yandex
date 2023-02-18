@@ -3,10 +3,15 @@ import template from './tpl.hbs';
 import './style.css';
 import { MessageFooter } from '../../components/message_footer';
 import clip from '../../../static/clip.png';
+import store , { StoreEvents } from '../../utils/Store';
 
 export class MessageWindow extends Block<T> {
   constructor(props: T) {
     super('div', props);
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+      });
+    console.log('MessageWindow', store)
   }
 
   init() {
