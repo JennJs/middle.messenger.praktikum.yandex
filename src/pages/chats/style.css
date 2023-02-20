@@ -1,10 +1,14 @@
 .chats {
+  display: flex;
+  flex-direction: column;
   padding: 0 7px;
-  width: 370px;
+  width: 25%;
+  min-width: 300px;
   height: 100vh;
   border-right: 1px solid #EAEAEA;
-  box-shadow: 0 0 2px #c1b9b9;
+  box-shadow: 0 0 2px #C1B9B9;
 }
 .messenger {
   display: flex;
+  height: 100vh;
 }

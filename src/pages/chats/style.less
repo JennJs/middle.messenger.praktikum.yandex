@@ -1,10 +1,16 @@
+@border-color: #EAEAEA;
+@shadow-color: #C1B9B9;
 .chats {
+    display: flex;
+    flex-direction:column;
     padding: 0 7px;
-    width: 370px;
+    width: 25%;
+    min-width: 300px;
     height: 100vh;
-    border-right: 1px solid #EAEAEA;
-    box-shadow: 0 0 2px #c1b9b9;
+    border-right: 1px solid @border-color;
+    box-shadow: 0 0 2px @shadow-color;
 }
 .messenger {
     display: flex;
+    height: 100vh;
 }

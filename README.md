@@ -4,3 +4,9 @@
 команды для запуска:
 npm run dev  
 npm run start
+
+команда запуска esLint:
+npm run lint 
+
+команда запуска styleLint:
+npm run style
