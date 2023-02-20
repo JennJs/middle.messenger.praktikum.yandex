@@ -66,12 +66,12 @@ export class UsersController {
 
   async searchUserByLogin(login: string) {
     try {
-      console.log(login);
+      // console.log(login);
       const response =  await this.api.searchUser(login);
-      console.log(login);
+      // console.log(response);
 
       const user = JSON.parse(response);
-      // console.log(user[0].login);
+      console.log(user);
 
       store.set('search', user);
       // console.log(user);

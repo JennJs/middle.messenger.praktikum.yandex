@@ -17,9 +17,6 @@ export class ModalAddAndDeleteChat extends Block<T> {
   init() {
     this.children.button = new Button({
       label: this.props.label,
-      // events: {
-      //   click: (e: Event) => this.props.click(e),
-      // },
       events: {
         click: this.props.click
       }

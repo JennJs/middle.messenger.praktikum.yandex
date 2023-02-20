@@ -14,32 +14,60 @@ export class ChatsController {
 
   async getChats() {
     const response =  await this.api.getChats();
-    const chatInfo = JSON.parse(response);
-    console.log('getChatsresponse:', chatInfo );
-    store.set('chats', chatInfo)
+    const chatsInfo = JSON.parse(response);
+    console.log('getChatsresponse:', chatsInfo );
+    store.set('chats', chatsInfo)
   }
 
   async createChat( title: string ) {
     try {
-      // console.log(data);
       const response =  await this.api.createChat(title);
-      // const newUserData = JSON.parse(response);
       console.log(response);
       this.getChats()
-
-      // store.set('user', newUserData);
-      // console.log(store)
-
-      // (new Router()).go('/userSettings');
-      console.log('changeUserData')
     } catch (e: any) {
-      console.error('changeUserData:', e);
+      console.error('createChat:', e);
     }
   }
 
-  deleteChatById() {
+  async deleteChatById(chat_id: number) {
+    try {
+      const response =  await this.api.deleteChat(chat_id);
+      console.log(response);
+      this.getChats()
+    } catch (e: any) {
+      console.error('deleteChatById:', e);
+    }
   }
 
+  async addUsersToChat(users_id: number[], chat_id: number) {
+    try {
+      const response =  await this.api.addUsers(users_id, chat_id );
+      console.log(response);
+      this.getChats()
+    } catch (e: any) {
+      console.error('addUsersToChat:', e);
+    }
+  }
+
+  async deleteUsersFromChat(users_id: number[], chat_id: number) {
+    try {
+      const response =  await this.api.deleteUsers(users_id, chat_id );
+      console.log(response);
+      this.getChats()
+    } catch (e: any) {
+      console.error('deleteUsersFromChat:', e);
+    }
+  }
+
+  async getToken( chat_id: number) {
+    try {
+      const response =  await this.api.getToken(chat_id);
+      console.log(response);
+      // this.getChats()
+    } catch (e: any) {
+      console.error('addUsersToChat:', e);
+    }
+  }
 } 
 
 export default new ChatsController();

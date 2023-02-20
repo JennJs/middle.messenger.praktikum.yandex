@@ -17,9 +17,12 @@ type FormProps = {
 export class FormChangeData extends Block<FormProps> {
   constructor(props: FormProps) {
     super('form', props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+      });
   }
   init () {
-    // this.children.avatar = new Avatar({});
     this.children.user_setting_email_change_label = new Label({});
     this.children.user_setting_email_change_input = new Input({
       events: {

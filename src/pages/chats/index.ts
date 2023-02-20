@@ -5,38 +5,73 @@ import './style.css';
 import search from '../../../static/search.png';
 import { MessageWindow } from '../messageWindow';
 import { Chat } from '../../components/chat';
-import avatar from '../../../static/avatar.png';
+import avatar1 from '../../../static/avatar.png';
+import store,  { StoreEvents } from '../../utils/Store';
+import  ChatsController  from '../../controllers/ChatsController';
 
 export class Chats extends Block<T> {
   constructor(props: T) {
     super('div', props);
+    
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+      });
+    console.log('store Chat:', store)
   }
 
   init() {
     this.children.header_chats = new ChatHeader({
-      name: 'Jenn',
+      name: store._state.user.first_name,
       url: search,
     });
     this.children.chat = new Chat({
-      chat_name: 'Андрей',
-      last_message: 'Изображение',
-      url: avatar,
-      time: '10:49',
-      new_messages: '2',
-    });
-    this.children.chat2 = new Chat({
-      chat_name: 'Анна',
-      last_message: 'Привет',
-      url: avatar,
-      time: '17:50',
-      new_messages: '1',
+    chat: () => this.chats(),
+        events: {
+        click: (e: Event) => this.setCurrentChat(e)
+      }
+ 
+      
     });
     this.children.message_window = new MessageWindow({
-      incoming_message: 'Привет. Как дела?',
-      outgoing_message: 'Отлично',
+      incoming_message: store._state.incoming_message,
+      outgoing_message: store._state.outgoing_message,
+      // incoming_message: 'jgtrhit',
+      // outgoing_message: 'store._state.outgoing_message',
     });
   }
 
+  chats () {
+    let chat: string[] = [];
+    let avatar =  avatar1
+    if (store._state.chats.length > 0 ) {
+      store._state.chats.forEach( el => {
+        el.avatarUrl = avatar;
+        chat.push(el)
+      })
+    }
+    return chat;
+  }
+
+  setCurrentChat(e: Event ) {
+    let currentChat: Record<string, any> = [];
+    let currentChatId: number = e.target.parentNode.getAttribute('id');
+    store._state.chats.forEach( el => {
+     if (el.id === Number(currentChatId)) {
+         currentChat.push(el)
+      }
+    })
+   store.set('currentChat', currentChat);
+  }
+  // names() {
+  //   let names: string[] = [];
+  //   if (store._state.chats.length > 0 ) {
+  //     store._state.chats.forEach( el => {
+  //       names.push(el.title)
+  //     })
+  //   }
+  //   console.log(names);
+  //   return names;
+  // }
   render() {
     return this.compile(template, this.props);
   }

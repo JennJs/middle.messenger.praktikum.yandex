@@ -3,10 +3,16 @@ import template from './tpl.hbs';
 import './style.css';
 import { Button } from '../button';
 import { Input } from '../input';
+import store, { StoreEvents } from '../../utils/Store';
 
 export class MessageFooter extends Block<T> {
   constructor(props: T) {
     super('div', props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+      });
+    console.log('store ChatHeader:', store)
   }
 
   init(): void {

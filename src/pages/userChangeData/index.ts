@@ -4,10 +4,16 @@ import { ComeBack } from '../../components/comeBack';
 import './style.css';
 import { getFormValue } from '../../utils/getFormValue';
 import { FormChangeData } from '../../components/formChangeData';
+import store, { StoreEvents } from '../../utils/Store';
 
 export class UserChangeData extends Block<T> {
   constructor(props: T) {
     super('div', props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+      });
+    console.log('store ChatHeader:', store)
   }
 
   init() {

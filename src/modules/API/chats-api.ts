@@ -14,21 +14,17 @@ export class ChatsAPI extends BaseAPI {
       return this.http.get('')
     }
   
-    addUsers(id: number[], chatId: number) {
+    addUsers(Usersid: number[], chatId: number) {
       return this.http.put('/users', {
-        data: {
-          users: id,
+          users: [Usersid],
           chatId: chatId,
-        }
-      })
+        })
     }
   
-    DeleteUsers(id: number[], chatId: number) {
+    deleteUsers(Usersid: number[], chatId: number) {
       return this.http.delete('/users', {
-        data: {
-          users: id,
-          chatId: chatId,
-        },
+        users: [Usersid],
+        chatId: chatId,
       })
     }
   
@@ -38,10 +34,8 @@ export class ChatsAPI extends BaseAPI {
       })
     }
   
-    get_token(chat_id: number) {
-      return this._set(`token/${chat_id}`).then(
-        (res: HTTPResponse<{ token: string }>) => res.data?.token
-      )
+    getToken(chat_id: number) {
+      return this.http.post(`/token/${chat_id}`)
     }
   }
   

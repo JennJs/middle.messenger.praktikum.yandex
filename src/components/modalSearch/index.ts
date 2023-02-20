@@ -14,11 +14,11 @@ export class ModalSearch extends Block<T> {
   }
 
   init() {
-    this.children.button_add = new Button({
-      events: {
-        click: (e: Event) => console.log(e),
-      },
-    });
+    // this.children.button_add = new Button({
+    //   events: {
+    //     click: (e: Event) => console.log(e),
+    //   },
+    // });
     this.children.button_out = new Button({
       events: {
         click: () => {
