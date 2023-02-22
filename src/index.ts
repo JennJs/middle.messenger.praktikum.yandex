@@ -69,15 +69,10 @@ const userSettingsPage = new UserSettingsPage({
 });
 export const contUserSettingsPage: HTMLElement = userSettingsPage.getContent();
 
-
 window.addEventListener('DOMContentLoaded', () => {
 
   const router = new Router('#root');
 
-if(!store._state.user) {
-  router
-    .go('/login')
-}
   router
     .use('/login', loginForm)
     .use('/', chats) 
@@ -89,4 +84,3 @@ if(!store._state.user) {
     .use('/404', page404)
     .start(); 
 });
-
