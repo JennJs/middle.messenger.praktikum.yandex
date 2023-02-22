@@ -1,7 +1,6 @@
-import Block, {T} from '../../modules/block/Block';
+import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
-import sendAvatar from '../../utils/sendAvatar';
 import store, { StoreEvents } from '../../utils/Store'
 import { Button } from '../button';
 import { ModalAddAndDeleteChat } from '../modalAdd&Delete';
@@ -9,8 +8,16 @@ import showModal from '../../utils/showModal';
 import  UsersController  from '../../controllers/UsersController';
 import  ChatsController  from '../../controllers/ChatsController';
 
-export class AddToChat extends Block<T> {
-  constructor(props: T) {
+type AddToChatProps = { 
+  events?: {click: (e: Event & { target: HTMLElement}) => void},
+  label?: string,
+  login?: Record<string, any>
+};
+
+export class AddToChat extends Block<AddToChatProps> {
+  children: any;
+
+  constructor(props: AddToChatProps) {
     super('div', props);
 
     store.on(StoreEvents.Updated, () => {
@@ -22,15 +29,26 @@ export class AddToChat extends Block<T> {
     this.children.button = new Button({
       label: 'добавить пользователя в чат',
       events: {
-     click: (e) => showModal('modal_add_user', e)
-      }
+         click: (e: any) => {
+            showModal('modal_add_user', e),
+            store.removeState('search')
+          }
+        }
     });
     this.children.modal = new ModalAddAndDeleteChat({
       label: 'Добавить в чат',
-      click: (e) => this.addUserToChat(e),
+      click: (e: Event & {target: HTMLElement }) => this.addUserToChat(e),
       id: 'input_add_user',
       type: 'text',
       placeholder: 'Введите логин пользователя', 
+    });
+    this.children.button_out = new Button({
+      events: {
+        click: () => {
+          this.hideModal(),
+          store.removeState('search')
+        }
+      }
     });
     this.children.modal.getContent().classList.add('modal_add_user')   
     this.setInputsAttributes(this.children.modal.children.input_add_chat.getContent(), this.children.modal.props.id, '', this.children.modal.props.type , this.children.modal.props.placeholder , '');
@@ -39,15 +57,19 @@ export class AddToChat extends Block<T> {
     this.children.modal.children.button.getContent().classList.add('button_secondary');
   }
 
-  async addUserToChat(e) {
+  hideModal() {
+    (document.getElementsByClassName('modal_add_user')[0] as any).style.display = 'none' 
+  }
+
+  async addUserToChat(e: Event & {target: HTMLElement }) {
     e.preventDefault();
-    let inputValue = document.getElementById('input_add_user').value;
+    let inputValue = (document.getElementById('input_add_user') as HTMLInputElement).value ; 
     if (inputValue.trim()) {
       await UsersController.searchUserByLogin(inputValue.trim());
-      document.getElementsByClassName('login-conteiner')[0].style.display = 'block';
-      document.querySelectorAll('.login').forEach( (el, ind) => {
+      (document.getElementsByClassName('login-conteiner')[0] as HTMLDivElement).style.display = 'block';
+      (document.querySelectorAll('.login') as NodeListOf<Element>).forEach( (el: HTMLElement, ind: number) => {
         el.style.display = 'flex';
-        el.setAttribute('id', ind);
+        el.setAttribute('id', (ind as any));
         e.target.getAttribute('id')
         el.addEventListener('click',  this.addUser);
       })
@@ -55,16 +77,13 @@ export class AddToChat extends Block<T> {
     inputValue = '';
   }
 
-  addUser(e) {
-    let userIndex = e.target.getAttribute('id');
-    let userId = (store._state.search[userIndex].id);
-    let currentChatId = store._state.currentChat[0].id;
-    console.log(userId, currentChatId )
-
-    // store.removeState('search')
+  addUser(e: Event & {target: HTMLElement }) {
+    let userIndex = e.target.getAttribute('id') as string;
+    let userId: number[] = (store._state.search[userIndex].id);
+    let currentChatId: number = store._state.currentChat[0].id;
     ChatsController.addUsersToChat(userId, currentChatId)
-    store.removeState('search')
-    document.getElementsByClassName('modal_add_user')[0].style.display = 'none';
+    store.removeState('search');
+    (document.getElementsByClassName('modal_add_user')[0] as HTMLDivElement ).style.display = 'none';
 
   }
 

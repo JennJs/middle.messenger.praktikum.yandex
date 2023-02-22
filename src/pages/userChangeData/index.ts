@@ -12,8 +12,7 @@ export class UserChangeData extends Block<T> {
 
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
-      });
-    console.log('store ChatHeader:', store)
+    });
   }
 
   init() {

@@ -3,8 +3,11 @@ import template from './tpl.hbs';
 import './style.css';
 
 type ButtonProps = { 
-  events: {click: (e: Event & { target: HTMLInputElement}) => void},
-  label?: string
+  events?: {
+    click?: (e: Event & { target: HTMLInputElement}) => void,
+ },
+  label?: string,
+
 };
 
 export class Button extends Block<ButtonProps> {

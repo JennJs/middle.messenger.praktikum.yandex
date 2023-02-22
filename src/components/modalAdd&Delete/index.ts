@@ -8,10 +8,10 @@ import { Input } from '../input';
 export class ModalAddAndDeleteChat extends Block<T> {
   constructor(props: T) {
     super('form', props);
+    
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
       });
-    console.log('store ModalAddAndDeleteChat', store)
   }
 
   init() {

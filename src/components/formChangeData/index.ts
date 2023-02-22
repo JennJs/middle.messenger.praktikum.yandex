@@ -1,6 +1,5 @@
 import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
-import { Avatar } from '../avatar';
 import { Label } from '../label';
 import { Input } from '../input';
 import { Button } from '../button';
@@ -11,7 +10,10 @@ import route from '../../utils/navigation';
 
 
 type FormProps = {
-  events:{ submit: (e: Event & { target: HTMLInputElement})=> void} 
+  events?:{ 
+    submit?: (e: Event & { target: HTMLInputElement})=> void,
+    click?: (e: Event & { target: HTMLInputElement})=> void
+  } 
 }
 
 export class FormChangeData extends Block<FormProps> {
@@ -76,7 +78,7 @@ export class FormChangeData extends Block<FormProps> {
       link_title: 'В профиль',
       clas: 'position_centr',
       events: {
-        click : (e: Event) => route(e)
+        click : (e) => route(e)
       }
     })
 

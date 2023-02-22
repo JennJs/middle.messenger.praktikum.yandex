@@ -1,11 +1,10 @@
 .modal_add_user {
-  position: absolute;
   display: none;
   align-items: flex-end;
   height: fit-content;
 }
 .modal_add_user input {
-  border: 1px solid #ddd9d9;
+  border: 1px solid #DDD9D9;
   border-radius: 7px;
   height: 40px;
   margin-right: 10px;
@@ -27,11 +26,8 @@
   top: 150px;
   display: none;
   margin: 15px;
-  min-width: 100px;
+  width: fit-content;
   cursor: pointer;
-}
-.button_out {
-  margin-left: 20px;
 }
 .login-conteiner {
   display: none;

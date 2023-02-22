@@ -14,12 +14,6 @@ export default class EventBus {
       this.listeners[event] = [];
     }
     this.listeners[event].push(callback);
-    // if( this.listeners['updated']) {
-      // console.log('event on:',  this.listeners[event])
-      // console.log( this.listeners)
-
-    // }
-    
   }
 
   off(event: string, callback: Func): void {

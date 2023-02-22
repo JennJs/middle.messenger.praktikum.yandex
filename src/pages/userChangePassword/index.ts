@@ -15,8 +15,7 @@ export class UserChangePassword extends Block<T> {
 
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
-      });
-    console.log('store ChatHeader:', store)
+    });
   }
 
   init() {
@@ -33,7 +32,7 @@ export class UserChangePassword extends Block<T> {
       link_title: 'В профиль',
       clas: 'position_centr',
       events: {
-        click : (e: Event) => route(e)
+        click : (e) => route(e)
       }
     })
 

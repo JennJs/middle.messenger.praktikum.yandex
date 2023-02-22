@@ -1,11 +1,12 @@
-{{!-- <div class="add_to_chat"> --}}
-   {{{ button }}} 
-   {{{ modal }}}
-   {{!-- {{{  madal_search_user  }}} --}}
-    {{#each login}}
-      <div class="login_delete" >
-         {{{ this }}} 
-         {{!-- {{{ button2 }}} --}}
-      </div>
+{{{ button }}} 
+{{{ modal }}}
+<div class="login_delete" >
+   {{#each login}}   
+   <div class="login_del" >
+      {{{ this }}} 
+   </div>
    {{/each}}
-{{!-- </div> --}}
+   <div class="button_out">
+      {{{button_out}}}
+   </div>
+</div>

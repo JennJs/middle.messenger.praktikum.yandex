@@ -1,7 +1,6 @@
 import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
-import sendAvatar from '../../utils/sendAvatar';
 import store, { StoreEvents } from '../../utils/Store'
 import { Button } from '../button';
 import { ModalAddAndDeleteChat } from '../modalAdd&Delete';
@@ -9,7 +8,10 @@ import showModal from '../../utils/showModal';
 import  UsersController  from '../../controllers/UsersController';
 import  ChatsController  from '../../controllers/ChatsController';
 
+
 export class DeleteFromChat extends Block<T> {
+  children: any
+ 
   constructor(props: T) {
     super('div', props);
 
@@ -22,15 +24,23 @@ export class DeleteFromChat extends Block<T> {
     this.children.button = new Button({
       label: 'удалить пользователя из чата',
       events: {
-     click: (e) => showModal('modal_delete_user', e)
+      click: (e: any) => showModal('modal_delete_user', e)
       }
     });
     this.children.modal = new ModalAddAndDeleteChat({
       label: 'Удалить из чата',
-      click: (e) => this.deleteUserFromChat(e),
+      click: (e: Event & { target: HTMLElement}) => this.deleteUserFromChat(e),
       id: 'input_delete_user',
       type: 'text',
       placeholder: 'Введите логин пользователя', 
+    });
+    this.children.button_out = new Button({
+      events: {
+        click: () => {
+          this.hideModal(),
+          store.removeState('search')
+        }
+      }
     });
     this.children.modal.getContent().classList.add('modal_delete_user')   
     this.setInputsAttributes(this.children.modal.children.input_add_chat.getContent(), this.children.modal.props.id, '', this.children.modal.props.type , this.children.modal.props.placeholder , '');
@@ -38,14 +48,17 @@ export class DeleteFromChat extends Block<T> {
     this.children.button.getContent().setAttribute('id', 'button_add_user');
     this.children.modal.children.button.getContent().classList.add('button_red');
   }
-
-  async deleteUserFromChat(e) {
+  hideModal() {
+    (document.getElementsByClassName('modal_delete_user')[0]as HTMLDivElement).style.display = 'none';
+    (document.getElementsByClassName('login_delete')[0]as HTMLDivElement).style.display = 'block';
+  }
+  async deleteUserFromChat(e: Event & { target: HTMLElement}) {
     e.preventDefault();
-    let inputValue = document.getElementById('input_delete_user').value;
+    let inputValue = (document.getElementById('input_delete_user')as HTMLInputElement).value;
     if (inputValue.trim()) {
-      console.log(inputValue.trim())
       await UsersController.searchUserByLogin(inputValue.trim());
-      document.querySelectorAll('.login_delete').forEach( (el, ind) => {
+      (document.getElementsByClassName('login_delete')[0]as HTMLDivElement).style.display = 'block';
+      document.querySelectorAll('.login_del').forEach( (el: Record<string,any> , ind: number) => {
         el.style.display = 'flex';
         el.setAttribute('id', ind);
         el.addEventListener('click',  this.deleteUser);
@@ -54,33 +67,18 @@ export class DeleteFromChat extends Block<T> {
     inputValue = '';
   }
 
-  deleteUser(e) {
-    
-    // store.removeState('search')
-    // document.getElementsByClassName('modal_delete_user')[0].style.display = 'none';
-    let userIndex = e.target.getAttribute('id');
-    let userId = store._state.search[userIndex].id;
-    let currentChatId = store._state.currentChat[0].id;
-    console.log(userId, currentChatId )
+  deleteUser(e: Event & { target: HTMLElement}) {
+    let userIndex = e.target.getAttribute('id') as string;
+    let userId: number[] = store._state.search[userIndex].id;
+    let currentChatId: number = store._state.currentChat[0].id;
 
-    // store.removeState('search')
     ChatsController.deleteUsersFromChat(userId, currentChatId)
-    store.removeState('search')
-    document.getElementsByClassName('modal_delete_user')[0].style.display = 'none';
+    store.removeState('search');
+    (document.getElementsByClassName('modal_delete_user')[0]as HTMLDivElement).style.display = 'none';
   }
-  // searchedUsers() {
-  //   let res: string[] =[];
-  //   if (store._state.search.length > 0 ) {
-  //     store._state.search.forEach( el => {
-  //       res.push(el.login)
-  //     })
-  //   }
-  //   return res;
-  // }
 
   render() {
-    // console.log('add to chat props:', this.props)
-    this.getContent().classList.add('add_to_chat');
+    this.getContent().classList.add('delete_from_chat');
     return this.compile(template, this.props);
   }
 }

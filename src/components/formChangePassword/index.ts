@@ -1,6 +1,5 @@
 import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
-import { Avatar } from '../avatar';
 import { Label } from '../label';
 import { Input } from '../input';
 import { Button } from '../button';
@@ -15,7 +14,6 @@ export class FormChangePassword extends Block<FormProps> {
     super('form', props);
   }
   init () {
-    // this.children.avatar = new Avatar({});
     this.children.change_pass_old_pass_label = new Label({});
     this.children.change_pass_old_pass_input = new Input({
       events: {

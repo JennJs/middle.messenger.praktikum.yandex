@@ -7,7 +7,10 @@ type I = {
     focus?: (e: Event & { target: HTMLInputElement})=> void,
     blur?: (e: Event & { target: HTMLInputElement})=> void,
     change?: (e: Event & { target: HTMLInputElement})=> void
- } 
+  } ,
+  id?: string,
+  placeholder?: string,
+  type?: string
 }
 
 export class Input extends Block< I> {

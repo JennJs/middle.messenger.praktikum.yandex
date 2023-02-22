@@ -10,7 +10,7 @@ export class ComeBack extends Block<T> {
   init() {
     this.props = {
       events: {
-        click : (e: Event) => route(e)
+        click : (e: Event & { target: HTMLElement}) => route(e)
       }
   }
 }

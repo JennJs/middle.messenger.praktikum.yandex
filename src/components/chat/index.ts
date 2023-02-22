@@ -9,13 +9,10 @@ export class Chat extends Block<T> {
 
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
-      });
-      console.log('store Chat:', store)
+    });
   }
 
   render() {
-    // this.getContent().classList.add('chat');
-    // console.log
     return this.compile(template, this.props);
   }
 }

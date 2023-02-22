@@ -1,7 +1,5 @@
 import API from '../modules/API/chats-api';
 import store from '../utils/Store';
-import Router from '../modules/router/Router';
-// import MessagesController from './MessagesController';
 
 
 export class ChatsController {
@@ -13,7 +11,7 @@ export class ChatsController {
   }
 
   async getChats() {
-    const response =  await this.api.getChats();
+    const response:any =  await this.api.getChats();
     const chatsInfo = JSON.parse(response);
     console.log('getChatsresponse:', chatsInfo );
     store.set('chats', chatsInfo)
@@ -59,11 +57,11 @@ export class ChatsController {
     }
   }
 
-  async getToken( chat_id: number) {
+  async getToken(chat_id: number) {
     try {
-      const response =  await this.api.getToken(chat_id);
-      console.log(response);
-      // this.getChats()
+      const response: any =  await this.api.getToken(chat_id)
+      const data = JSON.parse(response);
+      return data.token
     } catch (e: any) {
       console.error('addUsersToChat:', e);
     }

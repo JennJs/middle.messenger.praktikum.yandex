@@ -8,6 +8,7 @@ import { Chat } from '../../components/chat';
 import avatar1 from '../../../static/avatar.png';
 import store,  { StoreEvents } from '../../utils/Store';
 import  ChatsController  from '../../controllers/ChatsController';
+import { ChatWebSocket } from '../../modules/Socket/ChatWebSocket';
 
 export class Chats extends Block<T> {
   constructor(props: T) {
@@ -15,36 +16,32 @@ export class Chats extends Block<T> {
     
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
-      });
-    console.log('store Chat:', store)
+    });
   }
 
   init() {
     this.children.header_chats = new ChatHeader({
-      name: store._state.user.first_name,
+      name: store._state.user ? store._state.user.first_name : '',
       url: search,
     });
     this.children.chat = new Chat({
     chat: () => this.chats(),
         events: {
-        click: (e: Event) => this.setCurrentChat(e)
-      }
- 
-      
+        click: (e: Event & {target: any , parentNode: HTMLElement}) => this.setCurrentChat(e)
+      } 
     });
     this.children.message_window = new MessageWindow({
-      incoming_message: store._state.incoming_message,
-      outgoing_message: store._state.outgoing_message,
-      // incoming_message: 'jgtrhit',
-      // outgoing_message: 'store._state.outgoing_message',
+      chat_title: store._state.currentChat ?  store._state.currentChat[0].title : '',
+      incoming_message: '',
+      outgoing_message:  store._state.currentChat && store._state.currentChat[0].last_message ? store._state.currentChat[0].last_message.content || store._state.currentChat[0].last_message: '',
     });
   }
 
   chats () {
-    let chat: string[] = [];
+    let chat: Record<string, any> = [];
     let avatar =  avatar1
-    if (store._state.chats.length > 0 ) {
-      store._state.chats.forEach( el => {
+    if (store._state.chats && store._state.chats.length > 0 ) {
+      store._state.chats.forEach( (el: Record<string, any>) => {
         el.avatarUrl = avatar;
         chat.push(el)
       })
@@ -52,26 +49,19 @@ export class Chats extends Block<T> {
     return chat;
   }
 
-  setCurrentChat(e: Event ) {
+  async setCurrentChat(e: Event & {target: any , parentNode: HTMLElement}) {
+    const web = new ChatWebSocket()
+    web.disconnect()
     let currentChat: Record<string, any> = [];
     let currentChatId: number = e.target.parentNode.getAttribute('id');
-    store._state.chats.forEach( el => {
+    store._state.chats.forEach( (el: Record<string, any>)  => {
      if (el.id === Number(currentChatId)) {
-         currentChat.push(el)
+        currentChat.push(el)
       }
     })
    store.set('currentChat', currentChat);
+   await ChatsController.getChats()
   }
-  // names() {
-  //   let names: string[] = [];
-  //   if (store._state.chats.length > 0 ) {
-  //     store._state.chats.forEach( el => {
-  //       names.push(el.title)
-  //     })
-  //   }
-  //   console.log(names);
-  //   return names;
-  // }
   render() {
     return this.compile(template, this.props);
   }

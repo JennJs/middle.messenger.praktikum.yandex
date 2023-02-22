@@ -9,7 +9,6 @@ import { Label } from '../../components/label';
 import { Input } from '../../components/input';
 import route from '../../utils/navigation';
 import AuthController from '../../controllers/AuthController';
-import UserController from '../../controllers/UsersController';
 import sendAvatar from '../../utils/sendAvatar';
 
 import store, { StoreEvents } from "../../utils/Store";
@@ -20,8 +19,7 @@ export class UserSettingsPage extends Block<T> {
 
      store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
-      });
-    console.log('store',store)
+    });
   }
 
 
@@ -30,9 +28,9 @@ export class UserSettingsPage extends Block<T> {
       url: left_arrow,
     });
     this.children.avatar = new Avatar({
-      storeUrl: store._state.user.avatar,
+      storeUrl: store._state.user ? store._state.user.avatar : '',
       events: {
-        submit: (e) => sendAvatar(e)
+        submit: (e: Event & { target: HTMLInputElement}) => sendAvatar(e)
       }
     });
     this.children.user_setting_email_label = new Label({});
@@ -52,7 +50,7 @@ export class UserSettingsPage extends Block<T> {
       link_title: 'Изменить данные',
       clas: 'position_left',
       events: {
-        click : (e: Event) => route(e)
+        click : (e) => route(e)
       }
     });
     this.children.link_change_pass = new Link({
@@ -60,7 +58,7 @@ export class UserSettingsPage extends Block<T> {
       link_title: 'Изменить пароль',
       clas: 'position_left',
       events: {
-        click : (e: Event) => route(e)
+        click : (e) => route(e)
       }
     });
     this.children.link_logout = new Link({
@@ -69,14 +67,12 @@ export class UserSettingsPage extends Block<T> {
       clas: 'position_left',
       style: 'color:red',
       events: {
-        click : (e: Event) => { 
+        click : (e) => { 
           AuthController.logout();
           route(e)
         }
       }
     });
-    console.log('store',store)
-
     this.setInputsAttributes(this.children.user_setting_email_input.getContent(), 'email_user_settings', 'email', 'email', '',  store._state.user ? store._state.user.email : '' );
     this.children.user_setting_email_input.getContent().setAttribute('disabled', '');
     this.children.user_setting_email_input.getContent().classList.add('user_settings');
@@ -107,7 +103,6 @@ export class UserSettingsPage extends Block<T> {
     this.children.user_setting_phone_input.getContent().classList.add('user_settings');
     this.setLabelsAttributes(this.children.user_setting_phone_label, 'Телефон', 'phone_user_settings');
   }
-
 
   render() {
     this.getContent().classList.add('settings');

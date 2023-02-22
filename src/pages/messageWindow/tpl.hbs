@@ -2,6 +2,23 @@
     {{{ add_user }}}
     {{{ delete_user }}}
 </div>
-<div id="incoming_message"> <p> {{{incoming_message}}}</p>  </div>
-<div id="outgoing_message"><p> {{{outgoing_message}}} </p> </div>
+ {{#if chat_title}}
+ <div> <h3> {{{chat_title}}} </h3></div>
+{{else}} 
+<div></div> 
+{{/if}}
+<div id="incoming_message">
+    {{#if incoming_message}}
+     <p> {{{incoming_message}}}</p> 
+    {{else}} 
+    <div></div> 
+    {{/if}}
+</div>
+<div id="outgoing_message">
+    {{#if outgoing_message}}
+    <p> {{{outgoing_message}}} </p> 
+    {{else}} 
+    <div></div> 
+    {{/if}}
+</div>
 {{{message_footer}}}

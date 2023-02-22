@@ -6,9 +6,10 @@ import { Link } from '../../components/link';
 import { Label } from '../../components/label';
 import { getFormValue } from '../../utils/getFormValue';
 import route from '../../utils/navigation';
+import store, { StoreEvents } from '../../utils/Store';
 
 type LoginFormProps = { 
-  events: {
+  events?: {
     submit: (e: Event & { target: HTMLInputElement}) => void,
     click: (e: Event ) => void
   },
@@ -17,6 +18,10 @@ type LoginFormProps = {
 export class LoginForm extends Block<LoginFormProps> {
   constructor(props: LoginFormProps) {
     super('form', props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+    });
   }
 
   init(): void {
@@ -45,7 +50,7 @@ export class LoginForm extends Block<LoginFormProps> {
       clas: 'position_centr',
       link_title: 'Нет аккаунта?',
       events: {
-        click : (e: Event) => route(e)
+        click : (e) => route(e)
       }
     });
     this.setLabelsAttributes(this.children.input_login_label, 'Логин', 'login_log_in');

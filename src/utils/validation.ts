@@ -46,7 +46,6 @@ export function validate( form: HTMLFormElement): boolean {
     if(input.getAttribute('type') !== 'file') {
       inputs.push(input);
     }
-    // inputs.push(input);
   })
 
   let newPassword: string = '';

@@ -5,7 +5,6 @@ import { MessageFooter } from '../../components/message_footer';
 import clip from '../../../static/clip.png';
 import store , { StoreEvents } from '../../utils/Store';
 import { AddToChat } from '../../components/addToChat';
-import { Button } from '../../components/button';
 import { DeleteFromChat } from '../../components/deleteFromChat';
 
 export class MessageWindow extends Block<T> {
@@ -13,20 +12,12 @@ export class MessageWindow extends Block<T> {
     super('div', props);
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
-      });
-    console.log('MessageWindow', store)
+    });
   }
 
   init() {
     this.children.add_user = new AddToChat({
       login: this.searchedUsers,
-  
-      // {
-      //   login: this.searchedUsers,
-      //   button2: new Button({
-      //     label: 'add' 
-      //    })
-      //  }
     });
     this.children.delete_user = new DeleteFromChat({
       login: this.searchedUsers,
@@ -39,8 +30,8 @@ export class MessageWindow extends Block<T> {
   searchedUsers() {
     let res: string[] =[];
 
-    if (store._state.search.length > 0 ) {
-      store._state.search.forEach( el => {
+    if (store._state.search && store._state.search.length > 0 ) {
+      store._state.search.forEach( (el: Record<string,any>) => {
         res.push(el.login)
       })
     }

@@ -1,27 +1,8 @@
 import EventBus from "./eventBus";
-import { set } from '../utils/set&merge';
 
 export enum StoreEvents {
     Updated = 'updated',
 }
-
-// class Store extends EventBus {
-//     private state: Record <string, any> = {};
-  
-//     public getState() {
-//      console.log(this.state);
-
-//       return this.state;
-//     }
-  
-//     public set(path: string, value: unknown) {
-//       set(this.state, path, value);
-
-//       this.emit(StoreEvents.Updated);
-//     };
-// }
-
-// export default new Store();
 
  class Store extends EventBus {
 
@@ -42,7 +23,7 @@ export enum StoreEvents {
 		
 		this._state = savedState ? (JSON.parse(savedState) ?? {}) : {} 
 
-		Store._instance = this;
+		Store._instance = this as Store;
 
 		this.on(
 			StoreEvents.Updated, 
@@ -54,16 +35,18 @@ export enum StoreEvents {
 		return this._state;
 	}
 
+	removeAllState() {
+		this._state = {};
+		this.emit(StoreEvents.Updated);
+	}
+	
 	removeState(id: string) {
 		this._state[id] = {};
-		// this.emit(Store.EVENT_UPDATE);
 		this.emit(StoreEvents.Updated);
-
 	}
 
-	set(id: string, value) {
+	set(id: string, value: any) {
 		this._state[id] = value;
-		// this.emit(Store.EVENT_UPDATE);
 		this.emit(StoreEvents.Updated);
 		return this;
 	}

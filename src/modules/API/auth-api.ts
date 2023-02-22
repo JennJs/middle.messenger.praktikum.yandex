@@ -1,23 +1,5 @@
 import  BaseAPI  from './Base-api';
 
-// const SignupAPIInstance = new HTTPTRequest('https://ya-praktikum.tech/api/v2');
-// // let body = getFormValue();
-// // console.log(body);
-// export class AuthAPI extends BaseAPI {
-//     create(data) {
-//         // let body = getFormValue();
-//         // console.log(body);
-//         // Здесь уже не нужно писать полный путь /api/v1/chats/
-//         return SignupAPIInstance.post('auth/signup', data);
-//     }
-
-//     request() {
-//         // Здесь уже не нужно писать полный путь /api/v1/chats/
-//         return SignupAPIInstance.get('/full');
-//     }
-// }
-// export default  SignupAPI;
-
 export interface SigninData {
     login: string;
     password: string;
