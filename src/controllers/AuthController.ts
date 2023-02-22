@@ -10,7 +10,6 @@ export class AuthController {
   }
 
   async signin(data: SigninData) {
-    const data1 = data;
     try {
       const response =  await this.api.signin(data);
       console.log(response)

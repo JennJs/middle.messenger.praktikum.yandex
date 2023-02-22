@@ -74,10 +74,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const router = new Router('#root');
 
-if(!store._state.user) {
-  router
-    .go('/login')
-}
   router
     .use('/login', loginForm)
     .use('/', chats) 
