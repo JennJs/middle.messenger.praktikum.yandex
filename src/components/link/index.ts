@@ -5,8 +5,11 @@ import './style.css';
 type LinkProps = {
   href: string,
   link_title: string,
-  clas: string,
-  style?: string
+  clas?: string,
+  style?: string,
+  events?: {
+    click: (e: Event & { target: HTMLElement }) => void
+  }
 }
 
 export class Link extends Block<LinkProps> {

@@ -1,14 +1,26 @@
-import Block, {T} from '../../modules/block/Block';
+import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { Label } from '../../components/label';
+import { getFormValue } from '../../utils/getFormValue';
+import route from '../../utils/navigation';
+import store, { StoreEvents } from '../../utils/Store';
 
+type SigninFormProps = { 
+  events?: {
+    submit: (e: Event & { target: HTMLInputElement}) => void,
+  },
+};
 
-export class SignInForm extends Block<T> {
-  constructor(props: T) {
-    super('div', props);
+export class SignInForm extends Block<SigninFormProps> {
+  constructor(props: SigninFormProps) {
+    super('form', props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+    });
   }
 
   init() {
@@ -57,13 +69,16 @@ export class SignInForm extends Block<T> {
     this.children.button_sign_in = new Button({
       label: 'Зарегистрироваться',
       events: {
-        click: (e) => this.getFormValue(e),
+        click: (e) => getFormValue(e),
       },
     });
     this.children.link_log_in = new Link({
       href: '/login',
       clas: 'position_centr',
       link_title: 'Войти',
+      events: {
+        click : (e) => route(e)
+      }
     });
     this.setLabelsAttributes(this.children.input_email_label, 'Email', 'email_sign_in');
     this.setInputsAttributes(this.children.input_email.getContent(), 'email_sign_in', 'email', 'email', 'Email');

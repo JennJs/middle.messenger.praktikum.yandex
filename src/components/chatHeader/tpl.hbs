@@ -1,13 +1,17 @@
 <div class="profile_conteiner">
-	<p>{{{name}}}</p>
-	<a href="/userSettings">
-		<p class="profile"> Профиль &gt;</p>
-	</a>
-</div>
+	<p>{{{ name }}}</p>
+	<a href="/userSettings" class="profile">Профиль &gt;</a>
 </div>
 <div id="search">
-<form action="#" method="post" class="form_search">
-	{{{ input_search }}}
-	{{{button_search}}}
-</form>
-
+	<form action="#" method="post" class="form_search">
+		{{{ input_search }}}
+		{{{ button_search }}}
+	</form>
+</div>
+{{{ modal_search }}}
+<div class="add_delete"> 
+    {{{ add_chat }}}
+    {{{ delete_chat }}}
+</div>
+{{{ modal_add_chat }}}
+{{{ modal_delete_chat }}}

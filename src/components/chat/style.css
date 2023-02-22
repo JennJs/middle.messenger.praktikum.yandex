@@ -8,8 +8,10 @@
 }
 .content {
   cursor: pointer;
-  flex-grow: 2;
   margin: 0 25px;
+}
+.chat_avatar {
+  width: fit-content;
 }
 .chat_name {
   font-weight: bold ;

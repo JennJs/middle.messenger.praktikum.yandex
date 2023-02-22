@@ -13,3 +13,23 @@
   margin-top: 35px;
   margin-bottom: 10px;
 }
+.button_secondary {
+  background-color: #07941D;
+  width: 90px;
+  height: 30px;
+  color: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: none;
+  margin: 15px 0;
+}
+.button_red {
+  background-color: red;
+  width: 90px;
+  height: 30px;
+  color: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: none;
+  margin: 15px 0;
+}

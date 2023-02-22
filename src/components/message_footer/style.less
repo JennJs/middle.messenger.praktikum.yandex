@@ -1,3 +1,4 @@
+@import '../../colors.less';
 .message_window_footer form {
  display: flex;
  align-items: center;
@@ -8,19 +9,18 @@
     position: fixed;
     bottom:0;
     width: 75%;
-    background-color: #fafbfb;
+    background-color: @message-window-color;
     min-height: 50px;
     padding: 10px 0;
-    border-top: 2px solid #EAEAEA;
+    border-top: 2px solid @shadow-color;
 }
 .input_message {
     flex-grow: 2;
     min-height: 40px;
 }
-
 #message_textarea {
     width: 100%;
-    background-color: #EFEFEF;
+    background-color: @input-color;
     border: none; 
     border-radius: 15px;
     padding: 5px;
@@ -28,7 +28,7 @@
     line-height: 28px;
 }
 #message_textarea :focus {
-    border-color: aliceblue;
+    border-color: @message-window-focus-color;
 }
 .button_send_message {
     width: 40px ;
@@ -39,7 +39,7 @@
     border: none;
     background-image: url('../../../static/right-arrow.png');
     background-size: 40px;
-    }
+}
 .button_send_arrow {
     width: 40px ;
     height: 40px;
@@ -48,6 +48,7 @@
     background-color:transparent;
     cursor: pointer;
     padding-bottom: 10px;
+    margin-right: 5px;
 }
 .clip {
     padding: 0 5px;

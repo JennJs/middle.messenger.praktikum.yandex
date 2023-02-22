@@ -1,24 +1,28 @@
+@import '../../colors.less';
 .comeback_icon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 .comeback:hover {
-    background: #efedf2;
+    background: @comeback-hover-color;
 }
 .comeback {
     display: flex;
     height: 100vh;
     width: 90px;
-    background: #FBFBFB;
-    border-right: 2px solid #cfc5c5;
+    background: @comeback-color;
+    border-right: 2px solid @comeback-border-color;
     margin: 0;
     padding-right: 25px;
     align-items: center;
     justify-content: flex-end;
 }
-.comeback p {
-    margin: 0;
-    width: 30px;
+.comeback a {
+    width: 40px;
+    height: 40px;
+    background-image: url('../../../static/left-arrow.png');
+    background-size: 40px;
+    border-radius: 50%;
 }
 

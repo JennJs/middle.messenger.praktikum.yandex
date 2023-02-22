@@ -1,5 +1,5 @@
-#form_signin,
-#form_login {
+#signin_form,
+#login_form {
   width: 340px;
   border: 1px solid #EDE8E8;
   border-radius: 12px;
@@ -7,16 +7,12 @@
   padding: 20px 0;
   box-shadow: 0px 1px 7px #EAEAEA;
   height: fit-content;
+  margin: 0 auto;
+  margin-top: 150px;
+  margin-bottom: 50px;
 }
 h1 {
   font-size: 20px;
   text-align: center;
   margin-bottom: 20px;
-}
-.login_form_conteiner {
-  display: flex;
-  width: 95vw;
-  height: inherit;
-  align-items: center;
-  justify-content: center;
 }

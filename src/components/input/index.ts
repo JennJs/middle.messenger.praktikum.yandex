@@ -1,12 +1,16 @@
-import Block, {T} from '../../modules/block/Block';
+import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 
 type I = {
   events?:{
-    focus: (e: Event & { target: HTMLInputElement})=> void,
-    blur: (e: Event & { target: HTMLInputElement})=> void
- } 
+    focus?: (e: Event & { target: HTMLInputElement})=> void,
+    blur?: (e: Event & { target: HTMLInputElement})=> void,
+    change?: (e: Event & { target: HTMLInputElement})=> void
+  } ,
+  id?: string,
+  placeholder?: string,
+  type?: string
 }
 
 export class Input extends Block< I> {

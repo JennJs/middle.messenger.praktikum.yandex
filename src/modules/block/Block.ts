@@ -1,6 +1,7 @@
 import  EventBus  from "../../utils/eventBus";
 import { nanoid } from 'nanoid';
-import { validate } from "../../utils/validation";
+import Router from "../router/Router";
+
 
 export type T = Record<string, any>;
 type Children = Record<string, Block<T>>;
@@ -58,6 +59,14 @@ class Block <Props extends Record<string, any>>  {
     return {props: (props as Props), children};
   }
 
+  private _registerEvents(eventBus: EventBus): void {
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+  }
+
+
   private _addEvents():void {
     const {events = {}} = this.props;
    
@@ -66,12 +75,16 @@ class Block <Props extends Record<string, any>>  {
     });
   }
 
-  private _registerEvents(eventBus: EventBus): void {
-    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-  }
+  private _removeEvents(): void {
+    const events: { [event: string]: () => void } = (this.props).events;
+    if (!events || !this._element) {
+        return;
+    }
+
+    Object.entries(events).forEach(([event, listener]) => {
+        this._element.removeEventListener(event, listener);
+    });
+}
 
   private _createResources(): void {
     const { tagName } = this._meta;
@@ -120,9 +133,12 @@ class Block <Props extends Record<string, any>>  {
   }
   
   private _render(): void {
-    const fragment = this.render();
-    this._element.innerHTML = '';
-    this._element.append(fragment);
+    const fragment = this.render(); 
+    if(fragment) {
+        this._removeEvents();
+        this._element.innerHTML = '';
+        this._element.append(fragment);
+    }
     this._addEvents();
   }
 
@@ -186,7 +202,7 @@ class Block <Props extends Record<string, any>>  {
   }
 
   public show(): void {
-    this.getContent().style.display = "block";
+    this.getContent().style.display = "flex";
   }
 
   public hide(): void {
@@ -207,27 +223,6 @@ class Block <Props extends Record<string, any>>  {
   protected setLabelsAttributes(el: Block<T>, label: string , id: string ) {
     el.getContent().setAttribute('for', id );
     el.getContent().textContent = label;
-  }
-
-  protected getFormValue(e: Event & { target: HTMLInputElement} ): boolean {
-    e.preventDefault();
-    const form = document.querySelector('form') as HTMLFormElement;
-    let form2  = document.forms[0];
-    const dataForm: Record<string, any> = Object.fromEntries(new FormData(form).entries());
-   
-    if (validate(dataForm, form2)) {
-      const values = form2.elements;
-      
-
-      Object.entries(values).forEach( ([ , value ]) => {
-        if (!value.classList.contains('user_settings')) {
-         (value as HTMLInputElement).value = '' ;
-        } 
-      })
-      console.log(dataForm);
-      e.target.setAttribute('disabled', '');
-    } 
-    return false;
   }
 
   focus(e: Event & { target: HTMLInputElement}): void {
@@ -312,6 +307,7 @@ class Block <Props extends Record<string, any>>  {
       }
     }
   }
+
 }
 
 export default Block;
