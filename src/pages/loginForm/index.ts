@@ -11,7 +11,7 @@ import store, { StoreEvents } from '../../utils/Store';
 type LoginFormProps = { 
   events?: {
     submit: (e: Event & { target: HTMLInputElement}) => void,
-    click: (e: Event ) => void
+    click?: (e: Event ) => void
   },
 };
 

@@ -30,7 +30,8 @@ export class AuthController {
   async signup(data: SignupData) {
     try {
       const response = await this.api.signup(data);
-      (new Router()).go('/login');
+      await this.fetchUser();
+      (new Router()).go('/userSettings');
     } catch (e: any) {
       console.error('signup:', e);
     }
@@ -48,9 +49,9 @@ export class AuthController {
   }
 
   async logout() {
-    try {
-      await this.api.logout();
+    try { 
       store.removeState('user');
+      await this.api.logout();
       (new Router()).go('/login');
       console.log('user logout')
     } catch (e: any) {

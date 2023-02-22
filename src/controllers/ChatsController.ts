@@ -7,7 +7,6 @@ export class ChatsController {
 
   constructor() {
     this.api = API;
-    console.log(this.api);
   }
 
   async getChats() {

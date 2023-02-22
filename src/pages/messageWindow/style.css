@@ -5,6 +5,11 @@
   height: 100hv;
   padding-right: 10px;
 }
+.message_window a {
+  margin-left: 100px;
+  margin-top: 40px;
+  font-size: 20px;
+}
 #incoming_message {
   margin-right: 10px;
   text-align: end;

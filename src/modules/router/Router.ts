@@ -8,8 +8,9 @@ export default class Router {
 
   rootQuery: string;
 	routes: [];
-	history;
+	history: History ;
 	_currentRoute: any;
+  block: HTMLElement
 
     constructor(rootQuery: string) {
       if (Router._instance) {
@@ -24,30 +25,24 @@ export default class Router {
       Router._instance = this;
     }
   
-    use(pathname: string, block, props = {}) {
+    use(pathname: string, block: any, props = {}) {
       const route =  new Route(pathname, block, {...props, rootQuery: this.rootQuery}); 
-
+      //не знаю уже как тут затипизировать
       this.routes.push(route);
-      // Возврат this — основа паттерна "Builder" («Строитель»)
       return this;
     }
   
     start() {
-      // Реагируем на изменения в адресной строке и вызываем перерисовку
-      window.onpopstate = event => {
-        // console.log(event.currentTarget.location.pathname);
-        this._onRoute(event.currentTarget.location.pathname);
+      window.onpopstate = (event: PopStateEvent ) => {
+        this._onRoute((event.currentTarget as Window).location.pathname);
       };
   
       this._onRoute(window.location.pathname);
     }
   
-    _onRoute(pathname) {
-      // console.log('history:', this.history);
+    _onRoute(pathname: string) {
 
       const route = this.getRoute(pathname);
-      // console.log('_currentRoute1 from Router', this._currentRoute)
-      // console.log('route from Router:', route);
 
       if (!route) {
         return;
@@ -63,11 +58,10 @@ export default class Router {
   
     go(pathname: string) {
       this.history.pushState({}, "", pathname);
-      // console.log(this.history);
       this._onRoute(pathname);
     }
   
-    getRoute(pathname) {
+    getRoute(pathname: string) {
       return this.routes.find(route => route.match(pathname));
     }
   }

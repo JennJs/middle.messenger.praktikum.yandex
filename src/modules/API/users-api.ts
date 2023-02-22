@@ -23,11 +23,10 @@ export interface UpdateUserData {
       return this.http.put('/profile', data);
     }
   
-  
     getUser(id: number) {
       return this.http.get(`/${id}`);
     }
-
+ 
     changePassword(data: ChangePassword) {
       return this.http.put('/password', data);
     }

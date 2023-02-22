@@ -6,6 +6,8 @@ import clip from '../../../static/clip.png';
 import store , { StoreEvents } from '../../utils/Store';
 import { AddToChat } from '../../components/addToChat';
 import { DeleteFromChat } from '../../components/deleteFromChat';
+import { Link } from '../../components/link';
+import route from '../../utils/navigation';
 
 export class MessageWindow extends Block<T> {
   constructor(props: T) {
@@ -16,6 +18,13 @@ export class MessageWindow extends Block<T> {
   }
 
   init() {
+    this.children.link_login = new Link({
+      href: '/login',
+      link_title: 'Вход',
+      events: {
+      click:  (e) => route(e)
+    }
+    });
     this.children.add_user = new AddToChat({
       login: this.searchedUsers,
     });

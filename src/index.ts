@@ -13,11 +13,10 @@ import { getFormValue } from './utils/getFormValue';
 import Router from './modules/router/Router';
 import route from './utils/navigation';
 import store from './utils/Store'
-import UsersController from './controllers/UsersController';
 
 const page404 = new Page404({
   events: {
-    click : (e: Event) => route(e)
+    click : (e: Event &{ target: HTMLElement}) => route(e)
   }
 });
 export const contPage404: HTMLElement = page404.getContent();
@@ -25,7 +24,7 @@ contPage404.classList.add('conteiner_500');
 
 const page500 = new Page500({
   events: {
-    click : (e: Event) => route(e)
+    click : (e: Event &{ target: HTMLElement}) => route(e)
   }
 });
 export const contPage500: HTMLElement = page500.getContent();
@@ -33,7 +32,7 @@ contPage500.classList.add('conteiner_500');
 
 const chats = new Chats({
   events: {
-    click : (e: Event) => route(e)
+    click : (e: Event & {target: any , parentNode: HTMLElement}) => route(e)
   }
 });
 export const contChats: HTMLElement = chats.getContent();
@@ -69,18 +68,19 @@ const userSettingsPage = new UserSettingsPage({
   first_name: store._state.user ? store._state.user.first_name : ''
 });
 export const contUserSettingsPage: HTMLElement = userSettingsPage.getContent();
-// userSettingsPage.dispatchComponentDidMount();
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  // const root = document.querySelector('#root') as  Element;
-  // root.append(router()); 
 
   const router = new Router('#root');
 
+if(!store._state.user) {
   router
-    .use('/', chats) 
+    .go('/login')
+}
+  router
     .use('/login', loginForm)
+    .use('/', chats) 
     .use('/registration', signInForm) 
     .use('/userSettings', userSettingsPage)
     .use('/userSettings/change-data', userChangeData) 
@@ -90,4 +90,3 @@ window.addEventListener('DOMContentLoaded', () => {
     .start(); 
 });
 
-// store.removeState('search');

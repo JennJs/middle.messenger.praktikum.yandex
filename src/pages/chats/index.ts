@@ -9,6 +9,7 @@ import avatar1 from '../../../static/avatar.png';
 import store,  { StoreEvents } from '../../utils/Store';
 import  ChatsController  from '../../controllers/ChatsController';
 import { ChatWebSocket } from '../../modules/Socket/ChatWebSocket';
+import { Link } from '../../components/link';
 
 export class Chats extends Block<T> {
   constructor(props: T) {
@@ -20,6 +21,7 @@ export class Chats extends Block<T> {
   }
 
   init() {
+   
     this.children.header_chats = new ChatHeader({
       name: store._state.user ? store._state.user.first_name : '',
       url: search,
@@ -52,6 +54,7 @@ export class Chats extends Block<T> {
   async setCurrentChat(e: Event & {target: any , parentNode: HTMLElement}) {
     const web = new ChatWebSocket()
     web.disconnect()
+    await ChatsController.getChats()
     let currentChat: Record<string, any> = [];
     let currentChatId: number = e.target.parentNode.getAttribute('id');
     store._state.chats.forEach( (el: Record<string, any>)  => {
@@ -60,7 +63,6 @@ export class Chats extends Block<T> {
       }
     })
    store.set('currentChat', currentChat);
-   await ChatsController.getChats()
   }
   render() {
     return this.compile(template, this.props);

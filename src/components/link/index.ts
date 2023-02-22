@@ -5,9 +5,9 @@ import './style.css';
 type LinkProps = {
   href: string,
   link_title: string,
-  clas: string,
+  clas?: string,
   style?: string,
-  events: {
+  events?: {
     click: (e: Event & { target: HTMLElement }) => void
   }
 }

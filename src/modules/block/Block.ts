@@ -139,8 +139,6 @@ class Block <Props extends Record<string, any>>  {
         this._element.innerHTML = '';
         this._element.append(fragment);
     }
-    // this._element.innerHTML = '';
-    // this._element.append(fragment);
     this._addEvents();
   }
 
