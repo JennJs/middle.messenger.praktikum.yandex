@@ -1,6 +1,7 @@
 import API, { AuthAPI, SigninData, SignupData } from '../modules/API/auth-api';
 import store from '../utils/Store';
 import Router from '../modules/router/Router';
+import  ChatsController  from './ChatsController';
 
 export class AuthController {
   private readonly api: AuthAPI;
@@ -14,6 +15,7 @@ export class AuthController {
       const response =  await this.api.signin(data);
       console.log(response)
       await this.fetchUser();
+      await ChatsController.getChats();
       (new Router()).go('/userSettings');
       console.log('signin ')
     } catch (e: any) {

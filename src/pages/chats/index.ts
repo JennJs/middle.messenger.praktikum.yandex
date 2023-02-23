@@ -18,6 +18,8 @@ export class Chats extends Block<T> {
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
     });
+    console.log('Chats props from constructor >>', this.props);
+    console.log('Chats store from constructor >>', store)
   }
 
   init() {
@@ -65,6 +67,8 @@ export class Chats extends Block<T> {
    store.set('currentChat', currentChat);
   }
   render() {
+    console.log('Chats props from render >>', this.props);
+    console.log('Chats store from render >>', store)
     return this.compile(template, this.props);
   }
 }
