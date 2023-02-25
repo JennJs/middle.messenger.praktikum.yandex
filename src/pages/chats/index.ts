@@ -16,16 +16,18 @@ export class Chats extends Block<T> {
     super('div', props);
     
     store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getState());
+      // this.setProps(store.getState());
+      this.setProps(store.getStateChats());
     });
-    console.log('Chats props from constructor >>', this.props);
-    console.log('Chats store from constructor >>', store)
+    // console.log('Chats props from constructor >>', this.props);
+    // console.log('Chats store from constructor >>', store)
   }
 
   init() {
    
     this.children.header_chats = new ChatHeader({
-      name: store._state.user ? store._state.user.first_name : '',
+      // name: store._state.user ? store._state.user.first_name : '',
+      // name: this.props.name,
       url: search,
     });
     this.children.chat = new Chat({
@@ -35,7 +37,8 @@ export class Chats extends Block<T> {
       } 
     });
     this.children.message_window = new MessageWindow({
-      chat_title: store._state.currentChat ?  store._state.currentChat[0].title : '',
+      // chat_title: this.props.chat_title || store._state.currentChat ?  this.props.chat_title || store._state.currentChat[0].title : '',
+      chat_title:   this.props.chat_title  ,
       incoming_message: '',
       outgoing_message:  store._state.currentChat && store._state.currentChat[0].last_message ? store._state.currentChat[0].last_message.content || store._state.currentChat[0].last_message: '',
     });
@@ -67,8 +70,8 @@ export class Chats extends Block<T> {
    store.set('currentChat', currentChat);
   }
   render() {
-    console.log('Chats props from render >>', this.props);
-    console.log('Chats store from render >>', store)
+    // console.log('Chats props from render >>', this.props);
+    // console.log('Chats store from render >>', store)
     return this.compile(template, this.props);
   }
 }

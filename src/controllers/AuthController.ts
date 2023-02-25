@@ -32,7 +32,8 @@ export class AuthController {
     try {
       const response = await this.api.signup(data);
       await this.fetchUser();
-      (new Router()).go('/userSettings');
+      await ChatsController.getChats();
+      (new Router()).go('/');
     } catch (e: any) {
       console.error('signup:', e);
     }
@@ -51,14 +52,16 @@ export class AuthController {
 
   async logout() {
     try { 
-      store.removeState('user');
+      store.removeAllState();
       await this.api.logout();
       (new Router()).go('/login');
       console.log('user logout')
+
     } catch (e: any) {
         console.error(e);
     }
   }
 }
+// export const authController = new AuthController()
 
 export default new AuthController();

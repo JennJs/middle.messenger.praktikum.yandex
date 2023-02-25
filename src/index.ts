@@ -38,7 +38,7 @@ const chats = new Chats({
 export const contChats: HTMLElement = chats.getContent();
 contChats.classList.add('messenger');
 
-const loginForm = new LoginForm({
+export const loginForm = new LoginForm({
   events: {
     submit: (e) => getFormValue(e),
   }
@@ -48,7 +48,7 @@ contloginForm.setAttribute('id', 'login_form');
 contloginForm.setAttribute('action', '#');
 contloginForm.setAttribute('method', 'post');
 
-const signInForm = new SignInForm({
+export const signInForm = new SignInForm({
   events: {
     submit: (e) => getFormValue(e),
   }
@@ -64,9 +64,7 @@ contUserChangeData.classList.add('settings');
 const userChangePassword = new UserChangePassword({});
 export const contUserChangePassword: HTMLElement = userChangePassword.getContent();
 
-const userSettingsPage = new UserSettingsPage({
-  first_name: store._state.user ? store._state.user.first_name : ''
-});
+const userSettingsPage = new UserSettingsPage({});
 export const contUserSettingsPage: HTMLElement = userSettingsPage.getContent();
 
 

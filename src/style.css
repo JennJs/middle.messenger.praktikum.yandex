@@ -64,3 +64,11 @@ nav h3 {
   background-color: transparent;
   border: none;
 }
+.user_settings,
+.user_change_data {
+  border: none;
+  margin: 0;
+  text-align-last: end;
+  justify-self: end;
+  font-size: 13px;
+}

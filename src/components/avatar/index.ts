@@ -8,9 +8,9 @@ import store, { StoreEvents } from '../../utils/Store'
 export class Avatar extends Block<T> {
   constructor(props: T) {
     super('form', props);
-
+    
     store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getState());
+      this.setProps(store.getStateAvatar());
     });
   }
 

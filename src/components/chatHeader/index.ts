@@ -18,7 +18,7 @@ export class ChatHeader extends Block<T> {
     super('div', props);
 
     store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getState());
+      this.setProps(store.getUsername());
     })
   }
 
@@ -133,6 +133,8 @@ export class ChatHeader extends Block<T> {
   } 
 
   render() {
+    // console.log('ChatHeader Props>>', this.props)
+
     this.getContent().classList.add('chats_header');
     return this.compile(template, this.props);
   }

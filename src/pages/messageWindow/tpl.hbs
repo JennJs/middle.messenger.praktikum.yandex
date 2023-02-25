@@ -4,13 +4,15 @@
     {{{ link_login}}}
 </div>
  {{#if chat_title}}
- <div> <h3> {{{chat_title}}} </h3></div>
+ <div> <h3 class="chat_title"> {{{chat_title}}} </h3></div>
 {{else}} 
 <div></div> 
 {{/if}}
 <div id="incoming_message">
     {{#if incoming_message}}
+     {{#each incoming_message}}
      <p> {{{incoming_message}}}</p> 
+      {{/each}}
     {{else}} 
     <div></div> 
     {{/if}}

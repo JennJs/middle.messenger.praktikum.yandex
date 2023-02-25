@@ -3,10 +3,10 @@ import renderDom from '../../utils/renderDom'
 
 
 export default class Route  {
-  _pathname: string;
-  _blockClass: HTMLElement ;
-  _block: HTMLElement | null;
-  _props: Record<string, any>
+  private _pathname: string;
+  private _blockClass: HTMLElement ;
+  private _block: HTMLElement | null;
+  private _props: Record<string, any>
 
   constructor(pathname: string, view: HTMLElement, props = {}) {
     this._pathname = pathname;

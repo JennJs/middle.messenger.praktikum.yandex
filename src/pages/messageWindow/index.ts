@@ -13,11 +13,13 @@ export class MessageWindow extends Block<T> {
   constructor(props: T) {
     super('div', props);
     store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getState());
+      // this.setProps(store.getState());
+      this.setProps(store.getChatTitle());
+
     });
-    console.log('MessageWindow props from constructor >>', this.props);
-    console.log('MessageWindow store constructor >>', store)
-    console.log('MessageWindow propsCurrentChatTitle from constructor >>', this.props.currentChat ? this.props.currentChat[0].title : 'no currentChat')
+    // console.log('MessageWindow props from constructor >>', this.props);
+    // console.log('MessageWindow store constructor >>', store)
+    // console.log('MessageWindow propsCurrentChatTitle from constructor >>', this.props.currentChat ? this.props.currentChat[0].title : 'no currentChat')
   }
 
   init() {
@@ -51,10 +53,7 @@ export class MessageWindow extends Block<T> {
   }
 
   render() {
-    // console.log('MessageWindow props from render >>', this.props);
-    // console.log('MessageWindow store from render >>', store)
-    console.log('MessageWindow propsCurrentChatTitle from render >>', this.props.currentChat ? this.props.currentChat[0].title : 'no currentChat')
-
+    // console.log('MessageWindow Props>>', this.props)
     this.getContent().classList.add('message_window');
     return this.compile(template, this.props);
   }

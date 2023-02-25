@@ -63,6 +63,7 @@ export class LoginForm extends Block<LoginFormProps> {
   }
 
   render() {
+    // console.log('LoginForm store from render >>', store)
     return this.compile(template, this.props);
   }
 }

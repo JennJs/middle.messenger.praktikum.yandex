@@ -40,3 +40,6 @@
   display: flex;
   width: 100px;
 }
+.chat_title {
+  margin: 20px auto;
+}

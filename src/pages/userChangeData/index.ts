@@ -11,7 +11,7 @@ export class UserChangeData extends Block<T> {
     super('div', props);
 
     store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getState());
+      this.setProps(store.getStateUserSettings());
     });
   }
 
@@ -26,6 +26,7 @@ export class UserChangeData extends Block<T> {
   }
 
   render() {
+    console.log()
     return this.compile(template, this.props);
   }
 }

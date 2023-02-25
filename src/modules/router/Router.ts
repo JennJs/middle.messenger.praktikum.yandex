@@ -1,5 +1,9 @@
 /* eslint-disable no-undef */
 import Route from './Route';
+import store from '../../utils/Store'
+import  AuthController  from '../../controllers/AuthController';
+import { loginForm, signInForm } from '../..';
+import  ChatsController  from '../../controllers/ChatsController';
 
 
 export default class Router {
@@ -27,16 +31,23 @@ export default class Router {
   
     use(pathname: string, block: any, props = {}) {
       const route =  new Route(pathname, block, {...props, rootQuery: this.rootQuery}); 
-      //не знаю уже как тут затипизировать
+    
       this.routes.push(route);
       return this;
     }
   
-    start() {
+    async start() {
       window.onpopstate = (event: PopStateEvent ) => {
         this._onRoute((event.currentTarget as Window).location.pathname);
       };
-  
+      await AuthController.fetchUser();
+
+      if (!store._state.user) {
+        this.go('/login')
+        this.use('/login', loginForm)
+           .use('/registration', signInForm )
+      } 
+      await ChatsController.getChats(); 
       this._onRoute(window.location.pathname);
     }
   
