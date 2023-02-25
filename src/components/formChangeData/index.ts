@@ -4,19 +4,19 @@ import { Label } from '../label';
 import { Input } from '../input';
 import { Button } from '../button';
 import { getFormValue } from '../../utils/getFormValue';
-import store, { StoreEvents } from "../../utils/Store";
+import { StoreEvents, store } from "../../utils/Store";
 import { Link } from '../link';
-import route from '../../utils/navigation';
+import { route}  from '../../utils/navigation';
 
 
 type FormProps = {
-  first_name: string,
-  user_email: string,
-  user_login: string,
-  user_name:  string,
-  user_surname: string,
-  user_name_in_chat: string,
-  user_phone: string,
+  first_name?: string,
+  user_email?: string,
+  user_login?: string,
+  user_name?:  string,
+  user_surname?: string,
+  user_name_in_chat?: string,
+  user_phone?: string,
   events?:{ 
     submit?: (e: Event & { target: HTMLInputElement})=> void,
     click?: (e: Event & { target: HTMLInputElement})=> void
@@ -116,8 +116,6 @@ export class FormChangeData extends Block<FormProps> {
   }
  
   render() {
-    // console.log('FormChangeData children from render >>', this.children);
-    // console.log('FormChangeData store from render >>', store)
     this.element.setAttribute('id', 'change_data_form');
     this.element.setAttribute('action', '#');
     this.element.setAttribute('method', 'post');

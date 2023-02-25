@@ -1,20 +1,21 @@
 /* eslint-disable no-undef */
-import Route from './Route';
-import store from '../../utils/Store'
-import  AuthController  from '../../controllers/AuthController';
-import { loginForm, signInForm } from '../..';
+import { Route } from './Route';
+import { store } from '../../utils/Store'
+import  { authController }  from '../../controllers/AuthController';
+import { chats, loginForm, page404, page500, signInForm, userChangeData, userChangePassword, userSettingsPage } from '../..';
 import  ChatsController  from '../../controllers/ChatsController';
+import Block from '../block/Block';
 
 
-export default class Router {
+export class Router {
 
-  static _instance: Router;
+  private static _instance: Router;
 
   rootQuery: string;
-	routes: [];
-	history: History ;
-	_currentRoute: any;
-  block: HTMLElement
+	private routes: Route[];
+	private history: History ;
+	private _currentRoute: any;
+  block: Block<Record<string, any>>
 
     constructor(rootQuery: string) {
       if (Router._instance) {
@@ -29,7 +30,7 @@ export default class Router {
       Router._instance = this;
     }
   
-    use(pathname: string, block: any, props = {}) {
+    use(pathname: string, block: Block<Record<string, any>>, props = {}) {
       const route =  new Route(pathname, block, {...props, rootQuery: this.rootQuery}); 
     
       this.routes.push(route);
@@ -40,15 +41,29 @@ export default class Router {
       window.onpopstate = (event: PopStateEvent ) => {
         this._onRoute((event.currentTarget as Window).location.pathname);
       };
-      await AuthController.fetchUser();
+      await authController.fetchUser();
 
       if (!store._state.user) {
-        this.go('/login')
+        this.go('/login');
         this.use('/login', loginForm)
            .use('/registration', signInForm )
-      } 
-      await ChatsController.getChats(); 
-      this._onRoute(window.location.pathname);
+      } else {
+        await ChatsController.getChats(); 
+        this.go('/')
+        this.use('/login', loginForm)
+            .use('/', chats) 
+            .use('/registration', signInForm) 
+            .use('/userSettings', userSettingsPage)
+            .use('/userSettings/change-data', userChangeData) 
+            .use('/userSettings/change-password', userChangePassword)
+            .use('/500', page500) 
+            .use('/404', page404)
+
+       
+        this._onRoute(window.location.pathname);
+      }
+      // await ChatsController.getChats(); 
+      // this._onRoute(window.location.pathname);
     }
   
     _onRoute(pathname: string) {
@@ -71,8 +86,10 @@ export default class Router {
       this.history.pushState({}, "", pathname);
       this._onRoute(pathname);
     }
-  
+
     getRoute(pathname: string) {
       return this.routes.find(route => route.match(pathname));
     }
   }
+
+  export const router = new Router('#root');

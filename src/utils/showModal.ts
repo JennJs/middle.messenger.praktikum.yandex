@@ -1,4 +1,4 @@
-import store from '../utils/Store'
+import { store } from '../utils/Store'
 
 export default function showModal(clas: string, e: Event & { target: HTMLElement}) {
     let modal  =  document.getElementsByClassName(clas)[0] as HTMLElement

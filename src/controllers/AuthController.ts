@@ -1,6 +1,6 @@
 import API, { AuthAPI, SigninData, SignupData } from '../modules/API/auth-api';
-import store from '../utils/Store';
-import Router from '../modules/router/Router';
+import { store } from '../utils/Store';
+import { router } from '../modules/router/Router';
 import  ChatsController  from './ChatsController';
 
 export class AuthController {
@@ -12,11 +12,10 @@ export class AuthController {
 
   async signin(data: SigninData) {
     try {
-      const response =  await this.api.signin(data);
-      console.log(response)
+      await this.api.signin(data);
       await this.fetchUser();
       await ChatsController.getChats();
-      (new Router()).go('/userSettings');
+      router.go('/userSettings');
       console.log('signin ')
     } catch (e: any) {
       console.error('signin:', e
@@ -30,10 +29,10 @@ export class AuthController {
 
   async signup(data: SignupData) {
     try {
-      const response = await this.api.signup(data);
+      await this.api.signup(data);
       await this.fetchUser();
       await ChatsController.getChats();
-      (new Router()).go('/');
+      router.go('/');
     } catch (e: any) {
       console.error('signup:', e);
     }
@@ -43,7 +42,6 @@ export class AuthController {
     try {
     const user: any = await this.api.read();
     const userData = JSON.parse(user);
-    console.log(userData);
     store.set('user', userData);
   } catch (e: any) {
     console.error(e);
@@ -54,7 +52,7 @@ export class AuthController {
     try { 
       store.removeAllState();
       await this.api.logout();
-      (new Router()).go('/login');
+      router.go('/login');
       console.log('user logout')
 
     } catch (e: any) {
@@ -62,6 +60,4 @@ export class AuthController {
     }
   }
 }
-// export const authController = new AuthController()
-
-export default new AuthController();
+export const authController = new AuthController();

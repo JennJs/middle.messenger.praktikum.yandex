@@ -1,7 +1,5 @@
 import  EventBus  from "../../utils/eventBus";
 import { nanoid } from 'nanoid';
-import Router from "../router/Router";
-
 
 export type T = Record<string, any>;
 type Children = Record<string, Block<T>>;

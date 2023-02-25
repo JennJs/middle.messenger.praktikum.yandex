@@ -5,14 +5,15 @@ import { Button } from '../button';
 import { Input } from '../input';
 import  UsersController  from '../../controllers/UsersController';
 import { ModalSearch } from '../modalSearch';
-import store, { StoreEvents } from '../../utils/Store'
+import  { StoreEvents, store } from '../../utils/Store'
 import { ModalAddAndDeleteChat } from '../modalAdd&Delete';
 import  ChatsController from '../../controllers/ChatsController';
 import showModal from '../../utils/showModal';
 
 
 export class ChatHeader extends Block<T> {
-  protected children: any;
+   
+  protected children: T;
 
   constructor(props: T) {
     super('div', props);
@@ -133,8 +134,6 @@ export class ChatHeader extends Block<T> {
   } 
 
   render() {
-    // console.log('ChatHeader Props>>', this.props)
-
     this.getContent().classList.add('chats_header');
     return this.compile(template, this.props);
   }

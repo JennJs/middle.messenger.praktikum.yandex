@@ -1,7 +1,7 @@
 import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
-import store, { StoreEvents } from '../../utils/Store'
+import { StoreEvents, store } from '../../utils/Store'
 import { Button } from '../button';
 import { ModalAddAndDeleteChat } from '../modalAdd&Delete';
 import showModal from '../../utils/showModal';

@@ -1,4 +1,4 @@
-import AuthController from "../controllers/AuthController";
+import { authController } from "../controllers/AuthController";
 import UsersController from "../controllers/UsersController";
 import { SigninData, SignupData } from "../modules/API/auth-api";
 import {ChangePassword, UpdateUserData} from '../modules/API/users-api'
@@ -17,8 +17,8 @@ export async function getFormValue(e: Event & { target: HTMLInputElement} ) {
         } 
       })
 
-      if (form.getAttribute('id') ==='signin_form') await AuthController.signup(dataForm as SignupData);
-      if (form.getAttribute('id') ==='login_form') await AuthController.signin(dataForm as SigninData);
+      if (form.getAttribute('id') ==='signin_form') await authController.signup(dataForm as SignupData);
+      if (form.getAttribute('id') ==='login_form') await authController.signin(dataForm as SigninData);
       if (form.getAttribute('id') === 'change_data_form' ) await UsersController.changeUserData(dataForm as UpdateUserData);
       if (form.getAttribute('id') === 'change_pass_form' ) await UsersController.changeUserPassword(dataForm as ChangePassword);
 

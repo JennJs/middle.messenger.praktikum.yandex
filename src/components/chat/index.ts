@@ -1,7 +1,7 @@
 import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
-import store, { StoreEvents } from '../../utils/Store';
+import  { StoreEvents, store } from '../../utils/Store';
 
 export class Chat extends Block<T> {
   constructor(props: T) {

@@ -3,33 +3,19 @@ import template from './tpl.hbs';
 import './style.css';
 import { MessageFooter } from '../../components/message_footer';
 import clip from '../../../static/clip.png';
-import store , { StoreEvents } from '../../utils/Store';
+import { StoreEvents, store } from '../../utils/Store';
 import { AddToChat } from '../../components/addToChat';
 import { DeleteFromChat } from '../../components/deleteFromChat';
-import { Link } from '../../components/link';
-import route from '../../utils/navigation';
 
 export class MessageWindow extends Block<T> {
   constructor(props: T) {
     super('div', props);
     store.on(StoreEvents.Updated, () => {
-      // this.setProps(store.getState());
       this.setProps(store.getChatTitle());
-
     });
-    // console.log('MessageWindow props from constructor >>', this.props);
-    // console.log('MessageWindow store constructor >>', store)
-    // console.log('MessageWindow propsCurrentChatTitle from constructor >>', this.props.currentChat ? this.props.currentChat[0].title : 'no currentChat')
   }
 
   init() {
-    this.children.link_login = new Link({
-      href: '/login',
-      link_title: 'Вход',
-      events: {
-      click:  (e) => route(e)
-    }
-    });
     this.children.add_user = new AddToChat({
       login: this.searchedUsers,
     });
@@ -53,7 +39,6 @@ export class MessageWindow extends Block<T> {
   }
 
   render() {
-    // console.log('MessageWindow Props>>', this.props)
     this.getContent().classList.add('message_window');
     return this.compile(template, this.props);
   }

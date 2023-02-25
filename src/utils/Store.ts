@@ -19,23 +19,15 @@ export enum StoreEvents {
 
 		super();
 
-		// const savedState = localStorage.getItem(Store.STORE_NAME);
-		
-		// this._state = savedState ? (JSON.parse(savedState) ?? {}) : {} 
 
 		this._state = {} 
 
 		Store._instance = this as Store;
 
 		this.on(StoreEvents.Updated, () => {
-				console.log('Store updated', this._state);
 			}
 		);
 
-		// this.on(
-		// 	StoreEvents.Updated, 
-		// 	() => { localStorage.setItem(Store.STORE_NAME, JSON.stringify(this._state)); }
-		// );
 	}
 
 	getState() {
@@ -49,6 +41,7 @@ export enum StoreEvents {
 	getChatTitle() {
 		return {
 			chat_title: this._state.currentChat ? this._state.currentChat[0].title : '',
+			messages: this._state.currentChat  ?  this._state.currentChat.messages: [],
 	    }
 	}
 	getUsername() {
@@ -89,4 +82,4 @@ export enum StoreEvents {
 		return this;
 	}
 }
-export default new Store();
+export const store = new Store();

@@ -1,7 +1,7 @@
 import Block, { T }  from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
-import store, { StoreEvents } from '../../utils/Store';
+import  { StoreEvents, store } from '../../utils/Store';
 
 
 export class UserSettings extends Block<T> {
@@ -14,7 +14,6 @@ export class UserSettings extends Block<T> {
   }
 
   render() {
-    // console.log('UserSettings props>>', this.props)
     return this.compile(template, this.props);
   }
 }

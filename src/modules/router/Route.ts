@@ -1,14 +1,15 @@
 import renderDom from '../../utils/renderDom'
+import Block from '../block/Block';
 
 
 
-export default class Route  {
+export  class Route  {
   private _pathname: string;
-  private _blockClass: HTMLElement ;
-  private _block: HTMLElement | null;
+  private _blockClass: Block<Record<string,any>> ;
+  private _block: Block<Record<string,any>> | null;
   private _props: Record<string, any>
 
-  constructor(pathname: string, view: HTMLElement, props = {}) {
+  constructor(pathname: string, view: Block<Record<string,any>>, props = {}) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;

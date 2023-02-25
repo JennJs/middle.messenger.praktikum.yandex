@@ -6,28 +6,23 @@ import search from '../../../static/search.png';
 import { MessageWindow } from '../messageWindow';
 import { Chat } from '../../components/chat';
 import avatar1 from '../../../static/avatar.png';
-import store,  { StoreEvents } from '../../utils/Store';
+import  { StoreEvents, store } from '../../utils/Store';
 import  ChatsController  from '../../controllers/ChatsController';
 import { ChatWebSocket } from '../../modules/Socket/ChatWebSocket';
-import { Link } from '../../components/link';
+
 
 export class Chats extends Block<T> {
   constructor(props: T) {
     super('div', props);
     
     store.on(StoreEvents.Updated, () => {
-      // this.setProps(store.getState());
-      this.setProps(store.getStateChats());
+      this.setProps(store.getChatTitle());
     });
-    // console.log('Chats props from constructor >>', this.props);
-    // console.log('Chats store from constructor >>', store)
   }
 
   init() {
    
     this.children.header_chats = new ChatHeader({
-      // name: store._state.user ? store._state.user.first_name : '',
-      // name: this.props.name,
       url: search,
     });
     this.children.chat = new Chat({
@@ -37,10 +32,7 @@ export class Chats extends Block<T> {
       } 
     });
     this.children.message_window = new MessageWindow({
-      // chat_title: this.props.chat_title || store._state.currentChat ?  this.props.chat_title || store._state.currentChat[0].title : '',
       chat_title:   this.props.chat_title  ,
-      incoming_message: '',
-      outgoing_message:  store._state.currentChat && store._state.currentChat[0].last_message ? store._state.currentChat[0].last_message.content || store._state.currentChat[0].last_message: '',
     });
   }
 
@@ -57,7 +49,7 @@ export class Chats extends Block<T> {
   }
 
   async setCurrentChat(e: Event & {target: any , parentNode: HTMLElement}) {
-    const web = new ChatWebSocket()
+    const web = new ChatWebSocket();
     web.disconnect()
     await ChatsController.getChats()
     let currentChat: Record<string, any> = [];
@@ -68,10 +60,12 @@ export class Chats extends Block<T> {
       }
     })
    store.set('currentChat', currentChat);
+    let userId: number = store._state.user.id;
+    let chatId: number = store._state.currentChat[0].id;
+    let token = await ChatsController.getToken(chatId) as string;
+    await web.connect(userId, chatId, token);
   }
   render() {
-    // console.log('Chats props from render >>', this.props);
-    // console.log('Chats store from render >>', store)
     return this.compile(template, this.props);
   }
 }

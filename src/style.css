@@ -42,9 +42,6 @@ nav h3 {
 .error_input {
   border: 3px solid red;
 }
-.active_chat {
-  border: 1px solid blue;
-}
 .button_out {
   width: 30px ;
   height: 30px;

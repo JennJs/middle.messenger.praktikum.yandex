@@ -1,7 +1,7 @@
 import Block from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
-import store, { StoreEvents } from '../../utils/Store';
+import { StoreEvents, store } from '../../utils/Store';
 
 type I = {
   events?:{
@@ -31,10 +31,9 @@ export class Input extends Block< I> {
   }
 
   render() {
-    
     if(this.getContent().classList.contains('user_change_data')) {
       if(this.getContent().getAttribute('id') === 'email_user_settings_change') {
-        this.getContent().setAttribute('value',  this.props.user_email! || store._state.user.email)
+        this.getContent().setAttribute('value',  this.props.user_email ? this.props.user_email || store._state.user.email : '')
       } else if ( this.getContent().getAttribute('id') === 'login_user_settings') {
         this.getContent().setAttribute('value', this.props ? this.props.user_login! : '')
       } else if ( this.getContent().getAttribute('id') === 'name_user_settings') {
@@ -47,8 +46,6 @@ export class Input extends Block< I> {
         this.getContent().setAttribute('value', this.props ? this.props.user_phone! : '')
       }
     }
-      console.log('Input props from render >>', this.props);
-    console.log('Input store from render >>', store)
     return this.compile(template, this.props);
   }
 }

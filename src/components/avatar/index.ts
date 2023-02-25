@@ -3,7 +3,7 @@ import template from './tpl.hbs';
 import './style.css';
 import { Input } from '../input';
 import sendAvatar from '../../utils/sendAvatar';
-import store, { StoreEvents } from '../../utils/Store'
+import { StoreEvents, store } from '../../utils/Store'
 
 export class Avatar extends Block<T> {
   constructor(props: T) {

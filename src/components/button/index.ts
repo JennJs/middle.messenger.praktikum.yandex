@@ -7,7 +7,6 @@ type ButtonProps = {
     click?: (e: Event & { target: HTMLInputElement}) => void,
  },
   label?: string,
-
 };
 
 export class Button extends Block<ButtonProps> {

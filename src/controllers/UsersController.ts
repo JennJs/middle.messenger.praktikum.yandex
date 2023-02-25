@@ -1,6 +1,6 @@
 import API, { ChangePassword, UpdateUserData } from '../modules/API/users-api';
-import store from '../utils/Store';
-import  AuthController  from './AuthController';
+import { store } from '../utils/Store';
+import  { authController }  from './AuthController';
 
 
 export class UsersController {
@@ -13,7 +13,7 @@ export class UsersController {
   async  changeUserData( data: UpdateUserData ) {
     try {
       await this.api.updateUser(data);
-      await AuthController.fetchUser()
+      await authController.fetchUser()
     } catch (e: any) {
       console.error('changeUserData:', e);
     }

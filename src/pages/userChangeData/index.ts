@@ -4,7 +4,7 @@ import { ComeBack } from '../../components/comeBack';
 import './style.css';
 import { getFormValue } from '../../utils/getFormValue';
 import { FormChangeData } from '../../components/formChangeData';
-import store, { StoreEvents } from '../../utils/Store';
+import { StoreEvents, store } from '../../utils/Store';
 
 export class UserChangeData extends Block<T> {
   constructor(props: T) {

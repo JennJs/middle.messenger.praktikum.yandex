@@ -3,7 +3,7 @@
   align-items: flex-end;
   width: 300px;
 }
-.modal_delete_user input {
+.modal_delete_user #input_delete_user {
   border: 1px solid #ddd9d9;
   border-radius: 7px;
   height: 40px;
@@ -14,7 +14,7 @@
   margin: 5px 15px;
   height: fit-content;
 }
-.modal_delete_user button {
+.modal_delete_user .button_red {
   margin-left: 10px;
   padding: 5px;
   height: 40px;
