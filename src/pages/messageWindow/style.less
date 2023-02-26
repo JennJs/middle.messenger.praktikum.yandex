@@ -7,18 +7,17 @@
     padding-right: 10px;
 }
 .message_window a {
+    height: 100vh;
     margin-left: 100px;
     margin-top: 40px;
     font-size: 20px;
 }
 #incoming_message  {
-    margin-right: 10px;
+    height: 450px;
+    margin: 0;
+    overflow-y: scroll;
     text-align: end;
     padding: 10px  0px 5px 125px;
-}
-#outgoing_message  {
-    margin-left: 30px;
-    padding: 10px 125px 0px 10px;
 }
 #incoming_message p {
     display: flex;
@@ -30,14 +29,10 @@
     padding: 20px;
     background-color: @incoming-message-color;
 }
-#outgoing_message p {
-    width: fit-content;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: @outgoing-message-color;
-    text-align: end;
-}
 #add_delete_user {
     display: flex;
     width: 100px;
+}
+.chat_title {
+    margin: 20px auto;
 }

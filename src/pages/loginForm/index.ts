@@ -5,8 +5,8 @@ import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { Label } from '../../components/label';
 import { getFormValue } from '../../utils/getFormValue';
-import route from '../../utils/navigation';
-import store, { StoreEvents } from '../../utils/Store';
+import { route } from '../../utils/navigation';
+import { StoreEvents, store } from '../../utils/Store';
 
 type LoginFormProps = { 
   events?: {

@@ -1,15 +1,16 @@
-import Block, {T} from '../../modules/block/Block';
+import Block, { T }  from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 import  { StoreEvents, store } from '../../utils/Store';
 
-export class Chat extends Block<T> {
+
+export class UserSettings extends Block<T> {
   constructor(props: T) {
     super('div', props);
 
     store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getState());
-    });
+      this.setProps((store as Record<string, any>).getStateUserSettings());
+      });
   }
 
   render() {

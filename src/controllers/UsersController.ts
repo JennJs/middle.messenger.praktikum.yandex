@@ -1,5 +1,6 @@
 import API, { ChangePassword, UpdateUserData } from '../modules/API/users-api';
-import store from '../utils/Store';
+import { store } from '../utils/Store';
+import  { authController }  from './AuthController';
 
 
 export class UsersController {
@@ -11,13 +12,12 @@ export class UsersController {
 
   async  changeUserData( data: UpdateUserData ) {
     try {
-      const response =  await this.api.updateUser(data);
-      const newUserData = JSON.parse(response);
-      store.set('user', newUserData);
+      await this.api.updateUser(data);
+      await authController.fetchUser()
     } catch (e: any) {
       console.error('changeUserData:', e);
     }
-  }
+  } 
 
   async getUserById (id: number) {
     try {
@@ -30,7 +30,7 @@ export class UsersController {
 
   async changeUserPassword (data: ChangePassword ) {
     try {
-      const response =  await this.api.changePassword(data);
+      await this.api.changePassword(data);
     } catch (e: any) {
       console.error('getUserById:', e);
     }

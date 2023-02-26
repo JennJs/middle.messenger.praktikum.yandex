@@ -1,10 +1,11 @@
+@import '../../colors.less';
 .modal_add_user {
     display: none;
     align-items: flex-end;
     height:  fit-content;
 }
-.modal_add_user input {
-    border: 1px solid rgb(221, 217, 217);
+.modal_add_user #input_add_user {
+    border: 1px solid @border-modal;
     border-radius: 7px;
     height: 40px;
     margin-right: 10px;
@@ -13,7 +14,7 @@
     margin: 5px 15px;
     height: fit-content;
 }
-.modal_add_user button {
+.modal_add_user .button_secondary {
     padding: 5px;
     height: 40px;
 }

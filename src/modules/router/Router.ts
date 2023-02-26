@@ -1,16 +1,21 @@
 /* eslint-disable no-undef */
-import Route from './Route';
+import { Route } from './Route';
+import { store } from '../../utils/Store'
+import  { authController }  from '../../controllers/AuthController';
+import { chats, loginForm, page404, page500, signInForm, userChangeData, userChangePassword, userSettingsPage } from '../..';
+import  ChatsController  from '../../controllers/ChatsController';
+import Block from '../block/Block';
 
 
-export default class Router {
+export class Router {
 
-  static _instance: Router;
+  private static _instance: Router;
 
   rootQuery: string;
-	routes: [];
-	history: History ;
-	_currentRoute: any;
-  block: HTMLElement
+	private routes: Route[];
+	private history: History ;
+	private _currentRoute: any;
+  block: Block<Record<string, any>>
 
     constructor(rootQuery: string) {
       if (Router._instance) {
@@ -25,19 +30,18 @@ export default class Router {
       Router._instance = this;
     }
   
-    use(pathname: string, block: any, props = {}) {
+    use(pathname: string, block: Block<Record<string, any>>, props = {}) {
       const route =  new Route(pathname, block, {...props, rootQuery: this.rootQuery}); 
-      //не знаю уже как тут затипизировать
+    
       this.routes.push(route);
       return this;
     }
   
-    start() {
+    async start() {
       window.onpopstate = (event: PopStateEvent ) => {
         this._onRoute((event.currentTarget as Window).location.pathname);
       };
-  
-      this._onRoute(window.location.pathname);
+        this._onRoute(window.location.pathname);
     }
   
     _onRoute(pathname: string) {
@@ -60,8 +64,10 @@ export default class Router {
       this.history.pushState({}, "", pathname);
       this._onRoute(pathname);
     }
-  
+
     getRoute(pathname: string) {
       return this.routes.find(route => route.match(pathname));
     }
   }
+
+  export const router = new Router('#root');

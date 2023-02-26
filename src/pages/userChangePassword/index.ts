@@ -6,8 +6,8 @@ import './style.css';
 import { getFormValue } from '../../utils/getFormValue';
 import { FormChangePassword } from '../../components/formChangePassword';
 import { Link } from '../../components/link';
-import route from '../../utils/navigation';
-import store, { StoreEvents } from '../../utils/Store';
+import { route } from '../../utils/navigation';
+import { StoreEvents, store } from '../../utils/Store';
 
 export class UserChangePassword extends Block<T> {
   constructor(props: T) {

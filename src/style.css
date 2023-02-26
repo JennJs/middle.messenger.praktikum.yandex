@@ -42,9 +42,6 @@ nav h3 {
 .error_input {
   border: 3px solid red;
 }
-.active_chat {
-  border: 1px solid blue;
-}
 .button_out {
   width: 30px ;
   height: 30px;
@@ -63,4 +60,12 @@ nav h3 {
   cursor: pointer;
   background-color: transparent;
   border: none;
+}
+.user_settings,
+.user_change_data {
+  border: none;
+  margin: 0;
+  text-align-last: end;
+  justify-self: end;
+  font-size: 13px;
 }

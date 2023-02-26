@@ -5,46 +5,31 @@ import { ComeBack } from '../../components/comeBack';
 import left_arrow from '../../../static/left-arrow.png';
 import { Avatar } from '../../components/avatar';
 import './style.css';
-import { Label } from '../../components/label';
-import { Input } from '../../components/input';
-import route from '../../utils/navigation';
-import AuthController from '../../controllers/AuthController';
+import { route } from '../../utils/navigation';
+import { authController } from '../../controllers/AuthController';
 import sendAvatar from '../../utils/sendAvatar';
-
-import store, { StoreEvents } from "../../utils/Store";
+import { StoreEvents, store } from "../../utils/Store";
+import { UserSettings } from '../../components/userSettings';
 
 export class UserSettingsPage extends Block<T> {
   constructor(props: T) {
     super('div', props);
 
-     store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getState());
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getStateAvatar());
     });
   }
-
-
   init() {
     this.children.comeback_nav = new ComeBack({
       url: left_arrow,
     });
     this.children.avatar = new Avatar({
-      storeUrl: store._state.user ? store._state.user.avatar : '',
       events: {
         submit: (e: Event & { target: HTMLInputElement}) => sendAvatar(e)
       }
     });
-    this.children.user_setting_email_label = new Label({});
-    this.children.user_setting_email_input = new Input({});
-    this.children.user_setting_login_label = new Label({});
-    this.children.user_setting_login_input = new Input({});
-    this.children.user_setting_name_label = new Label({});
-    this.children.user_setting_name_input = new Input({});
-    this.children.user_setting_surname_label = new Label({});
-    this.children.user_setting_surname_input = new Input({});
-    this.children.user_setting_name_inchat_label = new Label({});
-    this.children.user_setting_name_inchat_input = new Input({});
-    this.children.user_setting_phone_label = new Label({});
-    this.children.user_setting_phone_input = new Input({});
+    this.children.settings = new UserSettings({})
+    
     this.children.link_change_data = new Link({
       href: '/userSettings/change-data',
       link_title: 'Изменить данные',
@@ -68,40 +53,11 @@ export class UserSettingsPage extends Block<T> {
       style: 'color:red',
       events: {
         click : (e) => { 
-          AuthController.logout();
+          authController.logout();
           route(e)
         }
       }
     });
-    this.setInputsAttributes(this.children.user_setting_email_input.getContent(), 'email_user_settings', 'email', 'email', '',  store._state.user ? store._state.user.email : '' );
-    this.children.user_setting_email_input.getContent().setAttribute('disabled', '');
-    this.children.user_setting_email_input.getContent().classList.add('user_settings');
-    this.setLabelsAttributes(this.children.user_setting_email_label, 'Почта', 'email_user_settings');
-
-    this.setInputsAttributes(this.children.user_setting_login_input.getContent(), 'login_user_settings', 'login', 'text', '', store._state.user ? store._state.user.login : '');
-    this.children.user_setting_login_input.getContent().setAttribute('disabled', '');
-    this.children.user_setting_login_input.getContent().classList.add('user_settings');
-    this.setLabelsAttributes(this.children.user_setting_login_label, 'Логин', 'login_user_settings');
-
-    this.setInputsAttributes(this.children.user_setting_name_input.getContent(), 'name_user_settings', 'first_name', 'text', '', store._state.user ? store._state.user.first_name : '');
-    this.children.user_setting_name_input.getContent().setAttribute('disabled', '');
-    this.children.user_setting_name_input.getContent().classList.add('user_settings');
-    this.setLabelsAttributes(this.children.user_setting_name_label, 'Имя', 'name_user_settings');
-
-    this.setInputsAttributes(this.children.user_setting_surname_input.getContent(), 'surname_user_settings', 'second_name', 'text', '', store._state.user ? store._state.user.second_name : '');
-    this.children.user_setting_surname_input.getContent().setAttribute('disabled', '');
-    this.children.user_setting_surname_input.getContent().classList.add('user_settings');
-    this.setLabelsAttributes(this.children.user_setting_surname_label, 'Фамилия', 'surname_user_settings');
-
-    this.setInputsAttributes(this.children.user_setting_name_inchat_input.getContent(), 'display_name_user_settings', 'display_name', 'text', '', store._state.user && store._state.user.display_name ? store._state.user.display_name : '' );
-    this.children.user_setting_name_inchat_input.getContent().setAttribute('disabled', '');
-    this.children.user_setting_name_inchat_input.getContent().classList.add('user_settings');
-    this.setLabelsAttributes(this.children.user_setting_name_inchat_label, 'Имя в чате', 'display_name_user_settings');
-
-    this.setInputsAttributes(this.children.user_setting_phone_input.getContent(), 'phone_user_settings', 'phone', 'tel', '', store._state.user ? store._state.user.phone : '' );
-    this.children.user_setting_phone_input.getContent().setAttribute('disabled', '');
-    this.children.user_setting_phone_input.getContent().classList.add('user_settings');
-    this.setLabelsAttributes(this.children.user_setting_phone_label, 'Телефон', 'phone_user_settings');
   }
 
   render() {
