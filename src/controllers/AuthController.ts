@@ -15,7 +15,9 @@ export class AuthController {
       await this.api.signin(data);
       await this.fetchUser();
       await ChatsController.getChats();
+      router.start();
       router.go('/userSettings');
+      window.location.reload();
       console.log('signin')
     } catch (e: any) {
       console.error('signin:', e
@@ -33,6 +35,7 @@ export class AuthController {
       await this.fetchUser();
       await ChatsController.getChats();
       router.go('/');
+      window.location.reload();
     } catch (e: any) {
       console.error('signup:', e);
     }
@@ -53,8 +56,8 @@ export class AuthController {
       store.removeAllState();
       await this.api.logout();
       router.go('/login');
+      window.location.reload();
       console.log('user logout')
-
     } catch (e: any) {
         console.error(e);
     }

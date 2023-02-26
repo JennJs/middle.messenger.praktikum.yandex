@@ -3,6 +3,7 @@
   width: 100px;
   border-radius: 50%;
   background-size: 100px;
+  background-color: #999999;
 }
 .avatar #avatar {
   height: 100px;

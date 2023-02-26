@@ -41,29 +41,7 @@ export class Router {
       window.onpopstate = (event: PopStateEvent ) => {
         this._onRoute((event.currentTarget as Window).location.pathname);
       };
-      // await authController.fetchUser();
-
-      // if (!store._state.user) {
-      //   this.go('/login');
-      //   this.use('/login', loginForm)
-      //      .use('/registration', signInForm )
-      // } else {
-      //   await ChatsController.getChats(); 
-      //   this.go('/')
-      //   this.use('/login', loginForm)
-      //       .use('/', chats) 
-      //       .use('/registration', signInForm) 
-      //       .use('/userSettings', userSettingsPage)
-      //       .use('/userSettings/change-data', userChangeData) 
-      //       .use('/userSettings/change-password', userChangePassword)
-      //       .use('/500', page500) 
-      //       .use('/404', page404)
-
-       
         this._onRoute(window.location.pathname);
-      // }
-      // await ChatsController.getChats(); 
-      // this._onRoute(window.location.pathname);
     }
   
     _onRoute(pathname: string) {
