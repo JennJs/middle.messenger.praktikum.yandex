@@ -12,6 +12,9 @@ import { UserSettingsPage } from './pages/userSettings';
 import { getFormValue } from './utils/getFormValue';
 import { router } from './modules/router/Router';
 import { route } from './utils/navigation';
+import { authController } from './controllers/AuthController';
+import { store } from './utils/Store';
+import ChatsController from './controllers/ChatsController';
 
 export const page404 = new Page404({
   events: {
@@ -67,16 +70,54 @@ export const userSettingsPage = new UserSettingsPage({});
 export const contUserSettingsPage: HTMLElement = userSettingsPage.getContent();
 
 
-window.addEventListener('DOMContentLoaded', () => {
-  router
-    .use('/login', loginForm)
-    .use('/', chats) 
-    .use('/registration', signInForm) 
-    .use('/userSettings', userSettingsPage)
-    .use('/userSettings/change-data', userChangeData) 
-    .use('/userSettings/change-password', userChangePassword)
-    .use('/500', page500) 
-    .use('/404', page404)
-    .start(); 
+window.addEventListener('DOMContentLoaded', async () => {
+  
+  await authController.fetchUser();
+  if(store._state.user && window.location.pathname === '/') {
+    await ChatsController.getChats(); 
+    router.go('/');
+    router.use('/login', loginForm)
+      .use('/', chats) 
+      .use('/registration', signInForm) 
+      .use('/userSettings', userSettingsPage)
+      .use('/userSettings/change-data', userChangeData) 
+      .use('/userSettings/change-password', userChangePassword)
+      .use('/500', page500) 
+      .use('/404', page404)
+    router.start();
+  } else if (!store._state.user && window.location.pathname === '/registration') {
+    router.use('/registration', signInForm)
+          .use('/login', loginForm)
+    router.start();
+  }else if (!store._state.user) {
+    router.go('/login')
+    router.use('/registration', signInForm)
+          .use('/login', loginForm)
+    router.start();
+  } else if (store._state.user && window.location.pathname === '/login') {
+    await ChatsController.getChats(); 
+    router.use('/login', loginForm)
+      .use('/', chats) 
+      .use('/registration', signInForm) 
+      .use('/userSettings', userSettingsPage)
+      .use('/userSettings/change-data', userChangeData) 
+      .use('/userSettings/change-password', userChangePassword)
+      .use('/500', page500) 
+      .use('/404', page404)
+    router.start();
+  } else if (store._state.user) {
+    await ChatsController.getChats(); 
+    router.use('/login', loginForm)
+      .use('/', chats) 
+      .use('/registration', signInForm) 
+      .use('/userSettings', userSettingsPage)
+      .use('/userSettings/change-data', userChangeData) 
+      .use('/userSettings/change-password', userChangePassword)
+      .use('/500', page500) 
+      .use('/404', page404)
+    router.start();
+  }
 });
 
+
+   

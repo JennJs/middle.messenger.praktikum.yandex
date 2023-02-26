@@ -16,7 +16,7 @@ export class AuthController {
       await this.fetchUser();
       await ChatsController.getChats();
       router.go('/userSettings');
-      console.log('signin ')
+      console.log('signin')
     } catch (e: any) {
       console.error('signin:', e
       );

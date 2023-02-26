@@ -15,7 +15,6 @@ export class ChatWebSocket  {
         this.disconnect();
       }
         this.socket.addEventListener('open', () => {
-        console.log('Соединение установлено');
         this.open = true;
         this.getMessages()
 
