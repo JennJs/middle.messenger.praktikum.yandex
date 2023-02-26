@@ -1,9 +1,5 @@
 /* eslint-disable no-undef */
 import { Route } from './Route';
-import { store } from '../../utils/Store'
-import  { authController }  from '../../controllers/AuthController';
-import { chats, loginForm, page404, page500, signInForm, userChangeData, userChangePassword, userSettingsPage } from '../..';
-import  ChatsController  from '../../controllers/ChatsController';
 import Block from '../block/Block';
 
 
