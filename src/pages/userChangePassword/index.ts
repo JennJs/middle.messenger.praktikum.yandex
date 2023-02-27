@@ -5,10 +5,17 @@ import left_arrow from '../../../static/left-arrow.png';
 import './style.css';
 import { getFormValue } from '../../utils/getFormValue';
 import { FormChangePassword } from '../../components/formChangePassword';
+import { Link } from '../../components/link';
+import { route } from '../../utils/navigation';
+import { StoreEvents, store } from '../../utils/Store';
 
 export class UserChangePassword extends Block<T> {
   constructor(props: T) {
     super('div', props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+    });
   }
 
   init() {
@@ -18,6 +25,14 @@ export class UserChangePassword extends Block<T> {
     this.children.formChangePassword = new FormChangePassword ({
       events: {
         submit: (e) => getFormValue(e)
+      }
+    })
+    this.children.link_back = new Link({
+      href: '/userSettings',
+      link_title: 'В профиль',
+      clas: 'position_centr',
+      events: {
+        click : (e) => route(e)
       }
     })
 

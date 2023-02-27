@@ -43,7 +43,9 @@ export function validate( form: HTMLFormElement): boolean {
   const allInputs = form.querySelectorAll('input');
   
   Array.from(allInputs).forEach((input: HTMLInputElement) => {
-    inputs.push(input);
+    if(input.getAttribute('type') !== 'file') {
+      inputs.push(input);
+    }
   })
 
   let newPassword: string = '';

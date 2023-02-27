@@ -1,27 +1,37 @@
 .message_window {
+  vertical-align: bottom;
   width: 75%;
   min-width: 846px;
   height: 100hv;
   padding-right: 10px;
 }
+.message_window a {
+  height: 100vh;
+  margin-left: 100px;
+  margin-top: 40px;
+  font-size: 20px;
+}
 #incoming_message {
+  height: 450px;
+  margin: 0;
+  overflow-y: scroll;
+  text-align: end;
   padding: 10px  0px 5px 125px;
 }
-#outgoing_message {
-  display: flex;
-  padding: 10px 125px 0px 10px;
-  justify-content: flex-end;
-}
 #incoming_message p {
+  display: flex;
+  align-items: flex-end;
+  margin-right: 0;
+  margin-left: 600px;
   border-radius: 20px;
   width: fit-content;
   padding: 20px;
   background-color: #F8F8F8;
 }
-#outgoing_message p {
-  width: fit-content;
-  padding: 20px;
-  border-radius: 20px;
-  background-color: #E4EDFD;
-  text-align: end;
+#add_delete_user {
+  display: flex;
+  width: 100px;
+}
+.chat_title {
+  margin: 20px auto;
 }

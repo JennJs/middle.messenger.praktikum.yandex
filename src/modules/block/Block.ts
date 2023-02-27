@@ -1,7 +1,6 @@
 import  EventBus  from "../../utils/eventBus";
 import { nanoid } from 'nanoid';
 
-
 export type T = Record<string, any>;
 type Children = Record<string, Block<T>>;
 
@@ -58,6 +57,14 @@ class Block <Props extends Record<string, any>>  {
     return {props: (props as Props), children};
   }
 
+  private _registerEvents(eventBus: EventBus): void {
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+  }
+
+
   private _addEvents():void {
     const {events = {}} = this.props;
    
@@ -76,13 +83,6 @@ class Block <Props extends Record<string, any>>  {
         this._element.removeEventListener(event, listener);
     });
 }
-
-  private _registerEvents(eventBus: EventBus): void {
-    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-  }
 
   private _createResources(): void {
     const { tagName } = this._meta;
@@ -137,8 +137,6 @@ class Block <Props extends Record<string, any>>  {
         this._element.innerHTML = '';
         this._element.append(fragment);
     }
-    // this._element.innerHTML = '';
-    // this._element.append(fragment);
     this._addEvents();
   }
 
@@ -202,7 +200,7 @@ class Block <Props extends Record<string, any>>  {
   }
 
   public show(): void {
-    this.getContent().style.display = "block";
+    this.getContent().style.display = "flex";
   }
 
   public hide(): void {
@@ -307,6 +305,7 @@ class Block <Props extends Record<string, any>>  {
       }
     }
   }
+
 }
 
 export default Block;

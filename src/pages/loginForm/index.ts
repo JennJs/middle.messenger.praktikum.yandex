@@ -5,14 +5,23 @@ import { Button } from '../../components/button';
 import { Link } from '../../components/link';
 import { Label } from '../../components/label';
 import { getFormValue } from '../../utils/getFormValue';
+import { route } from '../../utils/navigation';
+import { StoreEvents, store } from '../../utils/Store';
 
 type LoginFormProps = { 
-  events: {submit: (e: Event & { target: HTMLInputElement}) => void},
+  events?: {
+    submit: (e: Event & { target: HTMLInputElement}) => void,
+    click?: (e: Event ) => void
+  },
 };
 
 export class LoginForm extends Block<LoginFormProps> {
   constructor(props: LoginFormProps) {
     super('form', props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+    });
   }
 
   init(): void {
@@ -40,6 +49,9 @@ export class LoginForm extends Block<LoginFormProps> {
       href: '/registration',
       clas: 'position_centr',
       link_title: 'Нет аккаунта?',
+      events: {
+        click : (e) => route(e)
+      }
     });
     this.setLabelsAttributes(this.children.input_login_label, 'Логин', 'login_log_in');
     this.setInputsAttributes(this.children.input_login.getContent(), 'login_log_in', 'login', 'text', 'Логин');

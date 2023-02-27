@@ -1,12 +1,10 @@
-@chat-header-color:#EAEAEA;
-@input-color: #EFEFEF;
-@profile-color: #999999;
+@import '../../colors.less';
 .chats_header {
 	width: 100%;
 	justify-content: space-between;
     align-items: center;
 	padding: 0 15px;
-	border-bottom: 1px solid @chat-header-color;
+	border-bottom: 1px solid @shadow-color;
 }
 .profile_conteiner {
 	display: flex;
@@ -23,7 +21,7 @@
     justify-content: space-evenly;
 	margin-bottom: 25px;
 }
-#search input {
+#search #search_input {
 	width: 100%;
     border: none;
 	width: 260px;
@@ -46,8 +44,12 @@
 hr {
 	height: 1px;
 	border: 0;
-	background-color: @chat-header-color;
+	background-color: @shadow-color;
 }
 .form_search {
 	display: flex;
+}
+.add_delete {
+	display: flex;
+	justify-content: space-evenly;
 }

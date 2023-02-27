@@ -1,10 +1,26 @@
-<div><img src="{{url}}" alt="avatar"></div>
-<div  class="content">
-    <p class="chat_name">{{{chat_name}}}</p>
-    <p class="last_message">{{{last_message}}}</p>
+{{#each chat}}
+<div class="chat">
+    {{#if this.avatar}}
+        <div><img src="{{this.avatar}}" alt="avatar"></div>
+    {{else}} 
+        <div class="chat_avatar"><img src="{{this.avatarUrl}}" alt="avatar"></div>
+    {{/if}}
+    <div  class="content" id="{{this.id}}">
+        <p class="chat_name">{{{this.title}}}</p>
+       {{#if this.last_message}}
+        <p class="last_message">{{{this.last_message.content}}}</p>
+        {{else}} 
+        <p class="last_message">нет сообщений</p>
+        {{/if}}
+    </div>
+     {{#if this.last_message}}
+    <div>
+        <div class="time"></div>
+        <div class="sum_new_messages">{{{this.unread_count}}}</div>
+    </div> 
+    {{else}} 
+        <div></div>
+    {{/if}}    
 </div>
-<div>
-    <div class="time">{{{time}}}</div>
-    <div class="sum_new_messages">{{{new_messages}}}</div>
-</div>
+{{/each}} 
 
