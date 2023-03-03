@@ -1,5 +1,4 @@
-@settings-color: #EAEAEA;
-@label-color: #000000;
+@import '../../colors.less';
 .userSettings_container {
     height: 85vh;
     width: 400px;
@@ -17,7 +16,7 @@ h3 {
     font-size: 13px;
 }
 .user_settings_conteiner {
-    border-bottom: 1px solid @settings-color;
+    border-bottom: 1px solid @shadow-color;
     padding-bottom: 5px;
 	display: inline-flex;	
 	align-items: flex-end;
@@ -25,11 +24,4 @@ h3 {
 	margin-bottom: 25px;
 	margin-right: 0;
 	justify-content: space-between;
-}
-.user_settings_conteiner label {
-	color: @label-color;
-	font-size: 15px;
-	margin: 0;
-	display: inline-flex;
-	width: fit-content;
 }

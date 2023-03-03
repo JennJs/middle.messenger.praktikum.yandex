@@ -1,9 +1,17 @@
+@import '../../colors.less';
 .avatar {
     height: 100px;
     width: 100px;
+    border-radius:50%;
+    background-size: 100px;
+    background-color: @profile-color;
+}
+.avatar #avatar {
+    height: 100px;
+    width: 100px;
     cursor: pointer;
-    background-color: rgb(213, 205, 205);
-    border-radius: 80px;
+    opacity: 0;
+    border-radius: 50%;
 }
 .avatar_conteiner {
     display: flex;

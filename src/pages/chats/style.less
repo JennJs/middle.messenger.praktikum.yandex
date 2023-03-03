@@ -1,5 +1,4 @@
-@border-color: #EAEAEA;
-@shadow-color: #C1B9B9;
+@import '../../colors.less';
 .chats {
     display: flex;
     flex-direction:column;
@@ -7,10 +6,16 @@
     width: 25%;
     min-width: 300px;
     height: 100vh;
-    border-right: 1px solid @border-color;
-    box-shadow: 0 0 2px @shadow-color;
+    border-right: 1px solid @shadow-color;
+    box-shadow: 0 0 2px @shadow-chat-color;
 }
 .messenger {
     display: flex;
     height: 100vh;
 }
+.chats_list {
+    overflow-y: scroll;
+    height: 515px;
+}
+
+

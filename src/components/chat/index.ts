@@ -1,14 +1,18 @@
 import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
+import  { StoreEvents, store } from '../../utils/Store';
 
 export class Chat extends Block<T> {
   constructor(props: T) {
     super('div', props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+    });
   }
 
   render() {
-    this.getContent().classList.add('chat');
     return this.compile(template, this.props);
   }
 }

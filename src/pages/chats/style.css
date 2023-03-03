@@ -12,3 +12,7 @@
   display: flex;
   height: 100vh;
 }
+.chats_list {
+  overflow-y: scroll;
+  height: 515px;
+}

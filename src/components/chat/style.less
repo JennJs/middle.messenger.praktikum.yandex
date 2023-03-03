@@ -1,18 +1,19 @@
-@profile-color: #999999;
-@new-messages-color: #3369F3;
-@chat-color: #EAEAEA;
+@import '../../colors.less';
 .chat {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid @chat-color;
+    border-bottom: 1px solid @shadow-color;
     padding: 10px;
     margin-bottom: 10px;
 }
 .content {
     cursor: pointer;
-    flex-grow: 2;
     margin: 0 25px;
+}
+.chat_avatar {
+    width: fit-content;
+
 }
 .chat_name {
     font-weight: bold ;
@@ -35,9 +36,9 @@
 .sum_new_messages {
     width: 20px;
     height: 20px;
-    color: white;
+    color: @text-color;
     border-radius: 50%;
-    background-color: @new-messages-color;
+    background-color: @button-link-color;
     margin-top: 10px;
     font-size: 12px;
     padding-top: 3px;

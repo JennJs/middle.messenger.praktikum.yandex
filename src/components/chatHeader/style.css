@@ -20,7 +20,7 @@
   justify-content: space-evenly;
   margin-bottom: 25px;
 }
-#search input {
+#search #search_input {
   width: 100%;
   border: none;
   width: 260px;
@@ -47,4 +47,8 @@ hr {
 }
 .form_search {
   display: flex;
+}
+.add_delete {
+  display: flex;
+  justify-content: space-evenly;
 }
