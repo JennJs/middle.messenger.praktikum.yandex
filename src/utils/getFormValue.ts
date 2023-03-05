@@ -8,6 +8,8 @@ export async function getFormValue(e: Event & { target: HTMLInputElement} ) {
     e.preventDefault();
     let form  = document.forms[0];
     const dataForm: Record<string, any> = Object.fromEntries(new FormData(form).entries());
+    // const dataForm: FormData = Object.fromEntries(new FormData(form).entries());
+
    
     if (validate(form)) {
       const values = form.elements;

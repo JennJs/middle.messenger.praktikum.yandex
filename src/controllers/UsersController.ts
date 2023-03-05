@@ -22,7 +22,7 @@ export class UsersController {
   async getUserById (id: number) {
     try {
       const response =  await this.api.getUser(id);
-      const newUserData = JSON.parse(response);
+      JSON.parse(response);
     } catch (e: any) {
       console.error('getUserById:', e);
     }

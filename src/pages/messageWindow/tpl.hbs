@@ -1,10 +1,13 @@
-<div id="add_delete_user"> 
-    {{{ add_user }}}
-    {{{ delete_user }}}
-</div>
 <div class="message_window_header">
     {{#if chat_title}}
-        <div> <h3 class="chat_title"> {{{chat_title}}} </h3></div>
+    <div id="add_delete_user"> 
+    {{{ add_user }}}
+    {{{ delete_user }}}
+    </div>
+        <div class="chat_window_header"> 
+            {{{ chat_avatar }}}
+            <h3 class="chat_title"> {{{chat_title}}} </h3>
+        </div>
     {{else}} 
         <div class="choose_title"> Выберите чат</div> 
     {{/if}}

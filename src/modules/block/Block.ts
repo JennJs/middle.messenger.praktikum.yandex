@@ -108,15 +108,15 @@ class Block <Props extends Record<string, any>>  {
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate(oldProps: Props, newProps: Props): void {
-    if (this.componentDidUpdate(oldProps, newProps)) {
+  private _componentDidUpdate(): void {
+    // if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    }
+    // }
   }
 
-  protected componentDidUpdate(oldProps: Props, newProps: Props): boolean {
-    return true;
-  }
+  // protected componentDidUpdate(oldProps: Props, newProps: Props): boolean {
+  //   return true;
+  // }
 
   protected setProps = (nextProps: Props): void => {
     if (!nextProps) {

@@ -1,14 +1,33 @@
 {
-   "compilerOptions": {
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "dist",
-    "target": "ES2019",
-    "declaration": false,
-    "module": "commonjs",
-    "strictNullChecks": true,
-    "sourceMap": true,
-   },
-   "lib": ["es2019"]
-} 
+	"include": [
+		"src",
+		"ts.d.ts"
+	],
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": true,
+		"module": "es6",
+		"target": "es5",
+		"allowJs": true,
+		"sourceMap": true,
+		"moduleResolution": "Node",
+		"baseUrl": "./src",
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strictNullChecks": true,
+		"outDir": "dist",
+		"declaration": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"lib": [
+			"dom",
+            "dom.iterable",
+			"ES2018"
+		],
+	},
+	"exclude": [
+		"node_modules", 
+	],
+	"files": ["src/index.ts"]
+}

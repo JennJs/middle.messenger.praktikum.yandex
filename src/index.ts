@@ -131,6 +131,3 @@ window.addEventListener('DOMContentLoaded', async () => {
     router.start();
   }
 });
-
-
-   

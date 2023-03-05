@@ -1,12 +1,15 @@
-ссылка на макет: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1&t=Jr9rIXdErJPtgjnv-0
-ссылка Netlify: https://relaxed-banoffee-47e18c.netlify.app/
+# 🚀 Welcome to your new awesome project!
 
-команды для запуска:
-npm run dev  
-npm run start
+This project has been created using **webpack-cli**, you can now run
 
-команда запуска esLint:
-npm run lint 
+```
+npm run build
+```
 
-команда запуска styleLint:
-npm run style
+or
+
+```
+yarn build
+```
+
+to bundle your application

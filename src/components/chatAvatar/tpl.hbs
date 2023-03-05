@@ -1,0 +1,9 @@
+{{#if chatAvatarUrl}}
+<div class="chat_window_header_avatar" style='background-image: url("https://ya-praktikum.tech/api/v2/resources{{{chatAvatarUrl}}}")'>
+    {{{ input }}} 
+</div>
+{{else}} 
+<div class="chat_window_header_avatar" style='background-image: url("{{{ baseAvatar }}}")'>
+    {{{ input }}} 
+</div>
+{{/if}}
