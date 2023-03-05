@@ -11,7 +11,9 @@
   margin: 0 25px;
 }
 .chat_avatar {
-  width: fit-content;
+  width: 30px;
+  height: 30px;
+  background-color: red;
 }
 .chat_name {
   font-weight: bold ;

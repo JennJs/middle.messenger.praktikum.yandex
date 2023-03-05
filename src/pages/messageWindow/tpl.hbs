@@ -2,18 +2,21 @@
     {{{ add_user }}}
     {{{ delete_user }}}
 </div>
- {{#if chat_title}}
- <div> <h3 class="chat_title"> {{{chat_title}}} </h3></div>
-{{else}} 
-<div></div> 
-{{/if}}
+<div class="message_window_header">
+    {{#if chat_title}}
+        <div> <h3 class="chat_title"> {{{chat_title}}} </h3></div>
+    {{else}} 
+        <div class="choose_title"> Выберите чат</div> 
+    {{/if}}
+</div>
+
 <div id="incoming_message">
     {{#if messages}}
      {{#each messages}}
      <p> {{this}}</p> 
       {{/each}}
     {{else}} 
-    <div></div> 
+    <div > </div> 
     {{/if}}
 </div>
 {{{message_footer}}}

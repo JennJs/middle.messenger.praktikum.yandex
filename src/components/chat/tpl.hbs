@@ -1,9 +1,17 @@
 {{#each chat}}
 <div class="chat">
     {{#if this.avatar}}
-        <div><img src="{{this.avatar}}" alt="avatar"></div>
+    <div class="chat_avatar">
+       
+        {{{ input }}}
+    </div>
+        {{!-- <div><img src="{{this.avatar}}" alt="avatar"></div> --}}
     {{else}} 
-        <div class="chat_avatar"><img src="{{this.avatarUrl}}" alt="avatar"></div>
+      <div class="chat_avatar">
+         {{!-- <input type="file"> --}}
+        {{{ input }}}
+      </div>
+        {{!-- <div class="chat_avatar"><img src="{{this.avatarUrl}}" alt="avatar"></div> --}}
     {{/if}}
     <div  class="content" id="{{this.id}}">
         <p class="chat_name">{{{this.title}}}</p>
@@ -23,4 +31,5 @@
     {{/if}}    
 </div>
 {{/each}} 
+
 
