@@ -37,6 +37,11 @@ export class ChatsAPI extends BaseAPI {
     getToken(chat_id: number) {
       return this.http.post(`/token/${chat_id}`)
     }
+
+    changeAvatar (data: FormData) {
+      return this.http.put('/avatar', data)
+    }
+
   }
   
   export default new ChatsAPI();

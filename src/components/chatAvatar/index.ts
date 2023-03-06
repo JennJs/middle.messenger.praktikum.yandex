@@ -2,22 +2,22 @@ import Block, {T} from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 import { Input } from '../input';
-import sendAvatar from '../../utils/sendAvatar';
 import { StoreEvents, store } from '../../utils/Store'
+import { sendChatAvatar } from '../../utils/sendChatAvatar';
 
 export class ChatAvatar extends Block<T> {
   constructor(props: T) {
     super('form', props);
     
     store.on(StoreEvents.Updated, () => {
-      this.setProps(store.getStateAvatar());
+      this.setProps(store.getChatTitle());
     });
   }
 
   init() {
     this.children.input = new Input({
       events: {
-      change: (e) => sendAvatar(e)
+      change: (e) => sendChatAvatar(e)
       }
     });
     this.children.input.getContent().setAttribute('type', 'file');

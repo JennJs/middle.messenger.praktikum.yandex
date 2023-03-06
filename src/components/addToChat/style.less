@@ -1,6 +1,9 @@
 @import '../../colors.less';
 .modal_add_user {
     display: none;
+    position: fixed;
+    top:14px;
+    left: 335px;
     align-items: flex-end;
     height:  fit-content;
 }
@@ -23,13 +26,20 @@
     height: 50px;
 }
 .login {
-    position: relative;
-    top: 150px;
     display: none;
-    margin: 15px;
+    margin: 20px;
     width: fit-content;
     cursor: pointer;
 }
 .login-conteiner {
     display: none;
+    position: fixed;
+    top:74px;
+    left: 335px;
+    background-color: @modal-chats;
+    width: 280px;
+    border-radius: 7px;
+}
+.login-conteiner .button_out {
+  margin: 0 auto;
 }

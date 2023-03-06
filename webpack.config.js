@@ -66,15 +66,23 @@ const config = {
 			handlebars: 'handlebars/dist/handlebars.js'
 		},
     },
+    
 };
 
 module.exports = () => {
+   
     if (isProduction) {
         config.mode = 'production';
-        
-        
+        config.experiments = {
+            ...config.experiments,
+            topLevelAwait: true,
+          }
     } else {
         config.mode = 'development';
+        config.experiments = {
+            ...config.experiments,
+            topLevelAwait: true,
+        }
     }
     return config;
 };

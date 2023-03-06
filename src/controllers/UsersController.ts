@@ -42,7 +42,7 @@ export class UsersController {
       store.set('user', newUserData);
       store._state.user.avatar = `https://ya-praktikum.tech/api/v2/resources${newUserData.avatar}`;
       (document.getElementsByClassName('avatar')[0] as HTMLDivElement).style.backgroundImage=`url(${store._state.user.avatar})`;
-      console.log( store._state.user);
+      // console.log( store._state.user);
     } catch (e: any) {
       console.error('changeAvatar error:', e);
     }

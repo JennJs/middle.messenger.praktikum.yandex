@@ -60,6 +60,15 @@ export class ChatsController {
       console.error('addUsersToChat:', e);
     }
   }
+  async changeChatAvatar(data: FormData ) {
+    try {
+      const response = await this.api.changeAvatar(data) as  any;
+      const newChatData = JSON.parse(response);
+      store._state.currentChat[0].avatar = `${newChatData.avatar}`
+      this.getChats()
+    } catch (e: any) {
+      console.error('changeAvatar error:', e);
+    }
+  }
 } 
-
 export default new ChatsController();

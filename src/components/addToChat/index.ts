@@ -31,7 +31,8 @@ export class AddToChat extends Block<AddToChatProps> {
       events: {
          click: (e: any) => {
             showModal('modal_add_user', e),
-            store.removeState('search')
+            this.children.button.hide()
+            // store.removeState('search')
           }
         }
     });
@@ -46,6 +47,7 @@ export class AddToChat extends Block<AddToChatProps> {
       events: {
         click: () => {
           this.hideModal(),
+          this.children.button.show();
           store.removeState('search')
         }
       }

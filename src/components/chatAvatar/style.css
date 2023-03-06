@@ -1,6 +1,7 @@
 .chat_window_header_avatar {
   width: 60px;
   height: 60px;
+  background-size: 60px;
   border-radius: 50%;
   margin-bottom: 0;
 }

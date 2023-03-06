@@ -48,7 +48,7 @@ export class Chats extends Block<T> {
         chat.push(el)
       })
     }
-    console.log('chat', chat)
+    // console.log('chat', chat)
     return chat;
   }
 
@@ -70,7 +70,7 @@ export class Chats extends Block<T> {
     await web.connect(userId, chatId, token);
   }
   render() {
-    console.log(this.children)
+    // console.log(this.children)
     return this.compile(template, this.props);
   }
 }

@@ -24,7 +24,11 @@ export class DeleteFromChat extends Block<T> {
     this.children.button = new Button({
       label: 'удалить пользователя из чата',
       events: {
-      click: (e: any) => showModal('modal_delete_user', e)
+      click: (e ) => {
+        showModal('modal_delete_user', e),
+        this.children.button.hide()
+        this.children.modal.children.input_add_chat._element.value = ''
+      }
       }
     });
     this.children.modal = new ModalAddAndDeleteChat({
@@ -37,15 +41,17 @@ export class DeleteFromChat extends Block<T> {
     this.children.button_out = new Button({
       events: {
         click: () => {
-          this.hideModal(),
+          this.hideModal()
+          this.children.button.show()
           store.removeState('search')
+        
         }
       }
     });
     this.children.modal.getContent().classList.add('modal_delete_user')   
     this.setInputsAttributes(this.children.modal.children.input_add_chat.getContent(), this.children.modal.props.id, '', this.children.modal.props.type , this.children.modal.props.placeholder , '');
     this.children.button.getContent().classList.add('button_red');
-    this.children.button.getContent().setAttribute('id', 'button_add_user');
+    this.children.button.getContent().setAttribute('id', 'button_delete_user');
     this.children.modal.children.button.getContent().classList.add('button_red');
   }
   hideModal() {
@@ -64,7 +70,6 @@ export class DeleteFromChat extends Block<T> {
         el.addEventListener('click',  this.deleteUser);
       })
     }
-    inputValue = '';
   }
 
   deleteUser(e: Event & { target: HTMLElement}) {
@@ -75,9 +80,12 @@ export class DeleteFromChat extends Block<T> {
     ChatsController.deleteUsersFromChat(userId, currentChatId)
     store.removeState('search');
     (document.getElementsByClassName('modal_delete_user')[0]as HTMLDivElement).style.display = 'none';
+    (document.getElementById('button_delete_user') as HTMLDivElement).style.display = 'block';
+    this.children.modal.children.input_add_chat._element.value = ''
   }
 
   render() {
+    console.log('this.children.modal.children', this.children.modal.children.input_add_chat._element.value)
     this.getContent().classList.add('delete_from_chat');
     return this.compile(template, this.props);
   }

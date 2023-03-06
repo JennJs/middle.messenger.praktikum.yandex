@@ -5,14 +5,14 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
-    "start": "node server.js",
+    "server": "node server.js",
     "lint": "eslint .",
     "lint:fix": "eslint .--fix",
     "style": "stylelint \"**/*.css\"",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "start": "webpack serve"
   },
   "keywords": [],
   "author": "",
