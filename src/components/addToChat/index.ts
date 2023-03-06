@@ -63,7 +63,7 @@ export class AddToChat extends Block<AddToChatProps> {
     (document.getElementsByClassName('modal_add_user')[0] as any).style.display = 'none' 
   }
 
-  async addUserToChat(e: Event & {target: HTMLElement }) {
+  async addUserToChat(e ) {
     e.preventDefault();
     let inputValue = (document.getElementById('input_add_user') as HTMLInputElement).value ; 
     if (inputValue.trim()) {

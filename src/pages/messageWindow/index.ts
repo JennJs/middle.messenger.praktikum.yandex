@@ -44,7 +44,6 @@ export class MessageWindow extends Block<T> {
   }
 
   render() {
-    console.log(store)
     this.getContent().classList.add('message_window');
     return this.compile(template, this.props);
   }

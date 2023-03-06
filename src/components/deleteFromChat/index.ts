@@ -85,7 +85,6 @@ export class DeleteFromChat extends Block<T> {
   }
 
   render() {
-    console.log('this.children.modal.children', this.children.modal.children.input_add_chat._element.value)
     this.getContent().classList.add('delete_from_chat');
     return this.compile(template, this.props);
   }
