@@ -13,7 +13,6 @@ export class Chat extends Block<T> {
     });
   }
 
-  
   render() {
     return this.compile(template, this.props);
   }

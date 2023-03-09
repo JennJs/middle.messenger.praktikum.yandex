@@ -11,11 +11,15 @@
   margin-top: 40px;
   font-size: 20px;
 }
-#incoming_message {
-  height: 450px;
+#message_window {
+  height: 490px;
   margin: 0;
   overflow-y: scroll;
   text-align: end;
+}
+#incoming_message,
+#outgoing_message {
+  margin: 0;
   padding: 10px  0px 5px 125px;
 }
 #incoming_message p {
@@ -27,6 +31,15 @@
   width: fit-content;
   padding: 20px;
   background-color: #F8F8F8;
+}
+#outgoing_message p {
+  display: flex;
+  margin-right: 600px;
+  margin-left: 0;
+  border-radius: 20px;
+  width: fit-content;
+  padding: 20px;
+  background-color: #E4EDFD;
 }
 #add_delete_user {
   display: flex;

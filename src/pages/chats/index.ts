@@ -44,11 +44,9 @@ export class Chats extends Block<T> {
     if (store._state.chats && store._state.chats.length > 0 ) {
       store._state.chats.forEach( (el: Record<string, any>) => {
         el.avatarUrl = avatar;
-        // el.input = new Input({});
         chat.push(el)
       })
     }
-    // console.log('chat', chat)
     return chat;
   }
 
@@ -70,7 +68,6 @@ export class Chats extends Block<T> {
     await web.connect(userId, chatId, token);
   }
   render() {
-    // console.log(this.children)
     return this.compile(template, this.props);
   }
 }

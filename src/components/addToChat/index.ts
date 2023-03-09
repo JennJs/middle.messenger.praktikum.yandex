@@ -32,7 +32,6 @@ export class AddToChat extends Block<AddToChatProps> {
          click: (e: any) => {
             showModal('modal_add_user', e),
             this.children.button.hide()
-            // store.removeState('search')
           }
         }
     });
@@ -86,6 +85,7 @@ export class AddToChat extends Block<AddToChatProps> {
     ChatsController.addUsersToChat(userId, currentChatId)
     store.removeState('search');
     (document.getElementsByClassName('modal_add_user')[0] as HTMLDivElement ).style.display = 'none';
+    document.getElementById("button_add_user")!.style.display = 'block';
 
   }
 

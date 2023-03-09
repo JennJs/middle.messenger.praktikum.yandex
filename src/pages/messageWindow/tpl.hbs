@@ -12,13 +12,24 @@
         <div class="choose_title"> Выберите чат</div> 
     {{/if}}
 </div>
-<div id="incoming_message">
-    {{#if messages}}
-     {{#each messages}}
-     <p> {{this}}</p> 
-      {{/each}}
-    {{else}} 
-    <div > </div> 
-    {{/if}}
+<div id="message_window">
+    <div id="incoming_message">
+        {{#if messages}}
+        {{#each messages}}
+        <p> {{this}}</p> 
+        {{/each}}
+        {{else}} 
+        <div > </div> 
+        {{/if}}
+    </div>
+    <div id="outgoing_message">
+        {{#if outgoingMessages}}
+        {{#each outgoingMessages}} 
+        <p> {{this}}</p> 
+        {{/each}}
+       {{else}}  
+         <div > </div> 
+       {{/if}}
+    </div>
 </div>
 {{{message_footer}}}

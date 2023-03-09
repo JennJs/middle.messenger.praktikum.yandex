@@ -2,12 +2,12 @@
   display: none;
   position: fixed;
   top: 14px;
-  left: 335px;
+  left: 430px;
   align-items: flex-end;
   height: fit-content;
 }
 .modal_add_user #input_add_user {
-  border: 1px solid #DDD9D9;
+  border: 1px solid #ddd9d9;
   border-radius: 7px;
   height: 40px;
   margin-right: 10px;
@@ -34,7 +34,7 @@
   display: none;
   position: fixed;
   top: 74px;
-  left: 335px;
+  left: 430px;
   background-color: #E8F0FE;
   width: 280px;
   border-radius: 7px;

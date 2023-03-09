@@ -44,6 +44,7 @@ export enum StoreEvents {
 			messages: this._state.currentChat  ?  this._state.currentChat.messages: [],
 			chatAvatarUrl: this._state.currentChat ? this._state.currentChat[0].avatar : '',
 			id: this._state.currentChat ? this._state.currentChat[0].id : '',
+			outgoingMessages: this._state.currentChat ? this._state.currentChat.outgoingMessages: []
 	    }
 	}
 	getUsername() {

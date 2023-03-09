@@ -1,5 +1,5 @@
 import { store } from '../../utils/Store'
-import { addLastMessage, addMessagesToChat } from './actions';
+import { addIncomingMessageToChat, addLastMessage, addMessagesToChat } from './actions';
 
   
 export class ChatWebSocket  {
@@ -39,8 +39,11 @@ export class ChatWebSocket  {
             store.set('messages', message );
             addMessagesToChat(message)
           } else if (message.type === 'message') {
+            if (data.user_id !== store._state.user.id ) {
+              addIncomingMessageToChat(message)
+            }
             addLastMessage(message);
-          }
+          } 
       });
       
       this.socket.addEventListener('error', event => {
@@ -49,7 +52,7 @@ export class ChatWebSocket  {
     }
 
     async getMessages() {
-     this.socket?.send(JSON.stringify({content: '0', type: 'get old'}));
+       this.socket?.send(JSON.stringify({content: '0', type: 'get old'}));
     }
       
     sendMessage(message: string) { 

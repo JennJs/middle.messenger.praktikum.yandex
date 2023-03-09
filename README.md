@@ -1,15 +1,20 @@
-# 🚀 Welcome to your new awesome project!
+##### Cсылка на макет #####
 
-This project has been created using **webpack-cli**, you can now run
+https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1&t=Jr9rIXdErJPtgjnv-0
 
-```
-npm run build
-```
+#####  ссылка на Netlify ##### 
 
-or
+https://relaxed-banoffee-47e18c.netlify.app/
 
-```
-yarn build
-```
 
-to bundle your application
+##### команды для запуска: #####
+
+* режим разработки:  npm run dev
+
+* npm run start
+
+##### команда запуска esLint:  npm run lint #####
+
+##### команда запуска styleLint:  npm run style #####
+
+##### команда запуска тестов:  npm run test #####

@@ -1,15 +1,8 @@
 {{#each chat}}
 <div class="chat">
     {{#if this.avatar}}
-    {{!-- <div class="chat_avatar">
-        {{{ input }}}
-    </div> --}}
         <div><img src="https://ya-praktikum.tech/api/v2/resources{{this.avatar}}" alt="avatar"></div>
     {{else}} 
-      {{!-- <div class="chat_avatar"> --}}
-         {{!-- <input type="file"> --}}
-        {{!-- {{{ input }}} --}}
-      {{!-- </div> --}}
         <div class="chat_avatar"><img src="{{this.avatarUrl}}" alt="avatar"></div>
     {{/if}}
     <div  class="content" id="{{this.id}}">
