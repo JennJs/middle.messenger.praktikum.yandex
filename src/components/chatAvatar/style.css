@@ -1,0 +1,18 @@
+.chat_window_header_avatar {
+  width: 60px;
+  height: 60px;
+  background-size: 60px;
+  border-radius: 50%;
+  margin-bottom: 0;
+}
+.chat_window_header_avatar #chat_avatar {
+  height: 55px;
+  width: 55px;
+  cursor: pointer;
+  opacity: 0;
+  border-radius: 50%;
+  margin: 0;
+}
+.form_chat_avatar {
+  margin: 0;
+}

@@ -71,7 +71,7 @@ export enum Method {
         
         xhr.withCredentials = true;
      
-        xhr.onreadystatechange = (e) => {
+        xhr.onreadystatechange = () => {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
               resolve(xhr.response);
