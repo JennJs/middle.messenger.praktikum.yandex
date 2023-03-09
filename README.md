@@ -11,7 +11,7 @@ https://relaxed-banoffee-47e18c.netlify.app/
 
 * режим разработки:  npm run dev
 
-* npm run start
+* npm  start
 
 ##### команда запуска esLint:  npm run lint #####
 
