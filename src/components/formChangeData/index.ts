@@ -81,7 +81,7 @@ export class FormChangeData extends Block<FormProps> {
 		},
     });
     this.children.link_back = new Link({
-      href: '/userSettings',
+      href: '/settings',
       link_title: 'В профиль',
       clas: 'position_centr',
       events: {

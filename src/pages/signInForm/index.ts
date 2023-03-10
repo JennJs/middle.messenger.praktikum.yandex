@@ -73,7 +73,7 @@ export class SignInForm extends Block<SigninFormProps> {
       },
     });
     this.children.link_log_in = new Link({
-      href: '/login',
+      href: '/',
       clas: 'position_centr',
       link_title: 'Войти',
       events: {

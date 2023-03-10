@@ -46,7 +46,7 @@ export class LoginForm extends Block<LoginFormProps> {
       },
     });
     this.children.link_sign_in = new Link({
-      href: '/registration',
+      href: '/sign-up',
       clas: 'position_centr',
       link_title: 'Нет аккаунта?',
       events: {
