@@ -14,7 +14,7 @@ export class MessageFooter extends Block<T> {
 
     store.on(StoreEvents.Updated, () => {
       this.setProps(store.getState());
-      setTimeout( ( )=> this.scrollToBottom('incoming_message'));
+      setTimeout( ( )=> this.scrollToBottom('message_window'));
     });
 
   }

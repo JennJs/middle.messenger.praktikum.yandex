@@ -42,6 +42,9 @@ export enum StoreEvents {
 		return {
 			chat_title: this._state.currentChat ? this._state.currentChat[0].title : '',
 			messages: this._state.currentChat  ?  this._state.currentChat.messages: [],
+			chatAvatarUrl: this._state.currentChat ? this._state.currentChat[0].avatar : '',
+			id: this._state.currentChat ? this._state.currentChat[0].id : '',
+			outgoingMessages: this._state.currentChat ? this._state.currentChat.outgoingMessages: []
 	    }
 	}
 	getUsername() {
@@ -76,7 +79,7 @@ export enum StoreEvents {
 		this.emit(StoreEvents.Updated);
 	}
 
-	set(id: string, value: any) {
+	set(id: string, value: Record<string, any>) {
 		this._state[id] = value;
 		this.emit(StoreEvents.Updated);
 		return this;

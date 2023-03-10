@@ -28,7 +28,7 @@ export class UserChangePassword extends Block<T> {
       }
     })
     this.children.link_back = new Link({
-      href: '/userSettings',
+      href: '/settings',
       link_title: 'В профиль',
       clas: 'position_centr',
       events: {

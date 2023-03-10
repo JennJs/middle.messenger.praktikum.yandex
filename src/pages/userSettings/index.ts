@@ -31,7 +31,7 @@ export class UserSettingsPage extends Block<T> {
     this.children.settings = new UserSettings({})
     
     this.children.link_change_data = new Link({
-      href: '/userSettings/change-data',
+      href: '/settings/change-data',
       link_title: 'Изменить данные',
       clas: 'position_left',
       events: {
@@ -39,7 +39,7 @@ export class UserSettingsPage extends Block<T> {
       }
     });
     this.children.link_change_pass = new Link({
-      href: '/userSettings/change-password',
+      href: '/settings/change-password',
       link_title: 'Изменить пароль',
       clas: 'position_left',
       events: {
@@ -47,7 +47,7 @@ export class UserSettingsPage extends Block<T> {
       }
     });
     this.children.link_logout = new Link({
-      href: '/login',
+      href: '/',
       link_title: 'Выйти',
       clas: 'position_left',
       style: 'color:red',

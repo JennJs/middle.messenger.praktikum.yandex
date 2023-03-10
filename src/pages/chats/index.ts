@@ -9,6 +9,7 @@ import avatar1 from '../../../static/avatar.png';
 import  { StoreEvents, store } from '../../utils/Store';
 import  ChatsController  from '../../controllers/ChatsController';
 import { ChatWebSocket } from '../../modules/Socket/ChatWebSocket';
+import { Input } from '../../components/input';
 
 
 export class Chats extends Block<T> {
@@ -26,10 +27,11 @@ export class Chats extends Block<T> {
       url: search,
     });
     this.children.chat = new Chat({
+    input: new Input({}),
     chat: () => this.chats(),
         events: {
         click: (e: Event & {target: any , parentNode: HTMLElement}) => this.setCurrentChat(e)
-      } 
+      } ,
     });
     this.children.message_window = new MessageWindow({
       chat_title:   this.props.chat_title  ,

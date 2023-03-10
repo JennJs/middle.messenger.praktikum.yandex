@@ -1,4 +1,4 @@
-import Block from '../../modules/block/Block';
+import Block, { T } from '../../modules/block/Block';
 import template from './tpl.hbs';
 import './style.css';
 import { StoreEvents, store } from '../../utils/Store'
@@ -15,7 +15,7 @@ type AddToChatProps = {
 };
 
 export class AddToChat extends Block<AddToChatProps> {
-  children: any;
+  children: T;
 
   constructor(props: AddToChatProps) {
     super('div', props);
@@ -29,9 +29,9 @@ export class AddToChat extends Block<AddToChatProps> {
     this.children.button = new Button({
       label: 'добавить пользователя в чат',
       events: {
-         click: (e: any) => {
+         click: (e: Event& {target: HTMLElement }) => {
             showModal('modal_add_user', e),
-            store.removeState('search')
+            this.children.button.hide()
           }
         }
     });
@@ -46,6 +46,7 @@ export class AddToChat extends Block<AddToChatProps> {
       events: {
         click: () => {
           this.hideModal(),
+          this.children.button.show();
           store.removeState('search')
         }
       }
@@ -58,7 +59,7 @@ export class AddToChat extends Block<AddToChatProps> {
   }
 
   hideModal() {
-    (document.getElementsByClassName('modal_add_user')[0] as any).style.display = 'none' 
+    (document.getElementsByClassName('modal_add_user')[0] as HTMLDivElement).style.display = 'none' 
   }
 
   async addUserToChat(e: Event & {target: HTMLElement }) {
@@ -84,6 +85,7 @@ export class AddToChat extends Block<AddToChatProps> {
     ChatsController.addUsersToChat(userId, currentChatId)
     store.removeState('search');
     (document.getElementsByClassName('modal_add_user')[0] as HTMLDivElement ).style.display = 'none';
+    document.getElementById("button_add_user")!.style.display = 'block';
 
   }
 

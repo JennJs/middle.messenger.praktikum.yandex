@@ -4,7 +4,7 @@ import './style.css';
 
 type ButtonProps = { 
   events?: {
-    click?: (e: Event & { target: HTMLInputElement}) => void,
+    click?: (e: Event & { target: HTMLInputElement}) => void 
  },
   label?: string,
 };

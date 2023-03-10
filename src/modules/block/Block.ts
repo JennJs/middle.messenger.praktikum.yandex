@@ -1,5 +1,5 @@
 import  EventBus  from "../../utils/eventBus";
-import { nanoid } from 'nanoid';
+import { v4 as uuidv4 } from 'uuid';
 
 export type T = Record<string, any>;
 type Children = Record<string, Block<T>>;
@@ -13,7 +13,8 @@ class Block <Props extends Record<string, any>>  {
     FLOW_RENDER: "flow:render"
   };
 
-  public id: string = nanoid(6);
+
+  public id: string = uuidv4();
   private _element: HTMLElement;
   protected children: Children = {};
   protected props: Props;
@@ -108,17 +109,12 @@ class Block <Props extends Record<string, any>>  {
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate(oldProps: Props, newProps: Props): void {
-    if (this.componentDidUpdate(oldProps, newProps)) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    }
+  private _componentDidUpdate(): void {
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+
   }
 
-  protected componentDidUpdate(oldProps: Props, newProps: Props): boolean {
-    return true;
-  }
-
-  protected setProps = (nextProps: Props): void => {
+  public setProps = (nextProps: Props): void => {
     if (!nextProps) {
       return;
     }

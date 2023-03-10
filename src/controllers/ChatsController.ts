@@ -19,7 +19,7 @@ export class ChatsController {
     try {
       await this.api.createChat(title);
       this.getChats()
-    } catch (e: any) {
+    } catch (e) {
       console.error('createChat:', e);
     }
   }
@@ -28,7 +28,7 @@ export class ChatsController {
     try {
       await this.api.deleteChat(chat_id);
       this.getChats()
-    } catch (e: any) {
+    } catch (e) {
       console.error('deleteChatById:', e);
     }
   }
@@ -37,7 +37,7 @@ export class ChatsController {
     try {
       await this.api.addUsers(users_id, chat_id );
       this.getChats()
-    } catch (e: any) {
+    } catch (e) {
       console.error('addUsersToChat:', e);
     }
   }
@@ -46,20 +46,29 @@ export class ChatsController {
     try {
       await this.api.deleteUsers(users_id, chat_id );
       this.getChats()
-    } catch (e: any) {
+    } catch (e) {
       console.error('deleteUsersFromChat:', e);
     }
   }
 
   async getToken(chat_id: number) : Promise<string | undefined>  {
     try {
-      const response =  await this.api.getToken(chat_id) as any
+      const response =  await this.api.getToken(chat_id) as any;
       const data: Record<string, string> = JSON.parse(response);
       return data.token
-    } catch (e: any) {
+    } catch (e) {
       console.error('addUsersToChat:', e);
     }
   }
+  async changeChatAvatar(data: FormData ) {
+    try {
+      const response = await this.api.changeAvatar(data) as  any;
+      const newChatData = JSON.parse(response);
+      store._state.currentChat[0].avatar = `${newChatData.avatar}`
+      this.getChats()
+    } catch (e) {
+      console.error('changeAvatar error:', e);
+    }
+  }
 } 
-
 export default new ChatsController();

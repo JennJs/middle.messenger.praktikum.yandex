@@ -76,56 +76,56 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   if(store._state.user && window.location.pathname === '/') {
     await ChatsController.getChats(); 
-    router.go('/');
-    router.use('/login', loginForm)
-      .use('/', chats) 
-      .use('/registration', signInForm) 
-      .use('/userSettings', userSettingsPage)
-      .use('/userSettings/change-data', userChangeData) 
-      .use('/userSettings/change-password', userChangePassword)
+    router.go('/messenger');
+    router.use('/', loginForm)
+      .use('/messenger', chats) 
+      .use('/sign-up', signInForm) 
+      .use('/settings', userSettingsPage)
+      .use('/settings/change-data', userChangeData) 
+      .use('/settings/change-password', userChangePassword)
       .use('/500', page500) 
       .use('/404', page404)
     router.start();
-  } else if (!store._state.user && window.location.pathname === '/registration') {
-    router.use('/registration', signInForm)
-          .use('/login', loginForm)
+  } else if (!store._state.user && window.location.pathname === '/sign-up') {
+    router.use('/sign-up', signInForm)
+          .use('/', loginForm)
     router.start();
-  }else if (store._state.user && window.location.pathname === '/login') {
+  }else if (store._state.user && window.location.pathname === '/') {
     await ChatsController.getChats(); 
     router.start();
-    router.use('/login', loginForm)
-      .use('/', chats) 
-      .use('/registration', signInForm) 
-      .use('/userSettings', userSettingsPage)
-      .use('/userSettings/change-data', userChangeData) 
-      .use('/userSettings/change-password', userChangePassword)
+    router.use('/', loginForm)
+      .use('/messenger', chats) 
+      .use('/sign-up', signInForm) 
+      .use('/settings', userSettingsPage)
+      .use('/settings/change-data', userChangeData) 
+      .use('/settings/change-password', userChangePassword)
       .use('/500', page500) 
       .use('/404', page404)
   } else if (!store._state.user) {
-    router.go('/login')
-    router.use('/registration', signInForm)
-          .use('/login', loginForm)
+    router.go('/')
+    router.use('/sign-up', signInForm)
+          .use('/', loginForm)
     router.start();
-  } else if (store._state.user && window.location.pathname === '/registration') {
+  } else if (store._state.user && window.location.pathname === '/sign-up') {
     await ChatsController.getChats(); 
-    router.go('/');
-    router.use('/login', loginForm)
-      .use('/', chats) 
-      .use('/registration', signInForm) 
-      .use('/userSettings', userSettingsPage)
-      .use('/userSettings/change-data', userChangeData) 
-      .use('/userSettings/change-password', userChangePassword)
+    router.go('/messenger');
+    router.use('/', loginForm)
+      .use('/messenger', chats) 
+      .use('/sign-up', signInForm) 
+      .use('/settings', userSettingsPage)
+      .use('/settings/change-data', userChangeData) 
+      .use('/settings/change-password', userChangePassword)
       .use('/500', page500) 
       .use('/404', page404)
     router.start();
    } else if (store._state.user) {
     await ChatsController.getChats(); 
-    router.use('/login', loginForm)
-      .use('/', chats) 
-      .use('/registration', signInForm) 
-      .use('/userSettings', userSettingsPage)
-      .use('/userSettings/change-data', userChangeData) 
-      .use('/userSettings/change-password', userChangePassword)
+    router.use('/', loginForm)
+      .use('/messenger', chats) 
+      .use('/sign-up', signInForm) 
+      .use('/settings', userSettingsPage)
+      .use('/settings/change-data', userChangeData) 
+      .use('/settings/change-password', userChangePassword)
       .use('/500', page500) 
       .use('/404', page404)
     router.start();
@@ -133,4 +133,3 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-   
