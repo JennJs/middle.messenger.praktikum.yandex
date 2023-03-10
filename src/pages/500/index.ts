@@ -9,7 +9,7 @@ export class Page500 extends Block<T> {
 
   init() {
     this.children.link = new Link({
-      href: '/chats',
+      href: '/messenger',
       clas: 'position_centr',
       link_title: 'Назад к чатам',
     });

@@ -16,10 +16,10 @@ export class AuthController {
       await this.fetchUser();
       await ChatsController.getChats();
       router.start();
-      router.go('/userSettings');
+      router.go('/settings');
       window.location.reload();
       console.log('signin')
-    } catch (e: any) {
+    } catch (e) {
       console.error('signin:', e
       );
       if (e == "User already in system") {
@@ -34,19 +34,19 @@ export class AuthController {
       await this.api.signup(data);
       await this.fetchUser();
       await ChatsController.getChats();
-      router.go('/');
+      router.go('/messenger');
       window.location.reload();
-    } catch (e: any) {
+    } catch (e) {
       console.error('signup:', e);
     }
   }
 
-  async fetchUser() {
+  async fetchUser(): Promise<void> {
     try {
     const user: any = await this.api.read();
-    const userData = JSON.parse(user);
+    const userData = JSON.parse(user) ;
     store.set('user', userData);
-  } catch (e: any) {
+  } catch (e) {
     console.error(e);
   }
   }
@@ -55,10 +55,10 @@ export class AuthController {
     try { 
       store.removeAllState();
       await this.api.logout();
-      router.go('/login');
+      router.go('/');
       window.location.reload();
       console.log('user logout')
-    } catch (e: any) {
+    } catch (e) {
         console.error(e);
     }
   }

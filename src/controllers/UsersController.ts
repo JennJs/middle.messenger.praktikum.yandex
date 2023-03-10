@@ -14,7 +14,7 @@ export class UsersController {
     try {
       await this.api.updateUser(data);
       await authController.fetchUser()
-    } catch (e: any) {
+    } catch (e) {
       console.error('changeUserData:', e);
     }
   } 
@@ -23,7 +23,7 @@ export class UsersController {
     try {
       const response =  await this.api.getUser(id);
       JSON.parse(response);
-    } catch (e: any) {
+    } catch (e) {
       console.error('getUserById:', e);
     }
   }
@@ -31,7 +31,7 @@ export class UsersController {
   async changeUserPassword (data: ChangePassword ) {
     try {
       await this.api.changePassword(data);
-    } catch (e: any) {
+    } catch (e) {
       console.error('getUserById:', e);
     }
   }
@@ -42,7 +42,7 @@ export class UsersController {
       store.set('user', newUserData);
       store._state.user.avatar = `https://ya-praktikum.tech/api/v2/resources${newUserData.avatar}`;
       (document.getElementsByClassName('avatar')[0] as HTMLDivElement).style.backgroundImage=`url(${store._state.user.avatar})`;
-    } catch (e: any) {
+    } catch (e) {
       console.error('changeAvatar error:', e);
     }
   }
@@ -52,7 +52,7 @@ export class UsersController {
       const response =  await this.api.searchUser(login);
       const user = JSON.parse(response);
       store.set('search', user);
-    } catch (e: any) {
+    } catch (e) {
       console.error('searchUserByLogin:', e);
     }
   }

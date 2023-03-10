@@ -79,7 +79,7 @@ export enum StoreEvents {
 		this.emit(StoreEvents.Updated);
 	}
 
-	set(id: string, value: any) {
+	set(id: string, value: Record<string, any>) {
 		this._state[id] = value;
 		this.emit(StoreEvents.Updated);
 		return this;

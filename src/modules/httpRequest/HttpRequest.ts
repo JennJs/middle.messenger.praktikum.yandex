@@ -8,9 +8,10 @@ export enum Method {
   
   type Options = {
     method: Method;
-    data?: any
+    data?: unknown
     headers?: Record<string, string>;
   };
+
   
   export default class HTTPRequest {
     static API_URL = 'https://ya-praktikum.tech/api/v2';
